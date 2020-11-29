@@ -1,0 +1,2056 @@
+v.03
+
+%todo
+
+Release checklist:
+
+1) No duplicate problems.
+
+%/todo
+
+
+
+Complete all of the problems in this worksheet by
+placing the code you write for each exercise into
+the empty fold which is provided in each exercise
+section. Each empty fold has a subtype attribute
+named "problem". Immediately below each empty
+fold is a mathpiper_grade fold that contains code
+which will automatically grade the code you place
+into the fold above it.
+
+
+========================
+The following special symbol characters can be inserted
+into the document by doing the following:
+
+1) Type a word such as "ohm".
+2) Leave the cursor to the immediate right of the
+last letter in the name.
+3) Hold down the control key (represented by <ctrl>)
+then press the semicolon key ";".
+4) The word to the left of the cursor will be
+replaced by the special symbol.
+
+Note1: for Macintosh computers, use the
+<cmd> key instead of the <ctrl> key.
+
+Note2: The complete list of "abbreviation" words
+is in Utilities -> Global Options -> Abbreviations
+
+μ mu/micro
+Ω ohm
+ρ rho
+η eta
+∠ angle
+ϴ theta
+ϕ phi
+β beta
+′ prime
+
+- Compound units need to be in parentheses: 25`(mA / s) instead of 25`mA / s .
+
+ℓ
+
+
+
+%group,name="Problem 1a",description="p.20",example_page="p.11"
+========================================================================================================
+
+
+%mathpiper,name="Problem 1a",subtype="problem",unassign_all="true",globalStateShow="true"
+
+Problem()
+{
+    Description()
+    {
+        "";
+    }
+    
+    Sought()
+    {
+        bytes$display`1 :: "Bytes per display.";
+    }
+    
+    Given()
+    {
+        xPixels$ := 1280`1;
+        yPixels$ := 1024`1;
+        oneDisplay$ := 1`_display;
+        threeBytes$ := 3`byte;
+        onePixel$ := 1`_pixel;
+    }
+    
+    Lookup()
+    {
+
+    }
+    
+    Formulas()
+    {
+        Formula(product$`_ == term$1`_ * term$2`_ * ... * term$n`_,
+                ID:"product",
+                Description:"Generic product of terms.",
+                Ellipsis:2,
+                Substitutions:[product$ -> totalPixels$, 
+                               term$1 -> xPixels$, 
+                               term$2 -> yPixels$],
+                Subject:'Null,
+                Units:_pixel,
+                Evaluate?:True);
+                
+        Formula(result$`_ == out$1`_ / in$1`_ * out$2`_ / in$2`_ * ... * out$n`_ / in$n`_,
+                ID:"unitsconversionmanual",
+                Description:"Generic unit conversion.",
+                Ellipsis:2,
+                Substitutions:[out$1 -> totalPixels$, in$1 -> oneDisplay$,
+                               out$2 -> threeBytes$, in$2 -> onePixel$],
+                Subject:'Null,
+                Units:(byte/_display),
+                Evaluate?:True);
+    }
+}
+
+%/mathpiper
+
+    %output,parent="Problem 1a",mpversion="327",preserve="false"
+      Result: 3932160`(byte / _display)
+      
+      Side Effects:
+      === RESULT VALUES ===
+      totalPixels$: 1310720`_pixel
+      result$: 3932160`(byte / _display)
+      
+      === FORMULAS (2D VIEW) ===
+      /                                                                                                                                                                                                                                                                                                                                                                           \
+      | ( product )               ( product$ == term$1 * term$2 * ... * term$n ) ( --ELLIPSIS--> ) ( product$ == term$1 * term$2 ) ( --SUBSTITUTE--> ) ( totalPixels$ == term$1 * term$2 ) ( --SUBSTITUTE--> ) ( totalPixels$ == xPixels$ * term$2 ) ( --SUBSTITUTE--> ) ( totalPixels$ == xPixels$ * yPixels$ )                                                                  |
+      |                                                                                                                                                                                                                                                                                                                                                                           |
+      | ( unitsconversionmanual ) /            out$1   out$2         out$n \     ( --ELLIPSIS--> ) /            out$1   out$2 \    ( --SUBSTITUTE--> ) /            totalPixels$   out$2 \ ( --SUBSTITUTE--> ) /            totalPixels$   out$2 \   ( --SUBSTITUTE--> ) /            totalPixels$   threeBytes$ \ ( --SUBSTITUTE--> ) /            totalPixels$   threeBytes$ \  |
+      |                           | result$ == ----- * ----- * ... * ----- |                       | result$ == ----- * ----- |                        | result$ == ------------ * ----- |                     | result$ == ------------ * ----- |                       | result$ == ------------ * ----------- |                     | result$ == ------------ * ----------- |  |
+      |                           \            in$1    in$2          in$n  /                       \            in$1    in$2  /                        \                in$1       in$2  /                     \            oneDisplay$    in$2  /                       \            oneDisplay$       in$2     /                     \            oneDisplay$     onePixel$  /  |
+      \                                                                                                                                                                                                                                                                                                                                                                           /
+      
+      === STEPS (CODE VIEW) ===
+       1: xPixels$ := 1280`1 --> 1280`1
+       2: yPixels$ := 1024`1 --> 1024`1
+       3: oneDisplay$ := 1`_display --> 1`_display
+       4: threeBytes$ := 3`byte --> 3`byte
+       5: onePixel$ := 1`_pixel --> 1`_pixel
+       6: (product) product$ == term$1 * term$2 * ... * term$n --ELLIPSIS--> product$ == term$1 * term$2 --SUBSTITUTE--> totalPixels$ == term$1 * term$2 --SUBSTITUTE--> totalPixels$ == xPixels$ * term$2 --SUBSTITUTE--> totalPixels$ == xPixels$ * yPixels$
+       7:   totalPixels$ := xPixels$ * yPixels$ --EVALUATE--> totalPixels$ == 1280`1 * 1024`1 --EVALUATE--> 1310720`_pixel
+       8: (unitsconversionmanual) result$ == out$1 / in$1 * out$2 / in$2 * ... * out$n / in$n --ELLIPSIS--> result$ == out$1 / in$1 * out$2 / in$2 --SUBSTITUTE--> result$ == totalPixels$ / in$1 * out$2 / in$2 --SUBSTITUTE--> result$ == totalPixels$ / oneDisplay$ * out$2 / in$2 --SUBSTITUTE--> result$ == totalPixels$ / oneDisplay$ * threeBytes$ / in$2 --SUBSTITUTE--> result$ == totalPixels$ / oneDisplay$ * threeBytes$ / onePixel$
+       9:   result$ := totalPixels$ / oneDisplay$ * threeBytes$ / onePixel$ --EVALUATE--> result$ == 1310720`_pixel / 1`_display * 3`byte / 1`_pixel --EVALUATE--> 3932160`(byte / _display)
+      
+.   %/output
+
+
+
+
+
+%mathpiper_grade,name="Problem 1a"
+
+
+
+%/mathpiper_grade
+
+%/group
+
+
+
+
+
+
+
+%group,name="Problem 1b",description="p.20",example_page="p.11"
+========================================================================================================
+
+
+%mathpiper,name="Problem 1b",subtype="problem",unassign_all="true",globalStateShow="true"
+
+Problem()
+{
+    Description()
+    {
+        "";
+    }
+    
+    Sought()
+    {
+        bytes$display`1 :: "Bytes per display.";
+    }
+    
+    Given()
+    {
+        xPixels$ := 1280`1;
+        yPixels$ := 1024`1;
+    }
+    
+    Lookup()
+    {
+
+    }
+    
+    Conversion()
+    {
+        _pixel -> 3 * byte;
+    }
+    
+    Formulas()
+    {
+        Formula(product$`_ == term$1`_ * term$2`_ * ... * term$n`_,
+                ID:"product",
+                Description:"Generic product of terms.",
+                Ellipsis:2,
+                Substitutions:[product$ -> totalPixels$, 
+                               term$1 -> xPixels$, 
+                               term$2 -> yPixels$],
+                Subject:'Null,
+                Units:_pixel,
+                Evaluate?:True);
+                
+        Formula(result$`_ == value$`_,
+                ID:"unitsconversionautomatic",
+                Description:"Generic automatic unit conversion.",
+                Substitutions:[result$ -> bytes$display, value$ -> totalPixels$],
+                Subject:'Null,
+                Units:MB,
+                Evaluate?:True);
+    }
+}
+
+%/mathpiper
+
+    %output,parent="Problem 1b",mpversion="327",preserve="false"
+      Result: ((1.31072 * _pixel) / B)`MB
+      
+      Side Effects:
+      === RESULT VALUES ===
+      totalPixels$: 1310720`_pixel
+      bytes$display: ((1.31072 * _pixel) / B)`MB
+      
+      === FORMULAS (2D VIEW) ===
+      /                                                                                                                                                                                                                                                                                                                \
+      | ( product )                  ( product$ == term$1 * term$2 * ... * term$n ) ( --ELLIPSIS--> )   ( product$ == term$1 * term$2 ) ( --SUBSTITUTE--> ) ( totalPixels$ == term$1 * term$2 ) ( --SUBSTITUTE--> ) ( totalPixels$ == xPixels$ * term$2 ) ( --SUBSTITUTE--> ) ( totalPixels$ == xPixels$ * yPixels$ )  |
+      |                                                                                                                                                                                                                                                                                                                |
+      | ( unitsconversionautomatic ) ( result$ == value$ )                          ( --SUBSTITUTE--> ) ( bytes$display == value$ )     ( --SUBSTITUTE--> ) ( bytes$display == totalPixels$ )                                                                                                                          |
+      \                                                                                                                                                                                                                                                                                                                /
+      
+      === STEPS (CODE VIEW) ===
+       1: xPixels$ := 1280`1 --> 1280`1
+       2: yPixels$ := 1024`1 --> 1024`1
+       3: (product) product$ == term$1 * term$2 * ... * term$n --ELLIPSIS--> product$ == term$1 * term$2 --SUBSTITUTE--> totalPixels$ == term$1 * term$2 --SUBSTITUTE--> totalPixels$ == xPixels$ * term$2 --SUBSTITUTE--> totalPixels$ == xPixels$ * yPixels$
+       4:   totalPixels$ := xPixels$ * yPixels$ --EVALUATE--> totalPixels$ == 1280`1 * 1024`1 --EVALUATE--> 1310720`_pixel
+       5: (unitsconversionautomatic) result$ == value$ --SUBSTITUTE--> bytes$display == value$ --SUBSTITUTE--> bytes$display == totalPixels$
+       6:   bytes$display := totalPixels$ --EVALUATE--> bytes$display == 1310720`_pixel --EVALUATE--> ((1.31072 * _pixel) / B)`MB
+      
+.   %/output
+
+
+
+
+
+%mathpiper_grade,name="Problem 1b"
+
+
+
+%/mathpiper_grade
+
+%/group
+
+
+
+
+
+
+
+%group,name="Problem 2",description="p.20",example_page="p.11"
+========================================================================================================
+
+
+%mathpiper,name="Problem 2",subtype="problem",unassign_all="true",globalStateShow="true",formula="true"
+
+Problem()
+{
+    Description()
+    {
+        "";
+    }
+    
+    Sought()
+    {
+        signalTravelTime$`s :: "The time it takes a signal to travel across the United States.";
+    }
+    
+    Given()
+    {
+        half$ := .5`1;
+        periodOfLight$ := NotationEngineering(1 / ?lightSpeed);
+        distance$ := 5`Mm;
+    }
+    
+    Lookup()
+    {
+        
+    }
+    
+    Formulas()
+    {
+        Formula(product$`_ == term$1`_ * term$2`_ * ... * term$n`_,
+                ID:"product",
+                Description:"Generic product of terms.",
+                Ellipsis:2,
+                Substitutions:[product$ -> halfPeriodOfLight$, term$1 -> half$, term$2 -> periodOfLight$],
+                Subject:'Null,
+                Units:Engineering,
+                Evaluate?:True);
+                
+        Formula(product$`_ == term$1`_ * term$2`_ * ... * term$n`_,
+                ID:"product",
+                Description:"Generic product of terms.",
+                Ellipsis:2,
+                Substitutions:[product$ -> signalTravelTime$, 
+                               term$1 -> distance$, 
+                               term$2 -> halfPeriodOfLight$],
+                Subject:'Null,
+                Units:Engineering,
+                Evaluate?:True);
+    }
+}
+
+%/mathpiper
+
+    %output,parent="Problem 2",mpversion="327",preserve="false"
+      Result: 8.33910238`ms
+      
+      Side Effects:
+      === RESULT VALUES ===
+      halfPeriodOfLight$: 1.667820476`(ns / m)
+      signalTravelTime$: 8.33910238`ms
+      
+      === FORMULAS (2D VIEW) ===
+      /                                                                                                                                                                                                                                                                                                                         \
+      | ( product ) ( product$ == term$1 * term$2 * ... * term$n ) ( --ELLIPSIS--> ) ( product$ == term$1 * term$2 ) ( --SUBSTITUTE--> ) ( halfPeriodOfLight$ == term$1 * term$2 ) ( --SUBSTITUTE--> ) ( halfPeriodOfLight$ == half$ * term$2 )    ( --SUBSTITUTE--> ) ( halfPeriodOfLight$ == half$ * periodOfLight$ )         |
+      |                                                                                                                                                                                                                                                                                                                         |
+      | ( product ) ( product$ == term$1 * term$2 * ... * term$n ) ( --ELLIPSIS--> ) ( product$ == term$1 * term$2 ) ( --SUBSTITUTE--> ) ( signalTravelTime$ == term$1 * term$2 )  ( --SUBSTITUTE--> ) ( signalTravelTime$ == distance$ * term$2 ) ( --SUBSTITUTE--> ) ( signalTravelTime$ == distance$ * halfPeriodOfLight$ )  |
+      \                                                                                                                                                                                                                                                                                                                         /
+      
+      === STEPS (CODE VIEW) ===
+       1: half$ := .5`1 --> .5`1
+       2: periodOfLight$ := NotationEngineering(1 / ?lightSpeed) --> 3.335640952`(ns / m)
+       3: distance$ := 5`Mm --> 5`Mm
+       4: (product) product$ == term$1 * term$2 * ... * term$n --ELLIPSIS--> product$ == term$1 * term$2 --SUBSTITUTE--> halfPeriodOfLight$ == term$1 * term$2 --SUBSTITUTE--> halfPeriodOfLight$ == half$ * term$2 --SUBSTITUTE--> halfPeriodOfLight$ == half$ * periodOfLight$
+       5:   halfPeriodOfLight$ := half$ * periodOfLight$ --EVALUATE--> halfPeriodOfLight$ == 0.5`1 * 3.3356`(ns / m) --EVALUATE--> 1.667820476`(ns / m)
+       6: (product) product$ == term$1 * term$2 * ... * term$n --ELLIPSIS--> product$ == term$1 * term$2 --SUBSTITUTE--> signalTravelTime$ == term$1 * term$2 --SUBSTITUTE--> signalTravelTime$ == distance$ * term$2 --SUBSTITUTE--> signalTravelTime$ == distance$ * halfPeriodOfLight$
+       7:   signalTravelTime$ := distance$ * halfPeriodOfLight$ --EVALUATE--> signalTravelTime$ == 5`Mm * 1.6678`(ns / m) --EVALUATE--> 8.33910238`ms
+      
+.   %/output
+
+
+
+
+
+%mathpiper_grade,name="Problem 2"
+
+
+
+%/mathpiper_grade
+
+%/group
+
+
+
+
+
+
+
+%group,name="Problem 3",description="p.20",example_page="p.11"
+========================================================================================================
+
+
+%mathpiper,name="Problem 3",subtype="problem",unassign_all="true",globalStateShow="true",formula="true"
+
+Problem()
+{
+    Description()
+    {
+        "";
+    }
+    
+    Sought()
+    {
+        cellLengthTime$`s :: "The time it takes to grow 1-cell length.";
+    }
+    
+    Given()
+    {
+        growthPeriod$ := NotationScientific((250`mm/1`day)^-1);
+        cellLength$ := 10`μm;
+    }
+    
+    Lookup()
+    {
+        
+    }
+    
+    Formulas()
+    {
+        Formula(product$`_ == term$1`_ * term$2`_ * ... * term$n`_,
+                ID:"product",
+                Description:"Generic product of terms.",
+                Ellipsis:2,
+                Substitutions:[product$ -> cellLengthTime$, term$1 -> growthPeriod$, term$2 -> cellLength$],
+                Subject:'Null,
+                Units:Engineering,
+                Evaluate?:True);        
+    }
+}
+
+%/mathpiper
+
+    %output,parent="Problem 3",mpversion="327",preserve="false"
+      Result: 3.456`s
+      
+      Side Effects:
+      === RESULT VALUES ===
+      cellLengthTime$: 3.456`s
+      
+      === FORMULAS (2D VIEW) ===
+      /                                                                                                                                                                                                                                                                                                                   \
+      | ( product ) ( product$ == term$1 * term$2 * ... * term$n ) ( --ELLIPSIS--> ) ( product$ == term$1 * term$2 ) ( --SUBSTITUTE--> ) ( cellLengthTime$ == term$1 * term$2 ) ( --SUBSTITUTE--> ) ( cellLengthTime$ == growthPeriod$ * term$2 ) ( --SUBSTITUTE--> ) ( cellLengthTime$ == growthPeriod$ * cellLength$ )  |
+      \                                                                                                                                                                                                                                                                                                                   /
+      
+      === STEPS (CODE VIEW) ===
+       1: growthPeriod$ := NotationScientific((250`mm / 1`day)^(-1)) --> 3.456e5`(s / m)
+       2: cellLength$ := 10`μm --> 10`μm
+       3: (product) product$ == term$1 * term$2 * ... * term$n --ELLIPSIS--> product$ == term$1 * term$2 --SUBSTITUTE--> cellLengthTime$ == term$1 * term$2 --SUBSTITUTE--> cellLengthTime$ == growthPeriod$ * term$2 --SUBSTITUTE--> cellLengthTime$ == growthPeriod$ * cellLength$
+       4:   cellLengthTime$ := growthPeriod$ * cellLength$ --EVALUATE--> cellLengthTime$ == 3.456`(s / m) * 10`μm --EVALUATE--> 3.456`s
+      
+.   %/output
+
+
+
+
+
+%mathpiper_grade,name="Problem 3"
+
+
+
+%/mathpiper_grade
+
+%/group
+
+
+
+
+
+
+
+
+%group,name="Problem 4",description="p.20",example_page="p.11"
+========================================================================================================
+
+%mathpiper,name="Problem 4",subtype="problem",unassign_all="true",globalStateShow="true",formula="true"
+
+Problem()
+{
+    Description()
+    {
+        "";
+    }
+    
+    Sought()
+    {
+        thickness$`m :: "Thickness of the paint.";
+    }
+    
+    Given()
+    {
+        area$ := 10`m^2;
+        volume$ := 1`liter;
+    }
+    
+    Lookup()
+    {
+        
+    }
+    
+    Formulas()
+    {
+        Formula(volume$`_ == area$`(_^2) * thickness$`_,
+                ID:"volume",
+                Description:"Generic volume.",
+                Substitutions:[],
+                Subject:'thickness$,
+                Units:mm,
+                Evaluate?:True);        
+    }
+}
+
+%/mathpiper
+
+    %output,parent="Problem 4",mpversion="327",preserve="false"
+      Result: 0.01`mm
+      
+      Side Effects:
+      === RESULT VALUES ===
+      thickness$: 0.01`mm
+      
+      === FORMULAS (2D VIEW) ===
+      /                                                                                          \
+      | ( volume ) ( volume$ == area$ * thickness$ ) ( --SUBJECT--> ) /               volume$ \  |
+      |                                                               | thickness$ == ------- |  |
+      |                                                               \                area$  /  |
+      \                                                                                          /
+      
+      === STEPS (CODE VIEW) ===
+       1: area$ := 10`m^2 --> 100`(m^2)
+       2: volume$ := 1`liter --> 1`liter
+       3: (volume) volume$ == area$ * thickness$ --SUBJECT--> thickness$ == volume$ / area$
+       4:   thickness$ := volume$ / area$ --EVALUATE--> thickness$ == 1`liter / 100`(m^2) --EVALUATE--> 0.01`mm
+      
+.   %/output
+
+
+
+
+
+%mathpiper_grade,name="Problem 4"
+
+
+
+%/mathpiper_grade
+
+%/group
+
+
+
+
+
+
+
+
+%group,name="Problem 5",description="p.20",example_page="p.11"
+========================================================================================================
+
+
+%mathpiper,name="Problem 5",subtype="problem",unassign_all="true",globalStateShow="true",formula="true"
+
+Problem()
+{
+    Description()
+    {
+        "";
+    }
+    
+    Sought()
+    {
+        
+    }
+    
+    Given()
+    {
+        thicknessPerPenny$ := 1.5`mm / 1`cent;
+        dollersPerYear$ := 300`billion`dollar / 1`year;
+    }
+    
+    Lookup()
+    {
+        
+    }
+    
+    Formulas()
+    {
+        Formula(product$`_ == term$1`_ * term$2`_ * ... * term$n`_,
+                ID:"product",
+                Description:"Generic product of terms.",
+                Ellipsis:2,
+                Substitutions:[product$ -> stackGrowthVelocity$, term$1 -> thicknessPerPenny$, term$2 -> dollersPerYear$],
+                Subject:'Null,
+                Units:(m/s),
+                Evaluate?:True);         
+    }
+}
+
+%/mathpiper
+
+    %output,parent="Problem 5",mpversion="327",preserve="false"
+      Result: 1425.963951`(m / s)
+      
+      Side Effects:
+      === RESULT VALUES ===
+      stackGrowthVelocity$: 1425.963951`(m / s)
+      
+      === FORMULAS (2D VIEW) ===
+      /                                                                                                                                                                                                                                                                                                                                                \
+      | ( product ) ( product$ == term$1 * term$2 * ... * term$n ) ( --ELLIPSIS--> ) ( product$ == term$1 * term$2 ) ( --SUBSTITUTE--> ) ( stackGrowthVelocity$ == term$1 * term$2 ) ( --SUBSTITUTE--> ) ( stackGrowthVelocity$ == thicknessPerPenny$ * term$2 ) ( --SUBSTITUTE--> ) ( stackGrowthVelocity$ == thicknessPerPenny$ * dollersPerYear$ )  |
+      \                                                                                                                                                                                                                                                                                                                                                /
+      
+      === STEPS (CODE VIEW) ===
+       1: thicknessPerPenny$ := 1.5`mm / 1`cent --> 0.0015`(m / cent)
+       2: dollersPerYear$ := 300`billion`dollar / 1`year --> 300`((billion * dollar) / year)
+       3: (product) product$ == term$1 * term$2 * ... * term$n --ELLIPSIS--> product$ == term$1 * term$2 --SUBSTITUTE--> stackGrowthVelocity$ == term$1 * term$2 --SUBSTITUTE--> stackGrowthVelocity$ == thicknessPerPenny$ * term$2 --SUBSTITUTE--> stackGrowthVelocity$ == thicknessPerPenny$ * dollersPerYear$
+       4:   stackGrowthVelocity$ := thicknessPerPenny$ * dollersPerYear$ --EVALUATE--> stackGrowthVelocity$ == 0.0015`(m / cent) * 300`((billion * dollar) / year) --EVALUATE--> 1425.963951`(m / s)
+      
+.   %/output
+
+
+
+
+
+%mathpiper_grade,name="Problem 5"
+
+
+
+%/mathpiper_grade
+
+%/group
+
+
+
+
+
+
+
+%group,name="Problem 6",description="p.20",example_page="p.11"
+========================================================================================================
+
+todo:tk: This problem does not work yet.
+
+%mathpiper,name="Problem 6",subtype="problem",unassign_all="true",globalStateShow="true",formula="true"
+
+Problem()
+{
+    Description()
+    {
+        "";
+    }
+    
+    Sought()
+    {
+        areaPerBitInTrack1$`m :: "Thickness of the paint.";
+    }
+    
+    Conversion()
+    {
+        _side -> 77 * _track;
+    }
+    
+    Given() //todo:tk.
+    {
+        numberOfTracks$ := 77`1;
+        widthOfTrack$ := NM((1`inch / numberOfTracks$) # μm);
+        //bitsOnATrack$ := NM(1.4`MB / 2`_side * 1`_side / 77`_track) # (bit / _track);
+        bitsOnATrack$ := NM(1.4`MB / 2`_side ) # (B / _track);
+
+    }
+    
+    Lookup()
+    {
+        
+    }
+    
+    Formulas()
+    {
+      
+    }
+}
+
+%/mathpiper
+
+    %error,parent="Problem 6",mpversion="327",preserve="false"
+      Result:  Error:  Error: The expression ((1.4`(B * 10^6) * _track) / (2`(77 * _track) * B)) can't be reduced because it contains an "`" operator.   Error on or before line 643 starting at index 22.
+.   %/error
+
+
+
+
+
+%mathpiper_grade,name="Problem 6"
+
+
+
+%/mathpiper_grade
+
+%/group
+
+
+
+
+
+
+
+
+%group,name="Problem 7",description="p.20",example_page="p.11"
+========================================================================================================
+
+
+%mathpiper,name="Problem 7",subtype="problem",unassign_all="true",globalStateShow="true",formula="true"
+
+Problem()
+{
+    Description()
+    {
+        "";
+    }
+    
+    Sought()
+    {
+        electron$velocity`(μm/s) :: "Average velocity of an electron.";
+    }
+    
+    Given()
+    {
+        current$ := 1400`A;
+        freeElectrons$ := (q$e * (10^29)) / m^3;
+        barArea$ := .6`cm * 9`cm;        
+    }
+    
+    Lookup()
+    {
+        
+    }
+    
+    Formulas()
+    {
+        Formula(product$`_ == term$1`_ * term$2`_ * ... * term$n`_,
+                ID:"product",
+                Description:"Generic product of terms.",
+                Ellipsis:2,
+                Substitutions:[product$ -> chargePerLength$, term$1 -> freeElectrons$, term$2 -> barArea$],
+                Subject:'Null,
+                Units:Scientific,
+                Evaluate?:True);
+    
+        Formula(quotient$`_ == numerator$`_ / denominator$`_,
+                ID:"quotient",
+                Description:"Generic division.",
+                Substitutions:[quotient$ -> electron$velocity, numerator$ -> current$, denominator$ -> chargePerLength$],
+                Subject:'Null,
+                Units:([μm/s, Engineering]),
+                Evaluate?:True);        
+    }
+}
+
+%/mathpiper
+
+    %output,parent="Problem 7",mpversion="327",preserve="false"
+      Result: 161.8169019`(μm / s)
+      
+      Side Effects:
+      === RESULT VALUES ===
+      chargePerLength$: 8.651753824e6`((s * A) / m)
+      electron$velocity: 161.8169019`(μm / s)
+      
+      === FORMULAS (2D VIEW) ===
+      /                                                                                                                                                                                                                                                                                                                              \
+      | ( product )  ( product$ == term$1 * term$2 * ... * term$n ) ( --ELLIPSIS--> )   ( product$ == term$1 * term$2 )       ( --SUBSTITUTE--> ) ( chargePerLength$ == term$1 * term$2 ) ( --SUBSTITUTE--> ) ( chargePerLength$ == freeElectrons$ * term$2 ) ( --SUBSTITUTE--> ) ( chargePerLength$ == freeElectrons$ * barArea$ )  |
+      |                                                                                                                                                                                                                                                                                                                              |
+      | ( quotient ) /               numerator$  \                  ( --SUBSTITUTE--> ) /                       numerator$  \ ( --SUBSTITUTE--> ) /                        current$   \   ( --SUBSTITUTE--> ) /                          current$     \                                                                              |
+      |              | quotient$ == ------------ |                                      | electron$velocity == ------------ |                     | electron$velocity == ------------ |                       | electron$velocity == ---------------- |                                                                              |
+      |              \              denominator$ /                                      \                      denominator$ /                     \                      denominator$ /                       \                      chargePerLength$ /                                                                              |
+      \                                                                                                                                                                                                                                                                                                                              /
+      
+      === STEPS (CODE VIEW) ===
+       1: current$ := 1400`A --> 1400`A
+       2: freeElectrons$ := (q$e * 10^29) / m^3 --> (100000000000000000000000000000 * q$e) / m^3
+       3: barArea$ := .6`cm * 9`cm --> 5.4`(cm^2)
+       4: (product) product$ == term$1 * term$2 * ... * term$n --ELLIPSIS--> product$ == term$1 * term$2 --SUBSTITUTE--> chargePerLength$ == term$1 * term$2 --SUBSTITUTE--> chargePerLength$ == freeElectrons$ * term$2 --SUBSTITUTE--> chargePerLength$ == freeElectrons$ * barArea$
+       5:   chargePerLength$ := freeElectrons$ * barArea$ --EVALUATE--> chargePerLength$ == (100000000000000000000000000000 * q$e) / m^3 * 5.4`(cm^2) --EVALUATE--> 8.651753824e6`((s * A) / m)
+       6: (quotient) quotient$ == numerator$ / denominator$ --SUBSTITUTE--> electron$velocity == numerator$ / denominator$ --SUBSTITUTE--> electron$velocity == current$ / denominator$ --SUBSTITUTE--> electron$velocity == current$ / chargePerLength$
+       7:   electron$velocity := current$ / chargePerLength$ --EVALUATE--> electron$velocity == 1400`A / 8.6518`((s * A) / m) --EVALUATE--> 161.8169019`(μm / s)
+      
+.   %/output
+
+
+
+
+
+%mathpiper_grade,name="Problem 7"
+
+
+
+%/mathpiper_grade
+
+%/group
+
+
+
+
+
+
+
+
+%group,name="Problem 8",description="p.20",example_page="p.11"
+========================================================================================================
+
+%mathpiper,name="Problem 8",subtype="problem",unassign_all="true",globalStateShow="true",formula="true"
+
+Problem(Precision:20)
+{
+    Description()
+    {
+        "";
+    }
+    
+    Sought()
+    {
+        
+    }
+    
+    Given()
+    {
+       current$ := NM(20`μA # (C/s));
+                                                         // todo:tk:what does this mean?
+       chargePerSecond$ := current$ / (1.6022 * 10^-19)`(C/q$e) # (q$e / s);
+       
+       distance$ := 3303`mile # μm;
+    }
+    
+    Lookup()
+    {
+        
+    }
+    
+    Formulas()
+    {
+        Formula(quotient$`1 == ValueOf(numerator$`_) / ValueOf(denominator$`_),
+                ID:"quotient2",
+                Description:"Unitless generic division.",
+                Substitutions:[quotient$ -> ratio$, numerator$ -> chargePerSecond$, denominator$ -> distance$],
+                Subject:'Null,
+                Units:1,
+                Evaluate?:True);        
+    }
+}
+
+%/mathpiper
+
+    %output,parent="Problem 8",mpversion="327",preserve="false"
+      Result: 23.483120648456463856`1
+      
+      Side Effects:
+      === RESULT VALUES ===
+      ratio$: 23.483120648456463856`1
+      
+      === FORMULAS (2D VIEW) ===
+      /                                                                                                                                                                                                                                               \
+      | ( quotient2 ) /               ValueOf( numerator$ )  \ ( --SUBSTITUTE--> ) /            ValueOf( numerator$ )  \ ( --SUBSTITUTE--> ) /           ValueOf( chargePerSecond$ ) \ ( --SUBSTITUTE--> ) /           ValueOf( chargePerSecond$ ) \  |
+      |               | quotient$ == ----------------------- |                     | ratio$ == ----------------------- |                     | ratio$ == --------------------------- |                     | ratio$ == --------------------------- |  |
+      |               \              ValueOf( denominator$ ) /                     \           ValueOf( denominator$ ) /                     \             ValueOf( denominator$ )   /                     \              ValueOf( distance$ )     /  |
+      \                                                                                                                                                                                                                                               /
+      
+      === STEPS (CODE VIEW) ===
+       1: current$ := NM(20`μA # C / s) --> 0.00002`(C / s)
+       2: chargePerSecond$ := current$ / (1.6022 * 10^(-19))`(C / q$e) # q$e / s --> 124828361003620.02247`(q$e / s)
+       3: distance$ := 3303`mile # μm --> 5315663232000`μm
+       4: (quotient2) quotient$ == ValueOf(numerator$) / ValueOf(denominator$) --SUBSTITUTE--> ratio$ == ValueOf(numerator$) / ValueOf(denominator$) --SUBSTITUTE--> ratio$ == ValueOf(chargePerSecond$) / ValueOf(denominator$) --SUBSTITUTE--> ratio$ == ValueOf(chargePerSecond$) / ValueOf(distance$)
+       5:   ratio$ := ValueOf(chargePerSecond$) / ValueOf(distance$) --EVALUATE--> ratio$ == ValueOf(124828361000000.0`(q$e / s)) / ValueOf(5315663232000`μm) --EVALUATE--> 23.483120648456463856`1
+      
+.   %/output
+
+
+
+
+
+%mathpiper_grade,name="Problem 8"
+
+
+
+%/mathpiper_grade
+
+%/group
+
+
+
+
+
+
+
+
+%group,name="Problem 9",description="p.20",example_page="p.14"
+========================================================================================================
+
+
+%mathpiper,name="Problem 9",subtype="problem",unassign_all="true",globalStateShow="true",formula="true"
+
+Problem()
+{
+    Description()
+    {
+        "";
+    }
+    
+    Sought()
+    {
+        q$t`_Procedure :: "The expression for q(t).";
+    }
+    
+    Given()
+    {
+        exp$ := (20 * Cos(5000 * _t));
+        var$ := _t;
+    }
+    
+    Lookup()
+    {
+        
+    }
+    
+    Formulas()
+    {
+        Formula(result$`_ == Integrate(exp$`_,
+                                       var$`_),
+                ID:"integral",
+                Description:"Generic integral.",
+                Substitutions:[result$ -> q$t],
+                Subject:'Null,
+                Units:Null,
+                Evaluate?:True);        
+    }
+}
+
+%/mathpiper
+
+    %output,parent="Problem 9",mpversion="327",preserve="false"
+      Result: Sin(5000 * _t) / 250
+      
+      Side Effects:
+      === RESULT VALUES ===
+      q$t: Sin(5000 * _t) / 250
+      
+      === FORMULAS (2D VIEW) ===
+      /                                                                                                         \
+      | ( integral ) ( result$ == Integrate(exp$, var$) ) ( --SUBSTITUTE--> ) ( q$t == Integrate(exp$, var$) )  |
+      \                                                                                                         /
+      
+      === STEPS (CODE VIEW) ===
+       1: exp$ := 20 * Cos(5000 * _t) --> 20 * Cos(5000 * _t)
+       2: var$ := _t --> _t
+       3: (integral) result$ == Integrate(exp$, var$) --SUBSTITUTE--> q$t == Integrate(exp$, var$)
+       4:   q$t := Integrate(exp$, var$) --EVALUATE--> q$t == Integrate(20 * Cos(5000 * _t), _t) --EVALUATE--> Sin(5000 * _t) / 250
+      
+.   %/output
+
+
+
+
+
+%mathpiper_grade,name="Problem 9"
+
+
+
+%/mathpiper_grade
+
+%/group
+
+
+
+
+
+
+
+
+%group,name="Problem 10",description="p.20",example_page="p.11"
+========================================================================================================
+
+
+%mathpiper,name="Problem 10",subtype="problem",unassign_all="true",globalStateShow="true",formula="true"
+
+Problem()
+{
+    Description()
+    {
+        "";
+    }
+    
+    Sought()
+    {
+        w$`aJ :: "Energy extracted from an electron.";
+    }
+    
+    Given()
+    {
+        V$drop := 9`V;
+        charge$ := q$e;
+    }
+    
+    Lookup()
+    {
+        
+    }
+    
+    Formulas()
+    {
+        Formula(w$`J == q$`C * V$`V,
+                ID:"b_p.20",
+                Page:"20",
+                Description:"Work.",
+                Substitutions:[q$ -> charge$, V$ -> V$drop],
+                Subject:'Null,
+                Units:aJ,
+                Evaluate?:True);    
+    }
+}
+
+%/mathpiper
+
+    %output,parent="Problem 10",mpversion="327",preserve="false"
+      Result: 1.441958971`aJ
+      
+      Side Effects:
+      === RESULT VALUES ===
+      w$: 1.441958971`aJ
+      
+      === FORMULAS (2D VIEW) ===
+      /                                                                                                                         \
+      | ( b_p.20 ) ( w$ == q$ * V$ ) ( --SUBSTITUTE--> ) ( w$ == charge$ * V$ ) ( --SUBSTITUTE--> ) ( w$ == charge$ * V$drop )  |
+      \                                                                                                                         /
+      
+      === STEPS (CODE VIEW) ===
+       1: V$drop := 9`V --> 9`V
+       2: charge$ := q$e --> q$e
+       3: (b_p.20) w$ == q$ * V$ --SUBSTITUTE--> w$ == charge$ * V$ --SUBSTITUTE--> w$ == charge$ * V$drop
+       4:   w$ := charge$ * V$drop --EVALUATE--> w$ == q$e * 9`V --EVALUATE--> 1.441958971`aJ
+      
+.   %/output
+
+
+
+
+
+%mathpiper_grade,name="Problem 10"
+
+
+
+%/mathpiper_grade
+
+%/group
+
+
+
+
+
+
+
+
+%group,name="Problem 11",description="p.21",example_page="p."
+========================================================================================================
+
+
+%mathpiper,name="Problem 11",subtype="problem",unassign_all="true",globalStateShow="true",formula="true"
+
+Problem()
+{
+    Description()
+    {
+        "";
+    }
+    
+    Sought()
+    {
+        
+    }
+    
+    Given()
+    {
+        numberOfBatteries$ := 4`1;
+        batteryVoltage$ := 1.5`V;
+        I$ := 100`mA;
+        var$ := _t;
+        lowValue$ := 0`s;
+        highValue$ := 3`hour # s;
+    }
+    
+    Lookup()
+    {
+        
+    }
+    
+    Formulas()
+    {
+        Formula(product$`_ == term$1`_ * term$2`_ * ... * term$n`_,
+                ID:"product",
+                Description:"Generic product of terms.",
+                Ellipsis:2,
+                Substitutions:[product$ -> V$total, term$1 -> numberOfBatteries$, term$2 -> batteryVoltage$],
+                Subject:'Null,
+                Units:Null,
+                Evaluate?:True);
+                
+        Formula(P$`W == V$`V * I$`A,
+                ID:"3.4",
+                Page:"84",
+                Description:"Power.",
+                Substitutions:[V$ -> V$total],
+                Subject:'Null,
+                Units:[W, Engineering],
+                Evaluate?:True);
+                
+        Formula(w$`J == IntegrateN(P$`W,
+                                  var$`s,
+                                  lowValue$`1,
+                                  highValue$`1),
+                ID:"b_p.21",
+                Page:"20",
+                Description:"Work.",
+                Substitutions:[],
+                Subject:'Null,
+                Units:J,
+                Evaluate?:True);       
+    }
+}
+
+%/mathpiper
+
+    %output,parent="Problem 11",mpversion="327",preserve="false"
+      Result: 6480`J
+      
+      Side Effects:
+      === RESULT VALUES ===
+      V$total: 6`V
+      P$: 600`mW
+      w$: 6480`J
+      
+      === FORMULAS (2D VIEW) ===
+      /                                                                                                                                                                                                                                                                                                                  \
+      | ( product ) ( product$ == term$1 * term$2 * ... * term$n )        ( --ELLIPSIS--> )   ( product$ == term$1 * term$2 ) ( --SUBSTITUTE--> ) ( V$total == term$1 * term$2 ) ( --SUBSTITUTE--> ) ( V$total == numberOfBatteries$ * term$2 ) ( --SUBSTITUTE--> ) ( V$total == numberOfBatteries$ * batteryVoltage$ )  |
+      |                                                                                                                                                                                                                                                                                                                  |
+      | ( 3.4 )     ( P$ == V$ * I$ )                                     ( --SUBSTITUTE--> ) ( P$ == V$total * I$ )                                                                                                                                                                                                     |
+      |                                                                                                                                                                                                                                                                                                                  |
+      | ( b_p.21 )  ( w$ == IntegrateN(P$, var$, lowValue$, highValue$) )                                                                                                                                                                                                                                                |
+      \                                                                                                                                                                                                                                                                                                                  /
+      
+      === STEPS (CODE VIEW) ===
+       1: numberOfBatteries$ := 4`1 --> 4`1
+       2: batteryVoltage$ := 1.5`V --> 1.5`V
+       3: I$ := 100`mA --> 100`mA
+       4: var$ := _t --> _t
+       5: lowValue$ := 0`s --> 0`s
+       6: highValue$ := 3`hour # s --> 10800`s
+       7: (product) product$ == term$1 * term$2 * ... * term$n --ELLIPSIS--> product$ == term$1 * term$2 --SUBSTITUTE--> V$total == term$1 * term$2 --SUBSTITUTE--> V$total == numberOfBatteries$ * term$2 --SUBSTITUTE--> V$total == numberOfBatteries$ * batteryVoltage$
+       8:   V$total := numberOfBatteries$ * batteryVoltage$ --EVALUATE--> V$total == 4`1 * 1.5`V --EVALUATE--> 6`V
+       9: (3.4) P$ == V$ * I$ --SUBSTITUTE--> P$ == V$total * I$
+      10:   P$ := V$total * I$ --EVALUATE--> P$ == 6.0`V * 100`mA --EVALUATE--> 600`mW
+      11: (b_p.21) w$ == IntegrateN(P$, var$, lowValue$, highValue$)
+      12:   w$ := IntegrateN(P$, var$, lowValue$, highValue$) --EVALUATE--> w$ == IntegrateN(600.0`mW, _t, 0`s, 10800`s) --EVALUATE--> 6480`J
+      
+.   %/output
+
+
+
+
+
+%mathpiper_grade,name="Problem 11"
+
+
+
+%/mathpiper_grade
+
+%/group
+
+
+
+
+
+
+
+
+%group,name="Problem 12",description="p.21",example_page="p.18"
+========================================================================================================
+
+
+%mathpiper,name="Problem 12",subtype="problem",unassign_all="true",globalStateShow="true",formula="true"
+
+Problem()
+{
+    Description()
+    {
+        "";
+    }
+    
+    Sought()
+    {
+        P$a`W :: "Power in the interconnection.";
+        direction$a`_String :: "'AtoB' or 'BtoA'";
+        
+        P$b`W :: "Power in the interconnection.";
+        direction$b`_String :: "'AtoB' or 'BtoA'";
+        
+        P$c`W :: "Power in the interconnection.";
+        direction$c`_String :: "'AtoB' or 'BtoA'";
+        
+        P$d`W :: "Power in the interconnection.";
+        direction$d`_String :: "'AtoB' or 'BtoA'";
+    }
+    
+    Given()
+    {
+        i$a := 15`A;
+        v$a := 20`V;
+        
+        i$b := -5`A;
+        v$b := 100`V;
+        
+        i$c := 4`A;
+        v$c := -50`V;
+        
+        i$d := -16`A;
+        v$d := -25`V;
+    }
+    
+    Lookup()
+    {
+        direction$a := "AtoB";
+        direction$b := "BtoA";
+        direction$c := "BtoA";
+        direction$d := "AtoB";
+    }
+    
+    Formulas()
+    {
+        Formula(P$`W == V$`V * I$`A,
+                ID:"3.4",
+                ID:"1.4",
+                Page:"84",
+                Page2:"17",
+                Description:"Power.",
+                Substitutions:[P$ -> P$a, V$ -> v$a, I$ -> i$a],
+                Subject:'Null,
+                Units:W,
+                Evaluate?:True);
+
+        Formula(P$`W == V$`V * I$`A,
+                ID:"3.4",
+                ID:"1.4",
+                Page:"84",
+                Page2:"17",
+                Description:"Power.",
+                Substitutions:[P$ -> P$b, V$ -> v$b, I$ -> i$b],
+                Subject:'Null,
+                Units:W,
+                Evaluate?:True);
+                
+        Formula(P$`W == V$`V * I$`A,
+                ID:"3.4",
+                ID:"1.4",
+                Page:"84",
+                Page2:"17",
+                Description:"Power.",
+                Substitutions:[P$ -> P$c, V$ -> v$c, I$ -> i$c],
+                Subject:'Null,
+                Units:W,
+                Evaluate?:True);
+                
+        Formula(P$`W == V$`V * I$`A,
+                ID:"3.4",
+                ID:"1.4",
+                Page:"84",
+                Page2:"17",
+                Description:"Power.",
+                Substitutions:[P$ -> P$d, V$ -> v$d, I$ -> i$d],
+                Subject:'Null,
+                Units:W,
+                Evaluate?:True);
+    }
+}
+
+%/mathpiper
+
+    %output,parent="Problem 12",mpversion="327",preserve="false"
+      Result: 400`W
+      
+      Side Effects:
+      === RESULT VALUES ===
+      P$a: 300`W
+      P$b: (-500)`W
+      P$c: (-200)`W
+      P$d: 400`W
+      
+      === FORMULAS (2D VIEW) ===
+      /                                                                                                                                                    \
+      | ( 1.4 ) ( P$ == V$ * I$ ) ( --SUBSTITUTE--> ) ( P$a == V$ * I$ ) ( --SUBSTITUTE--> ) ( P$a == v$a * I$ ) ( --SUBSTITUTE--> ) ( P$a == v$a * i$a )  |
+      |                                                                                                                                                    |
+      | ( 1.4 ) ( P$ == V$ * I$ ) ( --SUBSTITUTE--> ) ( P$b == V$ * I$ ) ( --SUBSTITUTE--> ) ( P$b == v$b * I$ ) ( --SUBSTITUTE--> ) ( P$b == v$b * i$b )  |
+      |                                                                                                                                                    |
+      | ( 1.4 ) ( P$ == V$ * I$ ) ( --SUBSTITUTE--> ) ( P$c == V$ * I$ ) ( --SUBSTITUTE--> ) ( P$c == v$c * I$ ) ( --SUBSTITUTE--> ) ( P$c == v$c * i$c )  |
+      |                                                                                                                                                    |
+      | ( 1.4 ) ( P$ == V$ * I$ ) ( --SUBSTITUTE--> ) ( P$d == V$ * I$ ) ( --SUBSTITUTE--> ) ( P$d == v$d * I$ ) ( --SUBSTITUTE--> ) ( P$d == v$d * i$d )  |
+      \                                                                                                                                                    /
+      
+      === STEPS (CODE VIEW) ===
+       1: i$a := 15`A --> 15`A
+       2: v$a := 20`V --> 20`V
+       3: i$b :=  -5`A --> (-5)`A
+       4: v$b := 100`V --> 100`V
+       5: i$c := 4`A --> 4`A
+       6: v$c :=  -50`V --> (-50)`V
+       7: i$d :=  -16`A --> (-16)`A
+       8: v$d :=  -25`V --> (-25)`V
+       9: direction$a := "AtoB" --> AtoB
+      10: direction$b := "BtoA" --> BtoA
+      11: direction$c := "BtoA" --> BtoA
+      12: direction$d := "AtoB" --> AtoB
+      13: (1.4) P$ == V$ * I$ --SUBSTITUTE--> P$a == V$ * I$ --SUBSTITUTE--> P$a == v$a * I$ --SUBSTITUTE--> P$a == v$a * i$a
+      14:   P$a := v$a * i$a --EVALUATE--> P$a == 20`V * 15`A --EVALUATE--> 300`W
+      15: (1.4) P$ == V$ * I$ --SUBSTITUTE--> P$b == V$ * I$ --SUBSTITUTE--> P$b == v$b * I$ --SUBSTITUTE--> P$b == v$b * i$b
+      16:   P$b := v$b * i$b --EVALUATE--> P$b == 100`V * (-5)`A --EVALUATE--> (-500)`W
+      17: (1.4) P$ == V$ * I$ --SUBSTITUTE--> P$c == V$ * I$ --SUBSTITUTE--> P$c == v$c * I$ --SUBSTITUTE--> P$c == v$c * i$c
+      18:   P$c := v$c * i$c --EVALUATE--> P$c == (-50)`V * 4`A --EVALUATE--> (-200)`W
+      19: (1.4) P$ == V$ * I$ --SUBSTITUTE--> P$d == V$ * I$ --SUBSTITUTE--> P$d == v$d * I$ --SUBSTITUTE--> P$d == v$d * i$d
+      20:   P$d := v$d * i$d --EVALUATE--> P$d == (-25)`V * (-16)`A --EVALUATE--> 400`W
+      
+.   %/output
+
+
+
+
+
+%mathpiper_grade,name="Problem 12"
+
+
+
+%/mathpiper_grade
+
+%/group
+
+
+
+
+
+
+
+
+%group,name="Problem 13",description="p.21",example_page="p.18"
+========================================================================================================
+
+
+%mathpiper,name="Problem 13",subtype="problem",unassign_all="true",globalStateShow="true",formula="true"
+
+Problem()
+{
+    Description()
+    {
+        "";
+    }
+    
+    Sought()
+    {
+        P$a`W :: "Power in the interconnection.";
+        power$direction`_String :: "'Absorbed' or 'Delivered'";
+        electron$direction`_String :: "'Entering' or 'Leaving'";
+        electron$energy`_String :: "'Gaining' or 'Losing'";
+    }
+    
+    Given()
+    {
+        v$ := -20`V;
+        i$ := 5`A;
+    }
+    
+    Lookup()
+    {
+        power$direction := "Delivered";
+        electron$direction := "Leaving";
+        electron$energy := "Gaining";
+    }
+    
+    Formulas()
+    {
+        Formula(P$`W == V$`V * I$`A,
+                ID:"3.4",
+                ID:"1.4",
+                Page:"84",
+                Page2:"17",
+                Description:"Power.",
+                Substitutions:[V$ -> v$, I$ -> i$],
+                Subject:'Null,
+                Units:W,
+                Evaluate?:True);
+    }
+}
+
+%/mathpiper
+
+    %output,parent="Problem 13",mpversion="327",preserve="false"
+      Result: (-100)`W
+      
+      Side Effects:
+      === RESULT VALUES ===
+      P$: (-100)`W
+      
+      === FORMULAS (2D VIEW) ===
+      /                                                                                                        \
+      | ( 1.4 ) ( P$ == V$ * I$ ) ( --SUBSTITUTE--> ) ( P$ == v$ * I$ ) ( --SUBSTITUTE--> ) ( P$ == v$ * i$ )  |
+      \                                                                                                        /
+      
+      === STEPS (CODE VIEW) ===
+       1: v$ :=  -20`V --> (-20)`V
+       2: i$ := 5`A --> 5`A
+       3: power$direction := "Delivered" --> Delivered
+       4: electron$direction := "Leaving" --> Leaving
+       5: electron$energy := "Gaining" --> Gaining
+       6: (1.4) P$ == V$ * I$ --SUBSTITUTE--> P$ == v$ * I$ --SUBSTITUTE--> P$ == v$ * i$
+       7:   P$ := v$ * i$ --EVALUATE--> P$ == (-20)`V * 5`A --EVALUATE--> (-100)`W
+      
+.   %/output
+
+
+
+
+
+%mathpiper_grade,name="Problem 13"
+
+
+
+%/mathpiper_grade
+
+%/group
+
+
+
+
+
+
+
+%group,name="Problem 14",description="p.21",example_page="p.18"
+========================================================================================================
+
+
+%mathpiper,name="Problem 14",subtype="problem",unassign_all="true",globalStateShow="true",formula="true"
+
+Problem()
+{
+    Description()
+    {
+        "";
+    }
+    
+    Sought()
+    {
+        P$a`W :: "Power in the interconnection.";
+        power$direction`_String :: "'Absorbed' or 'Delivered'";
+        electron$direction`_String :: "'Entering' or 'Leaving'";
+        electron$energy`_String :: "'Gaining' or 'Losing'";
+    }
+    
+    Given()
+    {
+        v$ := -20`V;
+        i$ := -5`A;
+    }
+    
+    Lookup()
+    {
+        power$direction := "Absorbed";
+        electron$direction := "Entering";
+        electron$energy := "Losing";
+    }
+    
+    Formulas()
+    {
+        Formula(P$`W == V$`V * I$`A,
+                ID:"3.4",
+                ID:"1.4",
+                Page:"84",
+                Page2:"17",
+                Description:"Power.",
+                Substitutions:[V$ -> v$, I$ -> i$],
+                Subject:'Null,
+                Units:W,
+                Evaluate?:True);
+    }
+}
+
+%/mathpiper
+
+    %output,parent="Problem 14",mpversion="327",preserve="false"
+      Result: 100`W
+      
+      Side Effects:
+      === RESULT VALUES ===
+      P$: 100`W
+      
+      === FORMULAS (2D VIEW) ===
+      /                                                                                                        \
+      | ( 1.4 ) ( P$ == V$ * I$ ) ( --SUBSTITUTE--> ) ( P$ == v$ * I$ ) ( --SUBSTITUTE--> ) ( P$ == v$ * i$ )  |
+      \                                                                                                        /
+      
+      === STEPS (CODE VIEW) ===
+       1: v$ :=  -20`V --> (-20)`V
+       2: i$ :=  -5`A --> (-5)`A
+       3: power$direction := "Absorbed" --> Absorbed
+       4: electron$direction := "Entering" --> Entering
+       5: electron$energy := "Losing" --> Losing
+       6: (1.4) P$ == V$ * I$ --SUBSTITUTE--> P$ == v$ * I$ --SUBSTITUTE--> P$ == v$ * i$
+       7:   P$ := v$ * i$ --EVALUATE--> P$ == (-20)`V * (-5)`A --EVALUATE--> 100`W
+      
+.   %/output
+
+
+
+
+
+%mathpiper_grade,name="Problem 14"
+
+
+
+%/mathpiper_grade
+
+%/group
+
+
+
+
+
+
+
+%group,name="Problem 15",description="p.21",example_page="p.18"
+========================================================================================================
+
+
+%mathpiper,name="Problem 15",subtype="problem",unassign_all="true",globalStateShow="true",formula="true"
+
+Problem()
+{
+    Description()
+    {
+        "";
+    }
+    
+    Sought()
+    {
+        P$A`W :: "Power of car 'A'.";
+        car$dead`_String :: "'CarA' or 'CarB'";
+        energy$transfer`J :: "Energy transfered.";
+    }
+    
+    Given()
+    {
+        i$ := -40`A;
+        v$ := 12`V;
+        var$ := _t;
+        lowValue$ := 0`minute;
+        highValue$ := 1.5`minute # s;
+    }
+    
+    Lookup()
+    {
+        car$dead := "CarB";
+    }
+    
+    Formulas()
+    {
+        Formula(P$`W == V$`V * I$`A,
+                ID:"3.4",
+                ID:"1.4",
+                Page:"84",
+                Page2:"17",
+                Description:"Power.",
+                Substitutions:[P$ -> P$A, V$ -> v$, I$ -> i$],
+                Subject:'Null,
+                Units:W,
+                Evaluate?:True);
+                
+        Formula(w$`J == IntegrateN(P$`W,
+                                  var$`s,
+                                  lowValue$`1,
+                                  highValue$`1),
+                ID:"b_p.21",
+                Page:"20",
+                Description:"Work.",
+                Substitutions:[w$ -> energy$transfered, P$ -> P$A],
+                Subject:'Null,
+                Units:[J, Engineering],
+                Evaluate?:True); 
+    }
+}
+
+%/mathpiper
+
+    %output,parent="Problem 15",mpversion="327",preserve="false"
+      Result: (-4.32)`kJ
+      
+      Side Effects:
+      === RESULT VALUES ===
+      P$A: (-480)`W
+      energy$transfered: (-4.32)`kJ
+      
+      === FORMULAS (2D VIEW) ===
+      /                                                                                                                                                                                                                                                                                             \
+      | ( 1.4 )    ( P$ == V$ * I$ )                                     ( --SUBSTITUTE--> ) ( P$A == V$ * I$ )                                                   ( --SUBSTITUTE--> ) ( P$A == v$ * I$ )                                                    ( --SUBSTITUTE--> ) ( P$A == v$ * i$ )  |
+      |                                                                                                                                                                                                                                                                                             |
+      | ( b_p.21 ) ( w$ == IntegrateN(P$, var$, lowValue$, highValue$) ) ( --SUBSTITUTE--> ) ( energy$transfered == IntegrateN(P$, var$, lowValue$, highValue$) ) ( --SUBSTITUTE--> ) ( energy$transfered == IntegrateN(P$A, var$, lowValue$, highValue$) )                                         |
+      \                                                                                                                                                                                                                                                                                             /
+      
+      === STEPS (CODE VIEW) ===
+       1: i$ :=  -40`A --> (-40)`A
+       2: v$ := 12`V --> 12`V
+       3: var$ := _t --> _t
+       4: lowValue$ := 0`minute --> 0`minute
+       5: highValue$ := 1.5`minute # s --> 90`s
+       6: car$dead := "CarB" --> CarB
+       7: (1.4) P$ == V$ * I$ --SUBSTITUTE--> P$A == V$ * I$ --SUBSTITUTE--> P$A == v$ * I$ --SUBSTITUTE--> P$A == v$ * i$
+       8:   P$A := v$ * i$ --EVALUATE--> P$A == 12`V * (-40)`A --EVALUATE--> (-480)`W
+       9: (b_p.21) w$ == IntegrateN(P$, var$, lowValue$, highValue$) --SUBSTITUTE--> energy$transfered == IntegrateN(P$, var$, lowValue$, highValue$) --SUBSTITUTE--> energy$transfered == IntegrateN(P$A, var$, lowValue$, highValue$)
+      10:   energy$transfered := IntegrateN(P$A, var$, lowValue$, highValue$) --EVALUATE--> energy$transfered == IntegrateN((-480)`W, _t, 0`minute, 90.0`s) --EVALUATE--> (-4.32)`kJ
+      
+.   %/output
+
+
+
+
+
+%mathpiper_grade,name="Problem 15"
+
+
+
+%/mathpiper_grade
+
+%/group
+
+
+
+
+
+
+
+
+%group,name="Problem 16",description="p.21",example_page="p.18"
+========================================================================================================
+
+In> Plot2D((-.03 / 216000) * _t + .09, 0:216000)
+Result: class org.jfree.chart.ChartPanel
+
+In> bb := IntegrateN((-.03 / 216000) * _t + .09, _t, 0, 216000) \\ NM
+Result: 16200
+
+%mathpiper,name="Problem 16",subtype="problem",unassign_all="true",globalStateShow="true",formula="true"
+
+Problem()
+{
+    Description()
+    {
+        "";
+    }
+    
+    Sought()
+    {
+        w$`J :: "Energy delivered during the time interval.";
+    }
+    
+    Given()
+    {
+        V$full := 6`V;
+        V$dropped := 4`V;
+        I$ := 15`mA;
+        duration$ := 60`hour # s;
+
+        var$ := _t;
+        lowValue$ := 0`s;
+        highValue$ := duration$;
+    }
+    
+    Lookup()
+    {
+        
+    }
+    
+    Formulas()
+    {           
+        Formula(P$`W == V$`V * I$`A,
+                ID:"3.4",
+                ID:"1.4",
+                Page:"84",
+                Page2:"17",
+                Description:"Power.",
+                Substitutions:[P$ -> P$full, V$ -> V$full],
+                Subject:'Null,
+                Units:W,
+                Evaluate?:True);
+                
+        Formula(P$`W == V$`V * I$`A,
+                ID:"3.4",
+                ID:"1.4",
+                Page:"84",
+                Page2:"17",
+                Description:"Power.",
+                Substitutions:[P$ -> P$dropped, V$ -> V$dropped],
+                Subject:'Null,
+                Units:W,
+                Evaluate?:True);
+                
+        Formula(P$ == (P$dropped - P$full) / duration$ * _t + P$full,
+                ID:"arbitraryformula",
+                Description:"Arbitrary formula.",
+                Substitutions:[],
+                Subject:'Null,
+                Units:Null,
+                Evaluate?:True);
+                
+        Formula(w$`J == IntegrateN(P$,
+                                  var$`s,
+                                  lowValue$`1,
+                                  highValue$`1),
+                ID:"b_p.21",
+                Page:"20",
+                Description:"Work.",
+                Substitutions:[],
+                Subject:'Null,
+                Units:[J, Engineering],
+                Evaluate?:True); 
+    }
+}
+
+%/mathpiper
+
+    %output,parent="Problem 16",mpversion="327",preserve="false"
+      Result: 16.2`kJ
+      
+      Side Effects:
+      === RESULT VALUES ===
+      P$full: 0.09`W
+      P$dropped: 0.06`W
+      P$: (-0.0000001388888889)`(W / s) * _t + 0.09`W
+      w$: 16.2`kJ
+      
+      === FORMULAS (2D VIEW) ===
+      /                                                                                                                                                                              \
+      | ( 1.4 )              ( P$ == V$ * I$ )                                     ( --SUBSTITUTE--> ) ( P$full == V$ * I$ )    ( --SUBSTITUTE--> ) ( P$full == V$full * I$ )        |
+      |                                                                                                                                                                              |
+      | ( 1.4 )              ( P$ == V$ * I$ )                                     ( --SUBSTITUTE--> ) ( P$dropped == V$ * I$ ) ( --SUBSTITUTE--> ) ( P$dropped == V$dropped * I$ )  |
+      |                                                                                                                                                                              |
+      | ( arbitraryformula ) /       P$dropped - P$full              \                                                                                                               |
+      |                      | P$ == ------------------ * t + P$full |                                                                                                               |
+      |                      \           duration$                   /                                                                                                               |
+      |                                                                                                                                                                              |
+      | ( b_p.21 )           ( w$ == IntegrateN(P$, var$, lowValue$, highValue$) )                                                                                                   |
+      \                                                                                                                                                                              /
+      
+      === STEPS (CODE VIEW) ===
+       1: V$full := 6`V --> 6`V
+       2: V$dropped := 4`V --> 4`V
+       3: I$ := 15`mA --> 15`mA
+       4: duration$ := 60`hour # s --> 216000`s
+       5: var$ := _t --> _t
+       6: lowValue$ := 0`s --> 0`s
+       7: highValue$ := duration$ --> 216000`s
+       8: (1.4) P$ == V$ * I$ --SUBSTITUTE--> P$full == V$ * I$ --SUBSTITUTE--> P$full == V$full * I$
+       9:   P$full := V$full * I$ --EVALUATE--> P$full == 6`V * 15`mA --EVALUATE--> 0.09`W
+      10: (1.4) P$ == V$ * I$ --SUBSTITUTE--> P$dropped == V$ * I$ --SUBSTITUTE--> P$dropped == V$dropped * I$
+      11:   P$dropped := V$dropped * I$ --EVALUATE--> P$dropped == 4`V * 15`mA --EVALUATE--> 0.06`W
+      12: (arbitraryformula) P$ == (P$dropped - P$full) / duration$ * _t + P$full
+      13:   P$ := (P$dropped - P$full) / duration$ * _t + P$full --EVALUATE--> P$ == (0.06`W - 0.09`W) / 216000`s * _t + 0.09`W --EVALUATE--> (-0.0000001388888889)`(W / s) * _t + 0.09`W
+      14: (b_p.21) w$ == IntegrateN(P$, var$, lowValue$, highValue$)
+      15:   w$ := IntegrateN(P$, var$, lowValue$, highValue$) --EVALUATE--> w$ == IntegrateN((-0.0000001388888889)`(W / s) * _t + 0.09`W, _t, 0`s, 216000`s) --EVALUATE--> 16.2`kJ
+      
+.   %/output
+
+
+
+
+
+%mathpiper_grade,name="Problem 16"
+
+
+
+%/mathpiper_grade
+
+%/group
+
+
+
+
+
+
+
+
+%group,name="Problem 17",description="p.21",example_page="p.18"
+========================================================================================================
+
+%todo
+- Is "base^((contant)`(1/s) * _t)" something that is done implicitly by hand?
+- Should a rule be added to the units system that places exponents into standard
+notation then remove any units they contain?
+%/todo
+
+
+%mathpiper,name="Problem 17",subtype="problem",unassign_all="true",globalStateShow="true",formula="true"
+
+Problem()
+{
+    Description()
+    {
+        "";
+    }
+    
+    Sought()
+    {
+        
+    }
+    
+    Given()
+    {
+        v$ := (50`V * Exp(-1600 * _t) - 50`V * Exp(-400 * _t));
+        i$ := (5`mA * Exp(-1600 * _t) - 5`mA * Exp(-400 * _t));        
+        
+        t$ := 625`μs;
+        
+        infinity$ := 10`ms;
+        
+        var$ := _t;
+        
+        lowValue$ := 0`s;
+        highValue$ := t$;
+    }
+    
+    Lookup()
+    {
+        
+    }
+    
+    Formulas()
+    {
+        // (a)
+        Formula(P$`W == V$`V * I$`A,
+                ID:"3.4",
+                ID:"1.4",
+                Page:"84",
+                Page2:"17",
+                Description:"Power.",
+                Substitutions:[P$ -> P$atTime, V$ -> v$, I$ -> i$, _t -> t$],
+                Subject:'Null,
+                Units:[W, Engineering],
+                Evaluate?:True);
+
+        // (b) and (c)
+        Formula(P$`W == V$`V * I$`A,
+                ID:"3.4",
+                ID:"1.4",
+                Page:"84",
+                Page2:"17",
+                Description:"Power.",
+                Substitutions:[V$ -> v$, I$ -> i$],
+                Subject:'Null,
+                Units:Null,
+                Evaluate?:True);
+
+        // (b)
+        Formula(w$`J == IntegrateN(P$,
+                                  var$`s,
+                                  lowValue$`1,
+                                  highValue$`1),
+                ID:"b_p.21",
+                Page:"20",
+                Description:"Work.",
+                Substitutions:[w$ -> w$time, highValue$ -> t$],
+                Subject:'Null,
+                Units:[J, Engineering],
+                Evaluate?:True);
+
+        // (c)
+        Formula(w$`J == IntegrateN(P$,
+                                  var$`s,
+                                  lowValue$`1,
+                                  highValue$`1),
+                ID:"b_p.21",
+                Page:"20",
+                Description:"Work.",
+                Substitutions:[w$ -> w$total, highValue$ -> infinity$],
+                Subject:'Null,
+                Units:[J, Engineering],
+                Evaluate?:True);
+    }
+}
+
+%/mathpiper
+
+    %output,parent="Problem 17",mpversion="327",preserve="false"
+      Result: 140.5201685`μJ
+      
+      Side Effects:
+      === RESULT VALUES ===
+      P$atTime: 42.21408745`mW
+      P$: (50`V * Exp((-1600) * _t) - 50`V * Exp((-400) * _t)) * (5`mA * Exp((-1600) * _t) - 5`mA * Exp((-400) * _t))
+      w$time: 12.13729906`μJ
+      w$total: 140.5201685`μJ
+      
+      === FORMULAS (2D VIEW) ===
+      /                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              \
+      | ( 1.4 )    ( P$ == V$ * I$ )                                     ( --SUBSTITUTE--> ) ( P$atTime == V$ * I$ )                                    ( --SUBSTITUTE--> ) ( P$atTime == v$ * I$ )                                   ( --SUBSTITUTE--> ) ( P$atTime == v$ * i$ ) ( --EVALUATE--> ) ( P$atTime == ( 50`V * Exp( -1600 * t ) - 50`V * Exp( -400 * t ) ) * ( 5`mA * Exp( -1600 * t ) - 5`mA * Exp( -400 * t ) ) ) ( --SUBSTITUTE--> ) ( P$atTime == ( 50`V * Exp( -1600 * t$ ) - 50`V * Exp( -400 * t$ ) ) * ( 5`mA * Exp( -1600 * t$ ) - 5`mA * Exp( -400 * t$ ) ) )  |
+      |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
+      | ( 1.4 )    ( P$ == V$ * I$ )                                     ( --SUBSTITUTE--> ) ( P$ == v$ * I$ )                                          ( --SUBSTITUTE--> ) ( P$ == v$ * i$ )                                                                                                                                                                                                                                                                                                                                                                                        |
+      |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
+      | ( b_p.21 ) ( w$ == IntegrateN(P$, var$, lowValue$, highValue$) ) ( --SUBSTITUTE--> ) ( w$time == IntegrateN(P$, var$, lowValue$, highValue$) )  ( --SUBSTITUTE--> ) ( w$time == IntegrateN(P$, var$, lowValue$, t$) )                                                                                                                                                                                                                                                                                                                                                        |
+      |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
+      | ( b_p.21 ) ( w$ == IntegrateN(P$, var$, lowValue$, highValue$) ) ( --SUBSTITUTE--> ) ( w$total == IntegrateN(P$, var$, lowValue$, highValue$) ) ( --SUBSTITUTE--> ) ( w$total == IntegrateN(P$, var$, lowValue$, infinity$) )                                                                                                                                                                                                                                                                                                                                                |
+      \                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              /
+      
+      === STEPS (CODE VIEW) ===
+       1: v$ := 50`V * Exp(-1600 * _t) - 50`V * Exp(-400 * _t) --> 50`V * Exp((-1600) * _t) - 50`V * Exp((-400) * _t)
+       2: i$ := 5`mA * Exp(-1600 * _t) - 5`mA * Exp(-400 * _t) --> 5`mA * Exp((-1600) * _t) - 5`mA * Exp((-400) * _t)
+       3: t$ := 625`μs --> 625`μs
+       4: infinity$ := 10`ms --> 10`ms
+       5: var$ := _t --> _t
+       6: lowValue$ := 0`s --> 0`s
+       7: highValue$ := t$ --> 625`μs
+       8: (1.4) P$ == V$ * I$ --SUBSTITUTE--> P$atTime == V$ * I$ --SUBSTITUTE--> P$atTime == v$ * I$ --SUBSTITUTE--> P$atTime == v$ * i$ --EVALUATE--> P$atTime == (50`V * Exp((-1600) * _t) - 50`V * Exp((-400) * _t)) * (5`mA * Exp((-1600) * _t) - 5`mA * Exp((-400) * _t)) --SUBSTITUTE--> P$atTime == (50`V * Exp((-1600) * t$) - 50`V * Exp((-400) * t$)) * (5`mA * Exp((-1600) * t$) - 5`mA * Exp((-400) * t$))
+       9:   P$atTime := (50`V * Exp((-1600) * t$) - 50`V * Exp((-400) * t$)) * (5`mA * Exp((-1600) * t$) - 5`mA * Exp((-400) * t$)) --EVALUATE--> P$atTime == (50`V * Exp((-1600) * 625`μs) - 50`V * Exp((-400) * 625`μs)) * (5`mA * Exp((-1600) * 625`μs) - 5`mA * Exp((-400) * 625`μs)) --EVALUATE--> 42.21408745`mW
+      10: (1.4) P$ == V$ * I$ --SUBSTITUTE--> P$ == v$ * I$ --SUBSTITUTE--> P$ == v$ * i$
+      11:   P$ := v$ * i$ --EVALUATE--> P$ == (50`V * Exp((-1600) * _t) - 50`V * Exp((-400) * _t)) * (5`mA * Exp((-1600) * _t) - 5`mA * Exp((-400) * _t)) --EVALUATE--> (50`V * Exp((-1600) * _t) - 50`V * Exp((-400) * _t)) * (5`mA * Exp((-1600) * _t) - 5`mA * Exp((-400) * _t))
+      12: (b_p.21) w$ == IntegrateN(P$, var$, lowValue$, highValue$) --SUBSTITUTE--> w$time == IntegrateN(P$, var$, lowValue$, highValue$) --SUBSTITUTE--> w$time == IntegrateN(P$, var$, lowValue$, t$)
+      13:   w$time := IntegrateN(P$, var$, lowValue$, t$) --EVALUATE--> w$time == IntegrateN((50`V * Exp((-1600) * _t) - 50`V * Exp((-400) * _t)) * (5`mA * Exp((-1600) * _t) - 5`mA * Exp((-400) * _t)), _t, 0`s, 625`μs) --EVALUATE--> 12.13729906`μJ
+      14: (b_p.21) w$ == IntegrateN(P$, var$, lowValue$, highValue$) --SUBSTITUTE--> w$total == IntegrateN(P$, var$, lowValue$, highValue$) --SUBSTITUTE--> w$total == IntegrateN(P$, var$, lowValue$, infinity$)
+      15:   w$total := IntegrateN(P$, var$, lowValue$, infinity$) --EVALUATE--> w$total == IntegrateN((50`V * Exp((-1600) * _t) - 50`V * Exp((-400) * _t)) * (5`mA * Exp((-1600) * _t) - 5`mA * Exp((-400) * _t)), _t, 0`s, 10`ms) --EVALUATE--> 140.5201685`μJ
+      
+.   %/output
+
+
+
+
+
+%mathpiper_grade,name="Problem 17"
+
+
+
+%/mathpiper_grade
+
+%/group
+
+
+
+
+
+%group,name="Problem 18",description="p.21",example_page="p.18"
+========================================================================================================
+
+%todo
+- Is "base^((contant)`(1/s) * _t)" something that is done implicitly by hand?
+- Should a rule be added to the units system that places exponents into standard
+notation then removes any units they contain?
+%/todo
+
+
+%mathpiper,name="Problem 18",subtype="problem",unassign_all="true",globalStateShow="true",formula="true"
+
+Problem()
+{
+    Description()
+    {
+        "";
+    }
+    
+    Sought()
+    {
+        
+    }
+    
+    Given()
+    {
+        v$ := (100`V * Exp(-50 * _t) * Sin(150`V * _t));
+        i$ := (20`A * Exp(-50 * _t) * Sin(150`V * _t));        
+        
+        t$ := 20`ms;
+        
+        infinity$ := 100`ms;
+        
+        var$ := _t;
+        
+        lowValue$ := 0`s;
+        highValue$ := t$;
+    }
+    
+    Lookup()
+    {
+        
+    }
+    
+    Formulas()
+    {
+        // (a)
+        Formula(P$`W == V$`V * I$`A,
+                ID:"3.4",
+                ID:"1.4",
+                Page:"84",
+                Page2:"17",
+                Description:"Power.",
+                Substitutions:[P$ -> P$atTime, V$ -> v$, I$ -> i$, _t -> t$],
+                Subject:'Null,
+                Units:[W, Engineering],
+                Evaluate?:True);
+
+        // (b) and (c)
+        Formula(P$`W == V$`V * I$`A,
+                ID:"3.4",
+                ID:"1.4",
+                Page:"84",
+                Page2:"17",
+                Description:"Power.",
+                Substitutions:[V$ -> v$, I$ -> i$],
+                Subject:'Null,
+                Units:Null,
+                Evaluate?:True);
+
+        // (b)
+        Formula(w$`J == IntegrateN(P$,
+                                  var$`s,
+                                  lowValue$`1,
+                                  highValue$`1),
+                ID:"b_p.21",
+                Page:"20",
+                Description:"Work.",
+                Substitutions:[w$ -> w$total, highValue$ -> infinity$],
+                Subject:'Null,
+                Units:[J, Engineering],
+                Evaluate?:True);
+    }
+}
+
+%/mathpiper
+
+    %output,parent="Problem 18",mpversion="327",preserve="false"
+      Result: 8.999687575`J
+      
+      Side Effects:
+      === RESULT VALUES ===
+      P$atTime: 5.390365536`W
+      P$: 100`V * Exp((-50) * _t) * Sin(150`V * _t) * 20`A * Exp((-50) * _t) * Sin(150`V * _t)
+      w$total: 8.999687575`J
+      
+      === FORMULAS (2D VIEW) ===
+      /                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                \
+      | ( 1.4 )    ( P$ == V$ * I$ )                                     ( --SUBSTITUTE--> ) ( P$atTime == V$ * I$ )                                    ( --SUBSTITUTE--> ) ( P$atTime == v$ * I$ )                                   ( --SUBSTITUTE--> ) ( P$atTime == v$ * i$ ) ( --EVALUATE--> ) ( P$atTime == 100`V * Exp( -50 * t ) * Sin( 150`V * t ) * 20`A * Exp( -50 * t ) * Sin( 150`V * t ) ) ( --SUBSTITUTE--> ) ( P$atTime == 100`V * Exp( -50 * t$ ) * Sin( 150`V * t$ ) * 20`A * Exp( -50 * t$ ) * Sin( 150`V * t$ ) )  |
+      |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
+      | ( 1.4 )    ( P$ == V$ * I$ )                                     ( --SUBSTITUTE--> ) ( P$ == v$ * I$ )                                          ( --SUBSTITUTE--> ) ( P$ == v$ * i$ )                                                                                                                                                                                                                                                                                                                                          |
+      |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
+      | ( b_p.21 ) ( w$ == IntegrateN(P$, var$, lowValue$, highValue$) ) ( --SUBSTITUTE--> ) ( w$total == IntegrateN(P$, var$, lowValue$, highValue$) ) ( --SUBSTITUTE--> ) ( w$total == IntegrateN(P$, var$, lowValue$, infinity$) )                                                                                                                                                                                                                                                                                                  |
+      \                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                /
+      
+      === STEPS (CODE VIEW) ===
+       1: v$ := 100`V * Exp(-50 * _t) * Sin(150`V * _t) --> 100`V * Exp((-50) * _t) * Sin(150`V * _t)
+       2: i$ := 20`A * Exp(-50 * _t) * Sin(150`V * _t) --> 20`A * Exp((-50) * _t) * Sin(150`V * _t)
+       3: t$ := 20`ms --> 20`ms
+       4: infinity$ := 100`ms --> 100`ms
+       5: var$ := _t --> _t
+       6: lowValue$ := 0`s --> 0`s
+       7: highValue$ := t$ --> 20`ms
+       8: (1.4) P$ == V$ * I$ --SUBSTITUTE--> P$atTime == V$ * I$ --SUBSTITUTE--> P$atTime == v$ * I$ --SUBSTITUTE--> P$atTime == v$ * i$ --EVALUATE--> P$atTime == 100`V * Exp((-50) * _t) * Sin(150`V * _t) * 20`A * Exp((-50) * _t) * Sin(150`V * _t) --SUBSTITUTE--> P$atTime == 100`V * Exp((-50) * t$) * Sin(150`V * t$) * 20`A * Exp((-50) * t$) * Sin(150`V * t$)
+       9:   P$atTime := 100`V * Exp((-50) * t$) * Sin(150`V * t$) * 20`A * Exp((-50) * t$) * Sin(150`V * t$) --EVALUATE--> P$atTime == 100`V * Exp((-50) * 20`ms) * Sin(150`V * 20`ms) * 20`A * Exp((-50) * 20`ms) * Sin(150`V * 20`ms) --EVALUATE--> 5.390365536`W
+      10: (1.4) P$ == V$ * I$ --SUBSTITUTE--> P$ == v$ * I$ --SUBSTITUTE--> P$ == v$ * i$
+      11:   P$ := v$ * i$ --EVALUATE--> P$ == 100`V * Exp((-50) * _t) * Sin(150`V * _t) * 20`A * Exp((-50) * _t) * Sin(150`V * _t) --EVALUATE--> 100`V * Exp((-50) * _t) * Sin(150`V * _t) * 20`A * Exp((-50) * _t) * Sin(150`V * _t)
+      12: (b_p.21) w$ == IntegrateN(P$, var$, lowValue$, highValue$) --SUBSTITUTE--> w$total == IntegrateN(P$, var$, lowValue$, highValue$) --SUBSTITUTE--> w$total == IntegrateN(P$, var$, lowValue$, infinity$)
+      13:   w$total := IntegrateN(P$, var$, lowValue$, infinity$) --EVALUATE--> w$total == IntegrateN(100`V * Exp((-50) * _t) * Sin(150`V * _t) * 20`A * Exp((-50) * _t) * Sin(150`V * _t), _t, 0`s, 100`ms) --EVALUATE--> 8.999687575`J
+      
+.   %/output
+
+
+
+
+
+%mathpiper_grade,name="Problem 18"
+
+
+
+%/mathpiper_grade
+
+%/group
+

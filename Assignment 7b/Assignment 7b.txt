@@ -1,0 +1,87 @@
+Kyle Johnson
+11-23-20
+ETEC3501
+1.)
+The output from line 67 being right clicked on the class named "CircuitPiper" and selecting "Find Usages" produces:
+    CircuitPiper
+        MouseHandler.java
+            46:  import org.mathpiper.ui.gui.applications.circuitpiper.view.CircuitPanel;
+            64:  CircuitPanel circuitPanel;
+            68:  public MouseHandler(final CircuitPanel theParentCircuitEnginePanel) {
+        Circuit.java
+            95:  import org.mathpiper.ui.gui.applications.circuitpiper.view.CircuitPanel;
+            128:  public CircuitPanel circuitPanel;
+            143:  public Circuit(String id, CircuitPanel circuitPanel) throws Exception {
+            1407:  public Component newComponent(String typeAndUID, int headX, int headY, int tailX, int tailY, Stack componentAttributes, StringTokenizer elmAttributes, CircuitPanel circuitPanel) throws Exception
+        Circuits.java
+            15:  import org.mathpiper.ui.gui.applications.circuitpiper.view.CircuitPanel;
+            44:  CircuitPanel circuitPanel = new CircuitPanel();
+            44:  CircuitPanel circuitPanel = new CircuitPanel();
+        SparseMatrix.java
+            35:  import org.mathpiper.ui.gui.applications.circuitpiper.view.CircuitPanel;
+            56:  private CircuitPanel myParent;
+            60:  public SparseMatrix(CircuitPanel parent, int numRows, int numCols) {
+        RungeKutta.java
+            12:  import org.mathpiper.ui.gui.applications.circuitpiper.view.CircuitPanel;
+            16:  private CircuitPanel circuitPanel;
+            20:  public RungeKutta(CircuitPanel circuitPanel)
+        ButtonPanel.java
+            59:  public ButtonPanel(final CircuitPanel parentCircuitPanel) {
+        ChangeACParametersFrame.java
+            65:  private CircuitPanel myParent;
+            67:  public ChangeACParametersFrame(CircuitPanel parent, int x, int y, Component ec) {
+        ChangeErrorFrame.java
+            38:  private CircuitPanel myParent;
+            40:  public ChangeErrorFrame(CircuitPanel parent, int x, int y) {
+        ChangePrimaryValueFrame.java
+            47:  private CircuitPanel myParent;
+            49:  public ChangePrimaryValueFrame(CircuitPanel parent, int x, int y, Component ec) {
+        CircuitPanel.java
+            196:  CircuitPanel.this.currentCircuit.updateCircuit();
+        CircuitPiperMain.java
+            56:  private CircuitPanel circuitPanel;
+            64:  circuitPanel = new CircuitPanel();
+            1026:  public CircuitPanel getPanel() {
+        DrawingPanel.java
+            49:  public CircuitPanel circuitPanel;
+            69:  public DrawingPanel(final CircuitPanel parentCircuitEnginePanel) {
+        GraphFrame.java
+            34:  public GraphFrame(CircuitPanel parent, int x, int y, String componentID, String primary, String unit) {
+        HintPanel.java
+            28:  CircuitPanel circuitPanel;
+            33:  public HintPanel(final CircuitPanel theParentCircuitEnginePanel) {
+        PhasePlane.java
+            32:  private CircuitPanel myParent;
+            34:  public PhasePlane(CircuitPanel parent, int x, int y) {
+        PopupMenu.java
+            10:  private CircuitPanel circuitPanel;
+            13:  public PopupMenu(CircuitPanel circuitPanel) {
+            16:  final CircuitPanel finalCircuitPanel = circuitPanel;
+        ScopePanel.java
+            31:  public ScopePanel(CircuitPanel parent, int x, int y, String componentID, String primary, String unit) {
+
+2.)
+The output from line 113 being right clicked on the class named "readoutPanel" and selecting "Find Usages" produces:
+    CircuitPiper
+        CircuitPanel.java
+            113:  public ReadoutPanel readoutPanel;
+        CircuitPiperMain.java
+            67:  ReadoutPanel readoutPanel = new ReadoutPanel();
+            67:  ReadoutPanel readoutPanel = new ReadoutPanel();
+
+3.)
+The output from line 262 being right clicked on the class named "getMouseY" and selecting "Find Usages" produces:
+    CircuitPiper
+        MouseHandler.java
+          354:  circuitPanel.getMouseY());
+          698:  circuitPanel.getMouseY());
+        CircuitPanel.java
+          448:  long row = Math.round((getMouseY() - topSideYOffsetPixels) / terminalYSpacing);
+          460:  && sqr(getMouseX() - nearestGridPointXPixels()) + sqr(getMouseY() - nearestGridPointYPixels()) < 10 * 10) {
+          475:  int y3 = getMouseY();
+          506:  int y3 = getMouseY();
+
+4.)
+The result of right clicking on the variable name "viewScale" and selecting "Navigate" then "Go to Declaration" resulted in:
+    Taking you to the file that originally creates the variable. In this case it takes us to ".\src\org\mathpiper\ui\gui\applications\circuitpiper\view\DrawingPanel.java"
+

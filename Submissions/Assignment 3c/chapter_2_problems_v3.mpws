@@ -1,0 +1,1201 @@
+v.03
+
+%todo
+
+Release checklist:
+
+1) No duplicate problems.
+
+%/todo
+
+
+
+Complete all of the problems in this worksheet by
+placing the code you write for each exercise into
+the empty fold which is provided in each exercise
+section. Each empty fold has a subtype attribute
+named "problem". Immediately below each empty
+fold is a mathpiper_grade fold that contains code
+which will automatically grade the code you place
+into the fold above it.
+
+
+========================
+The following special symbol characters can be inserted
+into the document by doing the following:
+
+1) Type a word such as "ohm".
+2) Leave the cursor to the immediate right of the
+last letter in the name.
+3) Hold down the control key (represented by <ctrl>)
+then press the semicolon key ";".
+4) The word to the left of the cursor will be
+replaced by the special symbol.
+
+Note1: for Macintosh computers, use the
+<cmd> key instead of the <ctrl> key.
+
+Note2: The complete list of "abbreviation" words
+is in Utilities -> Global Options -> Abbreviations
+
+μ mu/micro
+Ω ohm
+ρ rho
+η eta
+∠ angle
+ϴ theta
+ϕ phi
+β beta
+′ prime
+
+- Compound units need to be in parentheses: 25`(mA / s) instead of 25`mA / s .
+
+ℓ
+
+
+
+
+
+%group,name="Problem 2.26",description="p.61",example_page="p.???"
+========================================================================================================
+
+
+%mathpiper,name="Problem 2.26",subtype="problem",unassign_all="true",globalStateShow="true",formula="true",hint="false"
+
+Problem()
+{
+    Description()
+    {
+        "2.26 (explanation version .02)";
+    }
+    
+    Sought()
+    {
+        R$1$p`W :: "Power of resistor R$1.";
+        R$2$p`W :: "Power of resistor R$2.";
+        R$3$p`W :: "Power of resistor R$3.";
+        R$4$p`W :: "Power of resistor R$4.";
+        R$5$p`W :: "Power of resistor R$5.";
+    }
+    
+    Given()
+    {
+        VS$1 := 240`V;
+        R$1 := 4`Ω;
+        R$2$v := 90`V;
+        R$2 := 22.5`Ω;
+        R$3 := 5`Ω;
+        R$4 := 20`Ω;
+        R$5 := 15`Ω;  
+    }
+    
+    Lookup()
+    {
+        
+    }
+    
+    Formulas()
+    {
+        Formula(I$`A == V$`V / R$`Ω,
+                Label:"3.1",
+                Page:"78",
+                Description:"Ohm's law.",
+                ID:"1.40",
+                Substitutions:[I$ -> R$2$i, V$ -> R$2$v, R$ -> R$2],
+                Schematic:"b_R$2_OL.png",
+                Reason:"The only formula that can be applied to any component, bottom-up.",
+                Search:"Keywords:Ohm",
+                Subject:'Null,
+                Units:A,
+                Evaluate?:True);
+                
+        Formula(V$S`V == V$1`V + V$2`V + ... + V$n`V,
+                ID:"1.95",
+                Label:"4.2",
+                Page:"102",
+                Description:"Series.,Kirchhoff's voltage law. KVL.",
+                Ellipsis:2,
+                ID:"1.95",
+                Substitutions:[V$S -> VS$1, V$1 -> R$2$v, V$2 -> R$5$v], //todo:tk:in ellipsis circuits maybe "$1, $2, etc." "$a, $b, et." to prevent subscript clashes?
+                Schematic:"c_R$5_KVL.png",
+                Reason:"Clockwise, the only formula that can be applied to any component, bottom-up.",
+                Search:"Keywords:KVL",
+                Subject:'R$5$v,
+                Units:Null,
+                Evaluate?:True);
+                
+        Formula(I$`A == V$`V / R$`Ω,
+                Label:"3.1",
+                Page:"78",
+                Description:"Ohm's law.",
+                ID:"1.40",
+                Substitutions:[I$ -> R$5$i, V$ -> R$5$v, R$ -> R$5],
+                Schematic:"d_R$5_OL.png",
+                Reason:"The only formula that can be applied to any component, bottom-up.",
+                Search:"Keywords:Ohm",
+                Subject:'Null,
+                Units:A,
+                Evaluate?:True);
+                
+        Formula(I$T`A == I$1`A + I$2`A + ... + I$n`A,
+                ID:"1.110",
+                Label:"5.1",
+                Page:"131",
+                Description:"Total current through one or more collections of components in parallel. Kirchhoff's current law. KCL.",
+                Ellipsis:2,
+                ID:"1.110",
+                Substitutions:[I$T -> R$5$i, I$1 -> R$2$i, I$2 -> R$3$i],
+                Schematic:"e_T$5_KCL.png",
+                Reason:"The only formula that can be applied to any component, bottom-up.",
+                Search:"Keywords:kirchoff current",
+                Subject:'R$3$i,
+                Units:Null,
+                Evaluate?:True);
+                
+        Formula(I$`A == V$`V / R$`Ω,
+                Label:"3.1",
+                Page:"78",
+                Description:"Ohm's law.",
+                ID:"1.40",
+                Substitutions:[I$ -> R$3$i, V$ -> R$3$v, R$ -> R$3],
+                Schematic:"f_R$3_OL.png",
+                Reason:"The only formula that can be applied to any component, bottom-up.",
+                Search:"Keywords:Ohm",
+                Subject:'R$3$v,
+                Units:V,
+                Evaluate?:True);                
+                
+        Formula(V$S`V == V$1`V + V$2`V + ... + V$n`V,
+                ID:"1.95",
+                Label:"4.2",
+                Page:"102",
+                Description:"Series.,Kirchhoff's voltage law. KVL.",
+                Ellipsis:2,
+                ID:"1.95",
+                Substitutions:[V$S -> R$2$v, V$1 -> R$1$v, V$2 -> R$3$v],
+                Schematic:"g_R$1_KVL.png",
+                Reason:"Clockwise, the only formula that can be applied to any component, bottom-up.",
+                Search:"Keywords:KVL",
+                Subject:'R$1$v,
+                Units:V,
+                Evaluate?:True);
+                
+        Formula(I$`A == V$`V / R$`Ω,
+                Label:"3.1",
+                Page:"78",
+                Description:"Ohm's law.",
+                ID:"1.40",
+                Substitutions:[I$ -> R$1$i, V$ -> R$1$v, R$ -> R$1],
+                Schematic:"h_R$1_OL.png",
+                Reason:"The only formula that can be applied to any component, bottom-up.",
+                Search:"Keywords:Ohm",
+                Subject:'Null,
+                Units:A,
+                Evaluate?:True);
+                
+        Formula(I$T`A == I$1`A + I$2`A + ... + I$n`A,
+                ID:"1.110",
+                Label:"5.1",
+                Page:"131",
+                Description:"Total current through one or more collections of components in parallel. Kirchhoff's current law. KCL.",
+                Ellipsis:2,
+                ID:"1.110",
+                Substitutions:[I$T -> R$1$i, I$1 -> R$3$i, I$2 -> R$4$i],
+                Schematic:"i_T$4_KCL.png",
+                Reason:"The only formula that can be applied to any component, bottom-up.",
+                Search:"Keywords:kirchoff current",
+                Subject:'R$4$i,
+                Units:A,
+                Evaluate?:True);
+                
+        Formula(I$`A == V$`V / R$`Ω,
+                Label:"3.1",
+                Page:"78",
+                Description:"Ohm's law.",
+                ID:"1.40",
+                Substitutions:[I$ -> R$4$i, V$ -> R$4$v, R$ -> R$4],
+                Schematic:"j_R$4_OL.png",
+                Reason:"The only formula that can be applied to any component, bottom-up.",
+                Search:"Keywords:Ohm",
+                Subject:'R$4$v,
+                Units:V,
+                Evaluate?:True);
+
+        Formula(P$`W == I$`A^2 * R$`Ω,
+                ID:"1.55",
+                Label:"3.5",
+                Page:"339,85",
+                Description:"Power.",
+                ID:"1.55",
+                Substitutions:[P$ -> R$1$p, I$ -> R$1$i, R$ -> R$1],
+                Subject:'Null,
+                Units:W,
+                Evaluate?:True);
+                
+        Formula(P$`W == I$`A^2 * R$`Ω,
+                ID:"1.55",
+                Label:"3.5",
+                Page:"339,85",
+                Description:"Power.",
+                ID:"1.55",
+                Substitutions:[P$ -> R$2$p, I$ -> R$2$i, R$ -> R$2],
+                Subject:'Null,
+                Units:W,
+                Evaluate?:True);
+                
+        Formula(P$`W == I$`A^2 * R$`Ω,
+                ID:"1.55",
+                Label:"3.5",
+                Page:"339,85",
+                Description:"Power.",
+                ID:"1.55",
+                Substitutions:[P$ -> R$3$p, I$ -> R$3$i, R$ -> R$3],
+                Subject:'Null,
+                Units:W,
+                Evaluate?:True);
+                
+        Formula(P$`W == I$`A^2 * R$`Ω,
+                ID:"1.55",
+                Label:"3.5",
+                Page:"339,85",
+                Description:"Power.",
+                ID:"1.55",
+                Substitutions:[P$ -> R$4$p, I$ -> R$4$i, R$ -> R$4],
+                Subject:'Null,
+                Units:W,
+                Evaluate?:True);
+                
+        Formula(P$`W == I$`A^2 * R$`Ω,
+                ID:"1.55",
+                Label:"3.5",
+                Page:"339,85",
+                Description:"Power.",
+                ID:"1.55",
+                Substitutions:[P$ -> R$5$p, I$ -> R$5$i, R$ -> R$5],
+                Subject:'Null,
+                Units:W,
+                Evaluate?:True);
+    }
+}
+
+%/mathpiper
+
+    %output,parent="Problem 2.26",mpversion="327",preserve="false"
+      Result: 1500`W
+      
+      Side Effects:
+      === RESULT VALUES ===
+      R$2$i: 4`A
+      R$5$v: 150`V
+      R$5$i: 10`A
+      R$3$i: 6`A
+      R$3$v: 30`V
+      R$1$v: 60`V
+      R$1$i: 15`A
+      R$4$i: 9`A
+      R$4$v: 180`V
+      R$1$p: 900`W
+      R$2$p: 360`W
+      R$3$p: 180`W
+      R$4$p: 1620`W
+      R$5$p: 1500`W
+      
+      === FORMULAS (2D VIEW) ===
+      /                                                                                                                                                                                                                                                                                  \
+      | ( 1.40 )  /       V$ \                     ( --SUBSTITUTE--> ) /          V$ \       ( --SUBSTITUTE--> ) /          R$2$v \       ( --SUBSTITUTE--> ) /          R$2$v \                                                                                                         |
+      |           | I$ == -- |                                         | R$2$i == -- |                           | R$2$i == ----- |                           | R$2$i == ----- |                                                                                                         |
+      |           \       R$ /                                         \          R$ /                           \           R$   /                           \           R$2  /                                                                                                         |
+      |                                                                                                                                                                                                                                                                                  |
+      | ( 1.95 )  ( V$S == V$1 + V$2 + ... + V$n ) ( --ELLIPSIS--> )   ( V$S == V$1 + V$2 )  ( --SUBSTITUTE--> ) ( VS$1 == V$1 + V$2 )    ( --SUBSTITUTE--> ) ( VS$1 == R$2$v + V$2 )   ( --SUBSTITUTE--> ) ( VS$1 == R$2$v + R$5$v )  ( --SUBJECT--> ) ( R$5$v == -( R$2$v ) + VS$1 )   |
+      |                                                                                                                                                                                                                                                                                  |
+      | ( 1.40 )  /       V$ \                     ( --SUBSTITUTE--> ) /          V$ \       ( --SUBSTITUTE--> ) /          R$5$v \       ( --SUBSTITUTE--> ) /          R$5$v \                                                                                                         |
+      |           | I$ == -- |                                         | R$5$i == -- |                           | R$5$i == ----- |                           | R$5$i == ----- |                                                                                                         |
+      |           \       R$ /                                         \          R$ /                           \           R$   /                           \           R$5  /                                                                                                         |
+      |                                                                                                                                                                                                                                                                                  |
+      | ( 1.110 ) ( I$T == I$1 + I$2 + ... + I$n ) ( --ELLIPSIS--> )   ( I$T == I$1 + I$2 )  ( --SUBSTITUTE--> ) ( R$5$i == I$1 + I$2 )   ( --SUBSTITUTE--> ) ( R$5$i == R$2$i + I$2 )  ( --SUBSTITUTE--> ) ( R$5$i == R$2$i + R$3$i ) ( --SUBJECT--> ) ( R$3$i == -( R$2$i ) + R$5$i )  |
+      |                                                                                                                                                                                                                                                                                  |
+      | ( 1.40 )  /       V$ \                     ( --SUBSTITUTE--> ) /          V$ \       ( --SUBSTITUTE--> ) /          R$3$v \       ( --SUBSTITUTE--> ) /          R$3$v \        ( --SUBJECT--> )    ( R$3$v == R$3 * R$3$i )                                                     |
+      |           | I$ == -- |                                         | R$3$i == -- |                           | R$3$i == ----- |                           | R$3$i == ----- |                                                                                                         |
+      |           \       R$ /                                         \          R$ /                           \           R$   /                           \           R$3  /                                                                                                         |
+      |                                                                                                                                                                                                                                                                                  |
+      | ( 1.95 )  ( V$S == V$1 + V$2 + ... + V$n ) ( --ELLIPSIS--> )   ( V$S == V$1 + V$2 )  ( --SUBSTITUTE--> ) ( R$2$v == V$1 + V$2 )   ( --SUBSTITUTE--> ) ( R$2$v == R$1$v + V$2 )  ( --SUBSTITUTE--> ) ( R$2$v == R$1$v + R$3$v ) ( --SUBJECT--> ) ( R$1$v == R$2$v - R$3$v )       |
+      |                                                                                                                                                                                                                                                                                  |
+      | ( 1.40 )  /       V$ \                     ( --SUBSTITUTE--> ) /          V$ \       ( --SUBSTITUTE--> ) /          R$1$v \       ( --SUBSTITUTE--> ) /          R$1$v \                                                                                                         |
+      |           | I$ == -- |                                         | R$1$i == -- |                           | R$1$i == ----- |                           | R$1$i == ----- |                                                                                                         |
+      |           \       R$ /                                         \          R$ /                           \           R$   /                           \           R$1  /                                                                                                         |
+      |                                                                                                                                                                                                                                                                                  |
+      | ( 1.110 ) ( I$T == I$1 + I$2 + ... + I$n ) ( --ELLIPSIS--> )   ( I$T == I$1 + I$2 )  ( --SUBSTITUTE--> ) ( R$1$i == I$1 + I$2 )   ( --SUBSTITUTE--> ) ( R$1$i == R$3$i + I$2 )  ( --SUBSTITUTE--> ) ( R$1$i == R$3$i + R$4$i ) ( --SUBJECT--> ) ( R$4$i == R$1$i - R$3$i )       |
+      |                                                                                                                                                                                                                                                                                  |
+      | ( 1.40 )  /       V$ \                     ( --SUBSTITUTE--> ) /          V$ \       ( --SUBSTITUTE--> ) /          R$4$v \       ( --SUBSTITUTE--> ) /          R$4$v \        ( --SUBJECT--> )    ( R$4$v == R$4 * R$4$i )                                                     |
+      |           | I$ == -- |                                         | R$4$i == -- |                           | R$4$i == ----- |                           | R$4$i == ----- |                                                                                                         |
+      |           \       R$ /                                         \          R$ /                           \           R$   /                           \           R$4  /                                                                                                         |
+      |                                                                                                                                                                                                                                                                                  |
+      | ( 1.55 )  /         2      \               ( --SUBSTITUTE--> ) /            2      \ ( --SUBSTITUTE--> ) /               2      \ ( --SUBSTITUTE--> ) /               2       \                                                                                                  |
+      |           \ P$ == I$  * R$ /                                   \ R$1$p == I$  * R$ /                     \ R$1$p == R$1$i  * R$ /                     \ R$1$p == R$1$i  * R$1 /                                                                                                  |
+      |                                                                                                                                                                                                                                                                                  |
+      | ( 1.55 )  /         2      \               ( --SUBSTITUTE--> ) /            2      \ ( --SUBSTITUTE--> ) /               2      \ ( --SUBSTITUTE--> ) /               2       \                                                                                                  |
+      |           \ P$ == I$  * R$ /                                   \ R$2$p == I$  * R$ /                     \ R$2$p == R$2$i  * R$ /                     \ R$2$p == R$2$i  * R$2 /                                                                                                  |
+      |                                                                                                                                                                                                                                                                                  |
+      | ( 1.55 )  /         2      \               ( --SUBSTITUTE--> ) /            2      \ ( --SUBSTITUTE--> ) /               2      \ ( --SUBSTITUTE--> ) /               2       \                                                                                                  |
+      |           \ P$ == I$  * R$ /                                   \ R$3$p == I$  * R$ /                     \ R$3$p == R$3$i  * R$ /                     \ R$3$p == R$3$i  * R$3 /                                                                                                  |
+      |                                                                                                                                                                                                                                                                                  |
+      | ( 1.55 )  /         2      \               ( --SUBSTITUTE--> ) /            2      \ ( --SUBSTITUTE--> ) /               2      \ ( --SUBSTITUTE--> ) /               2       \                                                                                                  |
+      |           \ P$ == I$  * R$ /                                   \ R$4$p == I$  * R$ /                     \ R$4$p == R$4$i  * R$ /                     \ R$4$p == R$4$i  * R$4 /                                                                                                  |
+      |                                                                                                                                                                                                                                                                                  |
+      | ( 1.55 )  /         2      \               ( --SUBSTITUTE--> ) /            2      \ ( --SUBSTITUTE--> ) /               2      \ ( --SUBSTITUTE--> ) /               2       \                                                                                                  |
+      |           \ P$ == I$  * R$ /                                   \ R$5$p == I$  * R$ /                     \ R$5$p == R$5$i  * R$ /                     \ R$5$p == R$5$i  * R$5 /                                                                                                  |
+      \                                                                                                                                                                                                                                                                                  /
+      
+      === STEPS (CODE VIEW) ===
+       1: VS$1 := 240`V --> 240`V
+       2: R$1 := 4`Ω --> 4`Ω
+       3: R$2$v := 90`V --> 90`V
+       4: R$2 := 22.5`Ω --> 22.5`Ω
+       5: R$3 := 5`Ω --> 5`Ω
+       6: R$4 := 20`Ω --> 20`Ω
+       7: R$5 := 15`Ω --> 15`Ω
+       8: (1.40) I$ == V$ / R$ --SUBSTITUTE--> R$2$i == V$ / R$ --SUBSTITUTE--> R$2$i == R$2$v / R$ --SUBSTITUTE--> R$2$i == R$2$v / R$2
+       9:   R$2$i := R$2$v / R$2 --EVALUATE--> R$2$i == 90`V / 22.5`Ω --EVALUATE--> 4`A
+      10: (1.95) V$S == V$1 + V$2 + ... + V$n --ELLIPSIS--> V$S == V$1 + V$2 --SUBSTITUTE--> VS$1 == V$1 + V$2 --SUBSTITUTE--> VS$1 == R$2$v + V$2 --SUBSTITUTE--> VS$1 == R$2$v + R$5$v --SUBJECT--> R$5$v ==  -R$2$v + VS$1
+      11:   R$5$v :=  -R$2$v + VS$1 --EVALUATE--> R$5$v == -90`V + 240`V --EVALUATE--> 150`V
+      12: (1.40) I$ == V$ / R$ --SUBSTITUTE--> R$5$i == V$ / R$ --SUBSTITUTE--> R$5$i == R$5$v / R$ --SUBSTITUTE--> R$5$i == R$5$v / R$5
+      13:   R$5$i := R$5$v / R$5 --EVALUATE--> R$5$i == 150`V / 15`Ω --EVALUATE--> 10`A
+      14: (1.110) I$T == I$1 + I$2 + ... + I$n --ELLIPSIS--> I$T == I$1 + I$2 --SUBSTITUTE--> R$5$i == I$1 + I$2 --SUBSTITUTE--> R$5$i == R$2$i + I$2 --SUBSTITUTE--> R$5$i == R$2$i + R$3$i --SUBJECT--> R$3$i ==  -R$2$i + R$5$i
+      15:   R$3$i :=  -R$2$i + R$5$i --EVALUATE--> R$3$i == -4.0`A + 10.0`A --EVALUATE--> 6`A
+      16: (1.40) I$ == V$ / R$ --SUBSTITUTE--> R$3$i == V$ / R$ --SUBSTITUTE--> R$3$i == R$3$v / R$ --SUBSTITUTE--> R$3$i == R$3$v / R$3 --SUBJECT--> R$3$v == R$3 * R$3$i
+      17:   R$3$v := R$3 * R$3$i --EVALUATE--> R$3$v == 5`Ω * 6.0`A --EVALUATE--> 30`V
+      18: (1.95) V$S == V$1 + V$2 + ... + V$n --ELLIPSIS--> V$S == V$1 + V$2 --SUBSTITUTE--> R$2$v == V$1 + V$2 --SUBSTITUTE--> R$2$v == R$1$v + V$2 --SUBSTITUTE--> R$2$v == R$1$v + R$3$v --SUBJECT--> R$1$v == R$2$v - R$3$v
+      19:   R$1$v := R$2$v - R$3$v --EVALUATE--> R$1$v == 90`V - 30.0`V --EVALUATE--> 60`V
+      20: (1.40) I$ == V$ / R$ --SUBSTITUTE--> R$1$i == V$ / R$ --SUBSTITUTE--> R$1$i == R$1$v / R$ --SUBSTITUTE--> R$1$i == R$1$v / R$1
+      21:   R$1$i := R$1$v / R$1 --EVALUATE--> R$1$i == 60.0`V / 4`Ω --EVALUATE--> 15`A
+      22: (1.110) I$T == I$1 + I$2 + ... + I$n --ELLIPSIS--> I$T == I$1 + I$2 --SUBSTITUTE--> R$1$i == I$1 + I$2 --SUBSTITUTE--> R$1$i == R$3$i + I$2 --SUBSTITUTE--> R$1$i == R$3$i + R$4$i --SUBJECT--> R$4$i == R$1$i - R$3$i
+      23:   R$4$i := R$1$i - R$3$i --EVALUATE--> R$4$i == 15.0`A - 6`A --EVALUATE--> 9`A
+      24: (1.40) I$ == V$ / R$ --SUBSTITUTE--> R$4$i == V$ / R$ --SUBSTITUTE--> R$4$i == R$4$v / R$ --SUBSTITUTE--> R$4$i == R$4$v / R$4 --SUBJECT--> R$4$v == R$4 * R$4$i
+      25:   R$4$v := R$4 * R$4$i --EVALUATE--> R$4$v == 20`Ω * 9.0`A --EVALUATE--> 180`V
+      26: (1.55) P$ == I$^2 * R$ --SUBSTITUTE--> R$1$p == I$^2 * R$ --SUBSTITUTE--> R$1$p == R$1$i^2 * R$ --SUBSTITUTE--> R$1$p == R$1$i^2 * R$1
+      27:   R$1$p := R$1$i^2 * R$1 --EVALUATE--> R$1$p == 15`A^2 * 4`Ω --EVALUATE--> 900`W
+      28: (1.55) P$ == I$^2 * R$ --SUBSTITUTE--> R$2$p == I$^2 * R$ --SUBSTITUTE--> R$2$p == R$2$i^2 * R$ --SUBSTITUTE--> R$2$p == R$2$i^2 * R$2
+      29:   R$2$p := R$2$i^2 * R$2 --EVALUATE--> R$2$p == 4`A^2 * 22.5`Ω --EVALUATE--> 360`W
+      30: (1.55) P$ == I$^2 * R$ --SUBSTITUTE--> R$3$p == I$^2 * R$ --SUBSTITUTE--> R$3$p == R$3$i^2 * R$ --SUBSTITUTE--> R$3$p == R$3$i^2 * R$3
+      31:   R$3$p := R$3$i^2 * R$3 --EVALUATE--> R$3$p == 6`A^2 * 5`Ω --EVALUATE--> 180`W
+      32: (1.55) P$ == I$^2 * R$ --SUBSTITUTE--> R$4$p == I$^2 * R$ --SUBSTITUTE--> R$4$p == R$4$i^2 * R$ --SUBSTITUTE--> R$4$p == R$4$i^2 * R$4
+      33:   R$4$p := R$4$i^2 * R$4 --EVALUATE--> R$4$p == 9`A^2 * 20`Ω --EVALUATE--> 1620`W
+      34: (1.55) P$ == I$^2 * R$ --SUBSTITUTE--> R$5$p == I$^2 * R$ --SUBSTITUTE--> R$5$p == R$5$i^2 * R$ --SUBSTITUTE--> R$5$p == R$5$i^2 * R$5
+      35:   R$5$p := R$5$i^2 * R$5 --EVALUATE--> R$5$p == 10`A^2 * 15`Ω --EVALUATE--> 1500`W
+      
+.   %/output
+
+%/group
+%group,name="Problem 2.26b",description="p.61",example_page="p.???"
+========================================================================================================
+
+Create a problem that is similar to problem 2.26 but add one resistor anywhere in the circuit.
+
+
+%mathpiper,name="Problem 2.26 b",subtype="problem",unassign_all="true",globalStateShow="true",formula="true",hint="false"
+
+Problem()
+{
+    Description()
+    {
+        "2.26 (explanation version .02)";
+    }
+    
+    Sought()
+    {
+        R$1$p`W :: "Power of resistor R$1.";
+        R$2$p`W :: "Power of resistor R$2.";
+        R$3$p`W :: "Power of resistor R$3.";
+        R$4$p`W :: "Power of resistor R$4.";
+        R$5$p`W :: "Power of resistor R$5.";
+        R$6$p`W :: "Power of resistor R$5.";
+    }
+    
+    Given()
+    {
+        VS$1 := 240`V;
+        R$1 := 4`Ω;
+        R$2$v := 118.93`V;
+        R$2 := 22.5`Ω;
+        R$3 := 5`Ω;
+        R$4 := 20`Ω;
+        R$5 := 15`Ω;  
+        R$6 := 20`Ω; 
+    }
+    
+    Lookup()
+    {
+        
+    }
+    
+    Formulas()
+    {
+        Formula(I$`A == V$`V / R$`Ω,
+                Label:"3.1",
+                Page:"78",
+                Description:"Ohm's law.",
+                ID:"1.40",
+                Substitutions:[I$ -> R$2$i, V$ -> R$2$v, R$ -> R$2],
+                Schematic:"b_R$2_OL.png",
+                Reason:"The only formula that can be applied to any component, bottom-up.",
+                Search:"Keywords:Ohm",
+                Subject:'Null,
+                Units:A,
+                Evaluate?:True);
+                
+        Formula(V$S`V == V$1`V + V$2`V + ... + V$n`V,
+                ID:"1.95",
+                Label:"4.2",
+                Page:"102",
+                Description:"Series.,Kirchhoff's voltage law. KVL.",
+                Ellipsis:2,
+                ID:"1.95",
+                Substitutions:[V$S -> VS$1, V$1 -> R$2$v, V$2 -> R$5$v], //todo:tk:in ellipsis circuits maybe "$1, $2, etc." "$a, $b, et." to prevent subscript clashes?
+                Schematic:"c_R$5_KVL.png",
+                Reason:"Clockwise, the only formula that can be applied to any component, bottom-up.",
+                Search:"Keywords:KVL",
+                Subject:'R$5$v,
+                Units:Null,
+                Evaluate?:True);
+                
+        Formula(I$`A == V$`V / R$`Ω,
+                Label:"3.1",
+                Page:"78",
+                Description:"Ohm's law.",
+                ID:"1.40",
+                Substitutions:[I$ -> R$5$i, V$ -> R$5$v, R$ -> R$5],
+                Schematic:"d_R$5_OL.png",
+                Reason:"The only formula that can be applied to any component, bottom-up.",
+                Search:"Keywords:Ohm",
+                Subject:'Null,
+                Units:A,
+                Evaluate?:True);
+                
+                ////////////////////////////////////////////////////////////////////
+                
+        Formula(I$T`A == I$1`A + I$2`A + ... + I$n`A,
+                ID:"1.110",
+                Label:"5.1",
+                Page:"131",
+                Description:"Total current through one or more collections of components in parallel. Kirchhoff's current law. KCL.",
+                Ellipsis:2,
+                ID:"1.110",
+                Substitutions:[I$T -> R$5$i, I$1 -> R$2$i, I$2 -> R$3$i],
+                Schematic:"e_T$5_KCL.png",
+                Reason:"The only formula that can be applied to any component, bottom-up.",
+                Search:"Keywords:kirchoff current",
+                Subject:'R$3$i,
+                Units:Null,
+                Evaluate?:True);
+                
+        Formula(I$T`A == I$1`A + I$2`A + ... + I$n`A,
+                ID:"1.110",
+                Label:"5.1",
+                Page:"131",
+                Description:"Total current through one or more collections of components in parallel. Kirchhoff's current law. KCL.",
+                Ellipsis:2,
+                ID:"1.110",
+                Substitutions:[I$T -> R$5$i, I$1 -> R$2$i, I$2 -> R$6$i],
+                Schematic:"e_T$5_KCL.png",
+                Reason:"The only formula that can be applied to any component, bottom-up.",
+                Search:"Keywords:kirchoff current",
+                Subject:'R$6$i,
+                Units:Null,
+                Evaluate?:True);
+                
+        Formula(I$`A == V$`V / R$`Ω,
+                Label:"3.1",
+                Page:"78",
+                Description:"Ohm's law.",
+                ID:"1.40",
+                Substitutions:[I$ -> R$3$i, V$ -> R$3$v, R$ -> R$3],
+                Schematic:"f_R$3_OL.png",
+                Reason:"The only formula that can be applied to any component, bottom-up.",
+                Search:"Keywords:Ohm",
+                Subject:'R$3$v,
+                Units:V,
+                Evaluate?:True);    
+                
+        Formula(I$`A == V$`V / R$`Ω,
+                Label:"3.1",
+                Page:"78",
+                Description:"Ohm's law.",
+                ID:"1.40",
+                Substitutions:[I$ -> R$6$i, V$ -> R$6$v, R$ -> R$6],
+                Schematic:"f_R$3_OL.png",
+                Reason:"The only formula that can be applied to any component, bottom-up.",
+                Search:"Keywords:Ohm",
+                Subject:'R$6$v,
+                Units:V,
+                Evaluate?:True);     
+                
+        Formula(V$S`V == V$1`V + V$2`V + ... + V$n`V,
+                ID:"1.95",
+                Label:"4.2",
+                Page:"102",
+                Description:"Series.,Kirchhoff's voltage law. KVL.",
+                Ellipsis:3,
+                ID:"1.95",
+                Substitutions:[V$S -> R$2$v, V$1 -> R$1$v, V$2 -> R$3$v, V$3 -> R$6$v],
+                Schematic:"g_R$1_KVL.png",
+                Reason:"Clockwise, the only formula that can be applied to any component, bottom-up.",
+                Search:"Keywords:KVL",
+                Subject:'R$1$v,
+                Units:V,
+                Evaluate?:True);
+                
+        Formula(I$`A == V$`V / R$`Ω,
+                Label:"3.1",
+                Page:"78",
+                Description:"Ohm's law.",
+                ID:"1.40",
+                Substitutions:[I$ -> R$1$i, V$ -> R$1$v, R$ -> R$1],
+                Schematic:"h_R$1_OL.png",
+                Reason:"The only formula that can be applied to any component, bottom-up.",
+                Search:"Keywords:Ohm",
+                Subject:'Null,
+                Units:A,
+                Evaluate?:True);
+                
+        Formula(I$T`A == I$1`A + I$2`A + ... + I$n`A,
+                ID:"1.110",
+                Label:"5.1",
+                Page:"131",
+                Description:"Total current through one or more collections of components in parallel. Kirchhoff's current law. KCL.",
+                Ellipsis:2,
+                ID:"1.110",
+                Substitutions:[I$T -> R$1$i, I$1 -> R$3$i, I$2 -> R$4$i],
+                Schematic:"i_T$4_KCL.png",
+                Reason:"The only formula that can be applied to any component, bottom-up.",
+                Search:"Keywords:kirchoff current",
+                Subject:'R$4$i,
+                Units:A,
+                Evaluate?:True);
+                
+        Formula(I$`A == V$`V / R$`Ω,
+                Label:"3.1",
+                Page:"78",
+                Description:"Ohm's law.",
+                ID:"1.40",
+                Substitutions:[I$ -> R$4$i, V$ -> R$4$v, R$ -> R$4],
+                Schematic:"j_R$4_OL.png",
+                Reason:"The only formula that can be applied to any component, bottom-up.",
+                Search:"Keywords:Ohm",
+                Subject:'R$4$v,
+                Units:V,
+                Evaluate?:True);
+
+        Formula(P$`W == I$`A^2 * R$`Ω,
+                ID:"1.55",
+                Label:"3.5",
+                Page:"339,85",
+                Description:"Power.",
+                ID:"1.55",
+                Substitutions:[P$ -> R$1$p, I$ -> R$1$i, R$ -> R$1],
+                Subject:'Null,
+                Units:W,
+                Evaluate?:True);
+                
+        Formula(P$`W == I$`A^2 * R$`Ω,
+                ID:"1.55",
+                Label:"3.5",
+                Page:"339,85",
+                Description:"Power.",
+                ID:"1.55",
+                Substitutions:[P$ -> R$2$p, I$ -> R$2$i, R$ -> R$2],
+                Subject:'Null,
+                Units:W,
+                Evaluate?:True);
+                
+        Formula(P$`W == I$`A^2 * R$`Ω,
+                ID:"1.55",
+                Label:"3.5",
+                Page:"339,85",
+                Description:"Power.",
+                ID:"1.55",
+                Substitutions:[P$ -> R$3$p, I$ -> R$3$i, R$ -> R$3],
+                Subject:'Null,
+                Units:W,
+                Evaluate?:True);
+                
+        Formula(P$`W == I$`A^2 * R$`Ω,
+                ID:"1.55",
+                Label:"3.5",
+                Page:"339,85",
+                Description:"Power.",
+                ID:"1.55",
+                Substitutions:[P$ -> R$4$p, I$ -> R$4$i, R$ -> R$4],
+                Subject:'Null,
+                Units:W,
+                Evaluate?:True);
+        
+        Formula(P$`W == I$`A^2 * R$`Ω,
+                ID:"1.55",
+                Label:"3.5",
+                Page:"339,85",
+                Description:"Power.",
+                ID:"1.55",
+                Substitutions:[P$ -> R$6$p, I$ -> R$6$i, R$ -> R$6],
+                Subject:'Null,
+                Units:W,
+                Evaluate?:True);
+                
+        Formula(P$`W == I$`A^2 * R$`Ω,
+                ID:"1.55",
+                Label:"3.5",
+                Page:"339,85",
+                Description:"Power.",
+                ID:"1.55",
+                Substitutions:[P$ -> R$5$p, I$ -> R$5$i, R$ -> R$5],
+                Subject:'Null,
+                Units:W,
+                Evaluate?:True);
+    }
+}
+%/mathpiper
+
+    %output,parent="Problem 2.26 b",mpversion="327",preserve="false"
+      Result: 977.1963266`W
+      
+      Side Effects:
+      === RESULT VALUES ===
+      R$2$i: 5.285777778`A
+      R$5$v: 121.07`V
+      R$5$i: 8.071333333`A
+      R$3$i: 2.785555555`A
+      R$6$i: 2.785555555`A
+      R$3$v: 13.92777778`V
+      R$6$v: 55.7111111`V
+      R$1$v: 49.2911111`V
+      R$1$i: 12.32277778`A
+      R$4$i: 9.537222225`A
+      R$4$v: 190.7444445`V
+      R$1$p: 607.4034088`W
+      R$2$p: 628.6375512`W
+      R$3$p: 38.79659875`W
+      R$4$p: 1819.172155`W
+      R$6$p: 155.186395`W
+      R$5$p: 977.1963266`W
+      
+      === FORMULAS (2D VIEW) ===
+      /                                                                                                                                                                                                                                                                                                                                                                \
+      | ( 1.40 )  /       V$ \                     ( --SUBSTITUTE--> ) /          V$ \            ( --SUBSTITUTE--> ) /          R$2$v \           ( --SUBSTITUTE--> ) /          R$2$v \                                                                                                                                                                              |
+      |           | I$ == -- |                                         | R$2$i == -- |                                | R$2$i == ----- |                               | R$2$i == ----- |                                                                                                                                                                              |
+      |           \       R$ /                                         \          R$ /                                \           R$   /                               \           R$2  /                                                                                                                                                                              |
+      |                                                                                                                                                                                                                                                                                                                                                                |
+      | ( 1.95 )  ( V$S == V$1 + V$2 + ... + V$n ) ( --ELLIPSIS--> )   ( V$S == V$1 + V$2 )       ( --SUBSTITUTE--> ) ( VS$1 == V$1 + V$2 )        ( --SUBSTITUTE--> ) ( VS$1 == R$2$v + V$2 )        ( --SUBSTITUTE--> ) ( VS$1 == R$2$v + R$5$v )        ( --SUBJECT--> )    ( R$5$v == -( R$2$v ) + VS$1 )                                                          |
+      |                                                                                                                                                                                                                                                                                                                                                                |
+      | ( 1.40 )  /       V$ \                     ( --SUBSTITUTE--> ) /          V$ \            ( --SUBSTITUTE--> ) /          R$5$v \           ( --SUBSTITUTE--> ) /          R$5$v \                                                                                                                                                                              |
+      |           | I$ == -- |                                         | R$5$i == -- |                                | R$5$i == ----- |                               | R$5$i == ----- |                                                                                                                                                                              |
+      |           \       R$ /                                         \          R$ /                                \           R$   /                               \           R$5  /                                                                                                                                                                              |
+      |                                                                                                                                                                                                                                                                                                                                                                |
+      | ( 1.110 ) ( I$T == I$1 + I$2 + ... + I$n ) ( --ELLIPSIS--> )   ( I$T == I$1 + I$2 )       ( --SUBSTITUTE--> ) ( R$5$i == I$1 + I$2 )       ( --SUBSTITUTE--> ) ( R$5$i == R$2$i + I$2 )       ( --SUBSTITUTE--> ) ( R$5$i == R$2$i + R$3$i )       ( --SUBJECT--> )    ( R$3$i == -( R$2$i ) + R$5$i )                                                         |
+      |                                                                                                                                                                                                                                                                                                                                                                |
+      | ( 1.110 ) ( I$T == I$1 + I$2 + ... + I$n ) ( --ELLIPSIS--> )   ( I$T == I$1 + I$2 )       ( --SUBSTITUTE--> ) ( R$5$i == I$1 + I$2 )       ( --SUBSTITUTE--> ) ( R$5$i == R$2$i + I$2 )       ( --SUBSTITUTE--> ) ( R$5$i == R$2$i + R$6$i )       ( --SUBJECT--> )    ( R$6$i == -( R$2$i ) + R$5$i )                                                         |
+      |                                                                                                                                                                                                                                                                                                                                                                |
+      | ( 1.40 )  /       V$ \                     ( --SUBSTITUTE--> ) /          V$ \            ( --SUBSTITUTE--> ) /          R$3$v \           ( --SUBSTITUTE--> ) /          R$3$v \             ( --SUBJECT--> )    ( R$3$v == R$3 * R$3$i )                                                                                                                     |
+      |           | I$ == -- |                                         | R$3$i == -- |                                | R$3$i == ----- |                               | R$3$i == ----- |                                                                                                                                                                              |
+      |           \       R$ /                                         \          R$ /                                \           R$   /                               \           R$3  /                                                                                                                                                                              |
+      |                                                                                                                                                                                                                                                                                                                                                                |
+      | ( 1.40 )  /       V$ \                     ( --SUBSTITUTE--> ) /          V$ \            ( --SUBSTITUTE--> ) /          R$6$v \           ( --SUBSTITUTE--> ) /          R$6$v \             ( --SUBJECT--> )    ( R$6$v == R$6 * R$6$i )                                                                                                                     |
+      |           | I$ == -- |                                         | R$6$i == -- |                                | R$6$i == ----- |                               | R$6$i == ----- |                                                                                                                                                                              |
+      |           \       R$ /                                         \          R$ /                                \           R$   /                               \           R$6  /                                                                                                                                                                              |
+      |                                                                                                                                                                                                                                                                                                                                                                |
+      | ( 1.95 )  ( V$S == V$1 + V$2 + ... + V$n ) ( --ELLIPSIS--> )   ( V$S == V$1 + V$2 + V$3 ) ( --SUBSTITUTE--> ) ( R$2$v == V$1 + V$2 + V$3 ) ( --SUBSTITUTE--> ) ( R$2$v == R$1$v + V$2 + V$3 ) ( --SUBSTITUTE--> ) ( R$2$v == R$1$v + R$3$v + V$3 ) ( --SUBSTITUTE--> ) ( R$2$v == R$1$v + R$3$v + R$6$v ) ( --SUBJECT--> ) ( R$1$v == R$2$v - R$3$v - R$6$v )  |
+      |                                                                                                                                                                                                                                                                                                                                                                |
+      | ( 1.40 )  /       V$ \                     ( --SUBSTITUTE--> ) /          V$ \            ( --SUBSTITUTE--> ) /          R$1$v \           ( --SUBSTITUTE--> ) /          R$1$v \                                                                                                                                                                              |
+      |           | I$ == -- |                                         | R$1$i == -- |                                | R$1$i == ----- |                               | R$1$i == ----- |                                                                                                                                                                              |
+      |           \       R$ /                                         \          R$ /                                \           R$   /                               \           R$1  /                                                                                                                                                                              |
+      |                                                                                                                                                                                                                                                                                                                                                                |
+      | ( 1.110 ) ( I$T == I$1 + I$2 + ... + I$n ) ( --ELLIPSIS--> )   ( I$T == I$1 + I$2 )       ( --SUBSTITUTE--> ) ( R$1$i == I$1 + I$2 )       ( --SUBSTITUTE--> ) ( R$1$i == R$3$i + I$2 )       ( --SUBSTITUTE--> ) ( R$1$i == R$3$i + R$4$i )       ( --SUBJECT--> )    ( R$4$i == R$1$i - R$3$i )                                                              |
+      |                                                                                                                                                                                                                                                                                                                                                                |
+      | ( 1.40 )  /       V$ \                     ( --SUBSTITUTE--> ) /          V$ \            ( --SUBSTITUTE--> ) /          R$4$v \           ( --SUBSTITUTE--> ) /          R$4$v \             ( --SUBJECT--> )    ( R$4$v == R$4 * R$4$i )                                                                                                                     |
+      |           | I$ == -- |                                         | R$4$i == -- |                                | R$4$i == ----- |                               | R$4$i == ----- |                                                                                                                                                                              |
+      |           \       R$ /                                         \          R$ /                                \           R$   /                               \           R$4  /                                                                                                                                                                              |
+      |                                                                                                                                                                                                                                                                                                                                                                |
+      | ( 1.55 )  /         2      \               ( --SUBSTITUTE--> ) /            2      \      ( --SUBSTITUTE--> ) /               2      \     ( --SUBSTITUTE--> ) /               2       \                                                                                                                                                                       |
+      |           \ P$ == I$  * R$ /                                   \ R$1$p == I$  * R$ /                          \ R$1$p == R$1$i  * R$ /                         \ R$1$p == R$1$i  * R$1 /                                                                                                                                                                       |
+      |                                                                                                                                                                                                                                                                                                                                                                |
+      | ( 1.55 )  /         2      \               ( --SUBSTITUTE--> ) /            2      \      ( --SUBSTITUTE--> ) /               2      \     ( --SUBSTITUTE--> ) /               2       \                                                                                                                                                                       |
+      |           \ P$ == I$  * R$ /                                   \ R$2$p == I$  * R$ /                          \ R$2$p == R$2$i  * R$ /                         \ R$2$p == R$2$i  * R$2 /                                                                                                                                                                       |
+      |                                                                                                                                                                                                                                                                                                                                                                |
+      | ( 1.55 )  /         2      \               ( --SUBSTITUTE--> ) /            2      \      ( --SUBSTITUTE--> ) /               2      \     ( --SUBSTITUTE--> ) /               2       \                                                                                                                                                                       |
+      |           \ P$ == I$  * R$ /                                   \ R$3$p == I$  * R$ /                          \ R$3$p == R$3$i  * R$ /                         \ R$3$p == R$3$i  * R$3 /                                                                                                                                                                       |
+      |                                                                                                                                                                                                                                                                                                                                                                |
+      | ( 1.55 )  /         2      \               ( --SUBSTITUTE--> ) /            2      \      ( --SUBSTITUTE--> ) /               2      \     ( --SUBSTITUTE--> ) /               2       \                                                                                                                                                                       |
+      |           \ P$ == I$  * R$ /                                   \ R$4$p == I$  * R$ /                          \ R$4$p == R$4$i  * R$ /                         \ R$4$p == R$4$i  * R$4 /                                                                                                                                                                       |
+      |                                                                                                                                                                                                                                                                                                                                                                |
+      | ( 1.55 )  /         2      \               ( --SUBSTITUTE--> ) /            2      \      ( --SUBSTITUTE--> ) /               2      \     ( --SUBSTITUTE--> ) /               2       \                                                                                                                                                                       |
+      |           \ P$ == I$  * R$ /                                   \ R$6$p == I$  * R$ /                          \ R$6$p == R$6$i  * R$ /                         \ R$6$p == R$6$i  * R$6 /                                                                                                                                                                       |
+      |                                                                                                                                                                                                                                                                                                                                                                |
+      | ( 1.55 )  /         2      \               ( --SUBSTITUTE--> ) /            2      \      ( --SUBSTITUTE--> ) /               2      \     ( --SUBSTITUTE--> ) /               2       \                                                                                                                                                                       |
+      |           \ P$ == I$  * R$ /                                   \ R$5$p == I$  * R$ /                          \ R$5$p == R$5$i  * R$ /                         \ R$5$p == R$5$i  * R$5 /                                                                                                                                                                       |
+      \                                                                                                                                                                                                                                                                                                                                                                /
+      
+      === STEPS (CODE VIEW) ===
+       1: VS$1 := 240`V --> 240`V
+       2: R$1 := 4`Ω --> 4`Ω
+       3: R$2$v := 118.93`V --> 118.93`V
+       4: R$2 := 22.5`Ω --> 22.5`Ω
+       5: R$3 := 5`Ω --> 5`Ω
+       6: R$4 := 20`Ω --> 20`Ω
+       7: R$5 := 15`Ω --> 15`Ω
+       8: R$6 := 20`Ω --> 20`Ω
+       9: (1.40) I$ == V$ / R$ --SUBSTITUTE--> R$2$i == V$ / R$ --SUBSTITUTE--> R$2$i == R$2$v / R$ --SUBSTITUTE--> R$2$i == R$2$v / R$2
+      10:   R$2$i := R$2$v / R$2 --EVALUATE--> R$2$i == 118.93`V / 22.5`Ω --EVALUATE--> 5.285777778`A
+      11: (1.95) V$S == V$1 + V$2 + ... + V$n --ELLIPSIS--> V$S == V$1 + V$2 --SUBSTITUTE--> VS$1 == V$1 + V$2 --SUBSTITUTE--> VS$1 == R$2$v + V$2 --SUBSTITUTE--> VS$1 == R$2$v + R$5$v --SUBJECT--> R$5$v ==  -R$2$v + VS$1
+      12:   R$5$v :=  -R$2$v + VS$1 --EVALUATE--> R$5$v == -118.93`V + 240`V --EVALUATE--> 121.07`V
+      13: (1.40) I$ == V$ / R$ --SUBSTITUTE--> R$5$i == V$ / R$ --SUBSTITUTE--> R$5$i == R$5$v / R$ --SUBSTITUTE--> R$5$i == R$5$v / R$5
+      14:   R$5$i := R$5$v / R$5 --EVALUATE--> R$5$i == 121.07`V / 15`Ω --EVALUATE--> 8.071333333`A
+      15: (1.110) I$T == I$1 + I$2 + ... + I$n --ELLIPSIS--> I$T == I$1 + I$2 --SUBSTITUTE--> R$5$i == I$1 + I$2 --SUBSTITUTE--> R$5$i == R$2$i + I$2 --SUBSTITUTE--> R$5$i == R$2$i + R$3$i --SUBJECT--> R$3$i ==  -R$2$i + R$5$i
+      16:   R$3$i :=  -R$2$i + R$5$i --EVALUATE--> R$3$i == -5.2858`A + 8.0713`A --EVALUATE--> 2.785555555`A
+      17: (1.110) I$T == I$1 + I$2 + ... + I$n --ELLIPSIS--> I$T == I$1 + I$2 --SUBSTITUTE--> R$5$i == I$1 + I$2 --SUBSTITUTE--> R$5$i == R$2$i + I$2 --SUBSTITUTE--> R$5$i == R$2$i + R$6$i --SUBJECT--> R$6$i ==  -R$2$i + R$5$i
+      18:   R$6$i :=  -R$2$i + R$5$i --EVALUATE--> R$6$i == -5.2858`A + 8.0713`A --EVALUATE--> 2.785555555`A
+      19: (1.40) I$ == V$ / R$ --SUBSTITUTE--> R$3$i == V$ / R$ --SUBSTITUTE--> R$3$i == R$3$v / R$ --SUBSTITUTE--> R$3$i == R$3$v / R$3 --SUBJECT--> R$3$v == R$3 * R$3$i
+      20:   R$3$v := R$3 * R$3$i --EVALUATE--> R$3$v == 5`Ω * 2.7856`A --EVALUATE--> 13.92777778`V
+      21: (1.40) I$ == V$ / R$ --SUBSTITUTE--> R$6$i == V$ / R$ --SUBSTITUTE--> R$6$i == R$6$v / R$ --SUBSTITUTE--> R$6$i == R$6$v / R$6 --SUBJECT--> R$6$v == R$6 * R$6$i
+      22:   R$6$v := R$6 * R$6$i --EVALUATE--> R$6$v == 20`Ω * 2.7856`A --EVALUATE--> 55.7111111`V
+      23: (1.95) V$S == V$1 + V$2 + ... + V$n --ELLIPSIS--> V$S == V$1 + V$2 + V$3 --SUBSTITUTE--> R$2$v == V$1 + V$2 + V$3 --SUBSTITUTE--> R$2$v == R$1$v + V$2 + V$3 --SUBSTITUTE--> R$2$v == R$1$v + R$3$v + V$3 --SUBSTITUTE--> R$2$v == R$1$v + R$3$v + R$6$v --SUBJECT--> R$1$v == R$2$v - R$3$v - R$6$v
+      24:   R$1$v := R$2$v - R$3$v - R$6$v --EVALUATE--> R$1$v == 118.93`V - 13.9278`V - 55.7111`V --EVALUATE--> 49.2911111`V
+      25: (1.40) I$ == V$ / R$ --SUBSTITUTE--> R$1$i == V$ / R$ --SUBSTITUTE--> R$1$i == R$1$v / R$ --SUBSTITUTE--> R$1$i == R$1$v / R$1
+      26:   R$1$i := R$1$v / R$1 --EVALUATE--> R$1$i == 49.2911`V / 4`Ω --EVALUATE--> 12.32277778`A
+      27: (1.110) I$T == I$1 + I$2 + ... + I$n --ELLIPSIS--> I$T == I$1 + I$2 --SUBSTITUTE--> R$1$i == I$1 + I$2 --SUBSTITUTE--> R$1$i == R$3$i + I$2 --SUBSTITUTE--> R$1$i == R$3$i + R$4$i --SUBJECT--> R$4$i == R$1$i - R$3$i
+      28:   R$4$i := R$1$i - R$3$i --EVALUATE--> R$4$i == 12.3228`A - 2.7856`A --EVALUATE--> 9.537222225`A
+      29: (1.40) I$ == V$ / R$ --SUBSTITUTE--> R$4$i == V$ / R$ --SUBSTITUTE--> R$4$i == R$4$v / R$ --SUBSTITUTE--> R$4$i == R$4$v / R$4 --SUBJECT--> R$4$v == R$4 * R$4$i
+      30:   R$4$v := R$4 * R$4$i --EVALUATE--> R$4$v == 20`Ω * 9.5372`A --EVALUATE--> 190.7444445`V
+      31: (1.55) P$ == I$^2 * R$ --SUBSTITUTE--> R$1$p == I$^2 * R$ --SUBSTITUTE--> R$1$p == R$1$i^2 * R$ --SUBSTITUTE--> R$1$p == R$1$i^2 * R$1
+      32:   R$1$p := R$1$i^2 * R$1 --EVALUATE--> R$1$p == 12.3228`A^2 * 4`Ω --EVALUATE--> 607.4034088`W
+      33: (1.55) P$ == I$^2 * R$ --SUBSTITUTE--> R$2$p == I$^2 * R$ --SUBSTITUTE--> R$2$p == R$2$i^2 * R$ --SUBSTITUTE--> R$2$p == R$2$i^2 * R$2
+      34:   R$2$p := R$2$i^2 * R$2 --EVALUATE--> R$2$p == 5.2858`A^2 * 22.5`Ω --EVALUATE--> 628.6375512`W
+      35: (1.55) P$ == I$^2 * R$ --SUBSTITUTE--> R$3$p == I$^2 * R$ --SUBSTITUTE--> R$3$p == R$3$i^2 * R$ --SUBSTITUTE--> R$3$p == R$3$i^2 * R$3
+      36:   R$3$p := R$3$i^2 * R$3 --EVALUATE--> R$3$p == 2.7856`A^2 * 5`Ω --EVALUATE--> 38.79659875`W
+      37: (1.55) P$ == I$^2 * R$ --SUBSTITUTE--> R$4$p == I$^2 * R$ --SUBSTITUTE--> R$4$p == R$4$i^2 * R$ --SUBSTITUTE--> R$4$p == R$4$i^2 * R$4
+      38:   R$4$p := R$4$i^2 * R$4 --EVALUATE--> R$4$p == 9.5372`A^2 * 20`Ω --EVALUATE--> 1819.172155`W
+      39: (1.55) P$ == I$^2 * R$ --SUBSTITUTE--> R$6$p == I$^2 * R$ --SUBSTITUTE--> R$6$p == R$6$i^2 * R$ --SUBSTITUTE--> R$6$p == R$6$i^2 * R$6
+      40:   R$6$p := R$6$i^2 * R$6 --EVALUATE--> R$6$p == 2.7856`A^2 * 20`Ω --EVALUATE--> 155.186395`W
+      41: (1.55) P$ == I$^2 * R$ --SUBSTITUTE--> R$5$p == I$^2 * R$ --SUBSTITUTE--> R$5$p == R$5$i^2 * R$ --SUBSTITUTE--> R$5$p == R$5$i^2 * R$5
+      42:   R$5$p := R$5$i^2 * R$5 --EVALUATE--> R$5$p == 8.0713`A^2 * 15`Ω --EVALUATE--> 977.1963266`W
+      
+.   %/output
+
+%/group
+%group,name="Problem 2.26c",description="p.61",example_page="p.???"
+========================================================================================================
+
+Create a problem that is similar to problem 2.26 but add two resistors anywhere in the circuit. Do
+not add the same resistor that was added in problem 2.26b.
+
+
+%mathpiper,name="Problem 2.26c",subtype="problem",unassign_all="true",globalStateShow="true",formula="true",hint="false"
+
+Problem()
+{
+    Description()
+    {
+        "2.26 (explanation version .02)";
+    }
+    
+    Sought()
+    {
+        R$1$p`W :: "Power of resistor R$1.";
+        R$2$p`W :: "Power of resistor R$2.";
+        R$3$p`W :: "Power of resistor R$3.";
+        R$4$p`W :: "Power of resistor R$4.";
+        R$5$p`W :: "Power of resistor R$5.";
+        R$6$p`W :: "Power of resistor R$6.";
+        R$7$p`W :: "Power of resistor R$7.";
+    }
+    
+    Given()
+    {
+        VS$1 := 240`V;
+        R$1 := 4`Ω;
+        R$2 := 22.5`Ω;
+        R$3 := 5`Ω;
+        R$4 := 20`Ω;
+        R$5 := 15`Ω;  
+        R$6 := 10`Ω; 
+        R$7 := 2`Ω;
+        R$2$v := 54.65`mV;
+        R$6$v := 87.36`mV;
+        R$7$v := 239.64`V;
+    }
+    
+    Lookup()
+    {
+        
+    }
+    
+    Formulas()
+    {
+        Formula(I$`A == V$`V / R$`Ω,
+                Label:"3.1",
+                Page:"78",
+                Description:"Ohm's law.",
+                ID:"1.40",
+                Substitutions:[I$ -> R$2$i, V$ -> R$2$v, R$ -> R$2],
+                Schematic:"b_R$2_OL.png",
+                Reason:"The only formula that can be applied to any component, bottom-up.",
+                Search:"Keywords:Ohm",
+                Subject:'Null,
+                Units:A,
+                Evaluate?:True);
+                
+        Formula(V$S`V == V$1`V + V$2`V + ... + V$n`V,
+                ID:"1.95",
+                Label:"4.2",
+                Page:"102",
+                Description:"Series.,Kirchhoff's voltage law. KVL.",
+                Ellipsis:4,
+                ID:"1.95",
+                Substitutions:[V$S -> VS$1, V$1 -> R$6$v, V$2 -> R$5$v, V$3 -> R$7$v, V$4 -> R$2$v], //todo:tk:in ellipsis circuits maybe "$1, $2, etc." "$a, $b, et." to prevent subscript clashes?
+                Schematic:"c_R$5_KVL.png",
+                Reason:"Clockwise, the only formula that can be applied to any component, bottom-up.",
+                Search:"Keywords:KVL",
+                Subject:'R$5$v,
+                Units:Null,
+                Evaluate?:True);
+                
+        Formula(I$`A == V$`V / R$`Ω,
+                Label:"3.1",
+                Page:"78",
+                Description:"Ohm's law.",
+                ID:"1.40",
+                Substitutions:[I$ -> R$5$i, V$ -> R$5$v, R$ -> R$5],
+                Schematic:"d_R$5_OL.png",
+                Reason:"The only formula that can be applied to any component, bottom-up.",
+                Search:"Keywords:Ohm",
+                Subject:'Null,
+                Units:A,
+                Evaluate?:True);
+                
+        Formula(I$`A == V$`V / R$`Ω,
+                Label:"3.1",
+                Page:"78",
+                Description:"Ohm's law.",
+                ID:"1.40",
+                Substitutions:[I$ -> R$6$i, V$ -> R$6$v, R$ -> R$6],
+                Schematic:"d_R$5_OL.png",
+                Reason:"The only formula that can be applied to any component, bottom-up.",
+                Search:"Keywords:Ohm",
+                Subject:'Null,
+                Units:mA,
+                Evaluate?:True);
+                
+        Formula(I$`A == V$`V / R$`Ω,
+                Label:"3.1",
+                Page:"78",
+                Description:"Ohm's law.",
+                ID:"1.40",
+                Substitutions:[I$ -> R$7$i, V$ -> R$7$v, R$ -> R$7],
+                Schematic:"d_R$5_OL.png",
+                Reason:"The only formula that can be applied to any component, bottom-up.",
+                Search:"Keywords:Ohm",
+                Subject:'Null,
+                Units:A,
+                Evaluate?:True);
+                
+        Formula(I$T`A == I$1`A + I$2`A + ... + I$n`A,
+                ID:"1.110",
+                Label:"5.1",
+                Page:"131",
+                Description:"Total current through one or more collections of components in parallel. Kirchhoff's current law. KCL.",
+                Ellipsis:2,
+                ID:"1.110",
+                Substitutions:[I$T -> R$5$i, I$1 -> R$2$i, I$2 -> R$3$i],
+                Schematic:"e_T$5_KCL.png",
+                Reason:"The only formula that can be applied to any component, bottom-up.",
+                Search:"Keywords:kirchoff current",
+                Subject:'R$3$i,
+                Units:mA,
+                Evaluate?:True);
+                
+        Formula(I$`A == V$`V / R$`Ω,
+                Label:"3.1",
+                Page:"78",
+                Description:"Ohm's law.",
+                ID:"1.40",
+                Substitutions:[I$ -> R$3$i, V$ -> R$3$v, R$ -> R$3],
+                Schematic:"f_R$3_OL.png",
+                Reason:"The only formula that can be applied to any component, bottom-up.",
+                Search:"Keywords:Ohm",
+                Subject:'R$3$v,
+                Units:mV,
+                Evaluate?:True);                
+                
+        Formula(V$S`V == V$1`V + V$2`V + ... + V$n`V,
+                ID:"1.95",
+                Label:"4.2",
+                Page:"102",
+                Description:"Series.,Kirchhoff's voltage law. KVL.",
+                Ellipsis:2,
+                ID:"1.95",
+                Substitutions:[V$S -> R$1$v, V$1 -> R$2$v, V$2 -> R$3$v],
+                Schematic:"g_R$1_KVL.png",
+                Reason:"Clockwise, the only formula that can be applied to any component, bottom-up.",
+                Search:"Keywords:KVL",
+                Subject:'Null,
+                Units:mV,
+                Evaluate?:True);
+                
+        Formula(I$`A == V$`V / R$`Ω,
+                Label:"3.1",
+                Page:"78",
+                Description:"Ohm's law.",
+                ID:"1.40",
+                Substitutions:[I$ -> R$1$i, V$ -> R$1$v, R$ -> R$1],
+                Schematic:"h_R$1_OL.png",
+                Reason:"The only formula that can be applied to any component, bottom-up.",
+                Search:"Keywords:Ohm",
+                Subject:'Null,
+                Units:A,
+                Evaluate?:True);
+                
+        Formula(I$T`A == I$1`A + I$2`A + ... + I$n`A,
+                ID:"1.110",
+                Label:"5.1",
+                Page:"131",
+                Description:"Total current through one or more collections of components in parallel. Kirchhoff's current law. KCL.",
+                Ellipsis:2,
+                ID:"1.110",
+                Substitutions:[I$T -> R$1$i, I$1 -> R$3$i, I$2 -> R$4$i],
+                Schematic:"i_T$4_KCL.png",
+                Reason:"The only formula that can be applied to any component, bottom-up.",
+                Search:"Keywords:kirchoff current",
+                Subject:'R$4$i,
+                Units:mA,
+                Evaluate?:True);
+                
+        Formula(I$`A == V$`V / R$`Ω,
+                Label:"3.1",
+                Page:"78",
+                Description:"Ohm's law.",
+                ID:"1.40",
+                Substitutions:[I$ -> R$4$i, V$ -> R$4$v, R$ -> R$4],
+                Schematic:"j_R$4_OL.png",
+                Reason:"The only formula that can be applied to any component, bottom-up.",
+                Search:"Keywords:Ohm",
+                Subject:'R$4$v,
+                Units:mV,
+                Evaluate?:True);
+
+        Formula(P$`W == I$`A^2 * R$`Ω,
+                ID:"1.55",
+                Label:"3.5",
+                Page:"339,85",
+                Description:"Power.",
+                ID:"1.55",
+                Substitutions:[P$ -> R$1$p, I$ -> R$1$i, R$ -> R$1],
+                Subject:'Null,
+                Units:mW,
+                Evaluate?:True);
+                
+        Formula(P$`W == I$`A^2 * R$`Ω,
+                ID:"1.55",
+                Label:"3.5",
+                Page:"339,85",
+                Description:"Power.",
+                ID:"1.55",
+                Substitutions:[P$ -> R$2$p, I$ -> R$2$i, R$ -> R$2],
+                Subject:'Null,
+                Units:μW,
+                Evaluate?:True);
+                
+        Formula(P$`W == I$`A^2 * R$`Ω,
+                ID:"1.55",
+                Label:"3.5",
+                Page:"339,85",
+                Description:"Power.",
+                ID:"1.55",
+                Substitutions:[P$ -> R$3$p, I$ -> R$3$i, R$ -> R$3],
+                Subject:'Null,
+                Units:mW,
+                Evaluate?:True);
+                
+        Formula(P$`W == I$`A^2 * R$`Ω,
+                ID:"1.55",
+                Label:"3.5",
+                Page:"339,85",
+                Description:"Power.",
+                ID:"1.55",
+                Substitutions:[P$ -> R$4$p, I$ -> R$4$i, R$ -> R$4],
+                Subject:'Null,
+                Units:mW,
+                Evaluate?:True);
+                
+        Formula(P$`W == I$`A^2 * R$`Ω,
+                ID:"1.55",
+                Label:"3.5",
+                Page:"339,85",
+                Description:"Power.",
+                ID:"1.55",
+                Substitutions:[P$ -> R$5$p, I$ -> R$5$i, R$ -> R$5],
+                Subject:'Null,
+                Units:mW,
+                Evaluate?:True);
+                
+        Formula(P$`W == I$`A^2 * R$`Ω,
+                ID:"1.55",
+                Label:"3.5",
+                Page:"339,85",
+                Description:"Power.",
+                ID:"1.55",
+                Substitutions:[P$ -> R$6$p, I$ -> R$6$i, R$ -> R$6],
+                Subject:'Null,
+                Units:μW,
+                Evaluate?:True);
+                
+        Formula(P$`W == I$`A^2 * R$`Ω,
+                ID:"1.55",
+                Label:"3.5",
+                Page:"339,85",
+                Description:"Power.",
+                ID:"1.55",
+                Substitutions:[P$ -> R$7$p, I$ -> R$7$i, R$ -> R$7],
+                Subject:'Null,
+                Units:kW,
+                Evaluate?:True);
+                
+        
+    }
+}
+
+%/mathpiper
+
+    %output,parent="Problem 2.26c",mpversion="327",preserve="false"
+      Result: 28.7136648`kW
+      
+      Side Effects:
+      === RESULT VALUES ===
+      R$2$i: 0.002428888889`A
+      R$5$v: 217.99`mV
+      R$5$i: 0.01453266667`A
+      R$6$i: 8.736`mA
+      R$7$i: 119.82`A
+      R$3$i: 12.10377778`mA
+      R$3$v: 60.5188889`mV
+      R$1$v: 115.1688889`mV
+      R$1$i: 0.02879222223`A
+      R$4$i: 16.68844445`mA
+      R$4$v: 333.768889`mV
+      R$1$p: 3.315968244`mW
+      R$2$p: 132.7387778`μW
+      R$3$p: 0.7325071825`mW
+      R$4$p: 5.570083564`mW
+      R$5$p: 3.167976008`mW
+      R$6$p: 763.17696`μW
+      R$7$p: 28.7136648`kW
+      
+      === FORMULAS (2D VIEW) ===
+      /                                                                                                                                                                                                                                                                                                                                                                                                                                                                    \
+      | ( 1.40 )  /       V$ \                     ( --SUBSTITUTE--> ) /          V$ \                  ( --SUBSTITUTE--> ) /          R$2$v \                ( --SUBSTITUTE--> ) /          R$2$v \                                                                                                                                                                                                                                                                       |
+      |           | I$ == -- |                                         | R$2$i == -- |                                      | R$2$i == ----- |                                    | R$2$i == ----- |                                                                                                                                                                                                                                                                       |
+      |           \       R$ /                                         \          R$ /                                      \           R$   /                                    \           R$2  /                                                                                                                                                                                                                                                                       |
+      |                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
+      | ( 1.95 )  ( V$S == V$1 + V$2 + ... + V$n ) ( --ELLIPSIS--> )   ( V$S == V$1 + V$2 + V$3 + V$4 ) ( --SUBSTITUTE--> ) ( VS$1 == V$1 + V$2 + V$3 + V$4 ) ( --SUBSTITUTE--> ) ( VS$1 == R$6$v + V$2 + V$3 + V$4 ) ( --SUBSTITUTE--> ) ( VS$1 == R$6$v + R$5$v + V$3 + V$4 ) ( --SUBSTITUTE--> ) ( VS$1 == R$6$v + R$5$v + R$7$v + V$4 ) ( --SUBSTITUTE--> ) ( VS$1 == R$6$v + R$5$v + R$7$v + R$2$v ) ( --SUBJECT--> ) ( R$5$v == -( R$2$v ) - R$6$v - R$7$v + VS$1 )  |
+      |                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
+      | ( 1.40 )  /       V$ \                     ( --SUBSTITUTE--> ) /          V$ \                  ( --SUBSTITUTE--> ) /          R$5$v \                ( --SUBSTITUTE--> ) /          R$5$v \                                                                                                                                                                                                                                                                       |
+      |           | I$ == -- |                                         | R$5$i == -- |                                      | R$5$i == ----- |                                    | R$5$i == ----- |                                                                                                                                                                                                                                                                       |
+      |           \       R$ /                                         \          R$ /                                      \           R$   /                                    \           R$5  /                                                                                                                                                                                                                                                                       |
+      |                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
+      | ( 1.40 )  /       V$ \                     ( --SUBSTITUTE--> ) /          V$ \                  ( --SUBSTITUTE--> ) /          R$6$v \                ( --SUBSTITUTE--> ) /          R$6$v \                                                                                                                                                                                                                                                                       |
+      |           | I$ == -- |                                         | R$6$i == -- |                                      | R$6$i == ----- |                                    | R$6$i == ----- |                                                                                                                                                                                                                                                                       |
+      |           \       R$ /                                         \          R$ /                                      \           R$   /                                    \           R$6  /                                                                                                                                                                                                                                                                       |
+      |                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
+      | ( 1.40 )  /       V$ \                     ( --SUBSTITUTE--> ) /          V$ \                  ( --SUBSTITUTE--> ) /          R$7$v \                ( --SUBSTITUTE--> ) /          R$7$v \                                                                                                                                                                                                                                                                       |
+      |           | I$ == -- |                                         | R$7$i == -- |                                      | R$7$i == ----- |                                    | R$7$i == ----- |                                                                                                                                                                                                                                                                       |
+      |           \       R$ /                                         \          R$ /                                      \           R$   /                                    \           R$7  /                                                                                                                                                                                                                                                                       |
+      |                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
+      | ( 1.110 ) ( I$T == I$1 + I$2 + ... + I$n ) ( --ELLIPSIS--> )   ( I$T == I$1 + I$2 )             ( --SUBSTITUTE--> ) ( R$5$i == I$1 + I$2 )            ( --SUBSTITUTE--> ) ( R$5$i == R$2$i + I$2 )            ( --SUBSTITUTE--> ) ( R$5$i == R$2$i + R$3$i )            ( --SUBJECT--> )    ( R$3$i == -( R$2$i ) + R$5$i )                                                                                                                                        |
+      |                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
+      | ( 1.40 )  /       V$ \                     ( --SUBSTITUTE--> ) /          V$ \                  ( --SUBSTITUTE--> ) /          R$3$v \                ( --SUBSTITUTE--> ) /          R$3$v \                  ( --SUBJECT--> )    ( R$3$v == R$3 * R$3$i )                                                                                                                                                                                                         |
+      |           | I$ == -- |                                         | R$3$i == -- |                                      | R$3$i == ----- |                                    | R$3$i == ----- |                                                                                                                                                                                                                                                                       |
+      |           \       R$ /                                         \          R$ /                                      \           R$   /                                    \           R$3  /                                                                                                                                                                                                                                                                       |
+      |                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
+      | ( 1.95 )  ( V$S == V$1 + V$2 + ... + V$n ) ( --ELLIPSIS--> )   ( V$S == V$1 + V$2 )             ( --SUBSTITUTE--> ) ( R$1$v == V$1 + V$2 )            ( --SUBSTITUTE--> ) ( R$1$v == R$2$v + V$2 )            ( --SUBSTITUTE--> ) ( R$1$v == R$2$v + R$3$v )                                                                                                                                                                                                       |
+      |                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
+      | ( 1.40 )  /       V$ \                     ( --SUBSTITUTE--> ) /          V$ \                  ( --SUBSTITUTE--> ) /          R$1$v \                ( --SUBSTITUTE--> ) /          R$1$v \                                                                                                                                                                                                                                                                       |
+      |           | I$ == -- |                                         | R$1$i == -- |                                      | R$1$i == ----- |                                    | R$1$i == ----- |                                                                                                                                                                                                                                                                       |
+      |           \       R$ /                                         \          R$ /                                      \           R$   /                                    \           R$1  /                                                                                                                                                                                                                                                                       |
+      |                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
+      | ( 1.110 ) ( I$T == I$1 + I$2 + ... + I$n ) ( --ELLIPSIS--> )   ( I$T == I$1 + I$2 )             ( --SUBSTITUTE--> ) ( R$1$i == I$1 + I$2 )            ( --SUBSTITUTE--> ) ( R$1$i == R$3$i + I$2 )            ( --SUBSTITUTE--> ) ( R$1$i == R$3$i + R$4$i )            ( --SUBJECT--> )    ( R$4$i == R$1$i - R$3$i )                                                                                                                                             |
+      |                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
+      | ( 1.40 )  /       V$ \                     ( --SUBSTITUTE--> ) /          V$ \                  ( --SUBSTITUTE--> ) /          R$4$v \                ( --SUBSTITUTE--> ) /          R$4$v \                  ( --SUBJECT--> )    ( R$4$v == R$4 * R$4$i )                                                                                                                                                                                                         |
+      |           | I$ == -- |                                         | R$4$i == -- |                                      | R$4$i == ----- |                                    | R$4$i == ----- |                                                                                                                                                                                                                                                                       |
+      |           \       R$ /                                         \          R$ /                                      \           R$   /                                    \           R$4  /                                                                                                                                                                                                                                                                       |
+      |                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
+      | ( 1.55 )  /         2      \               ( --SUBSTITUTE--> ) /            2      \            ( --SUBSTITUTE--> ) /               2      \          ( --SUBSTITUTE--> ) /               2       \                                                                                                                                                                                                                                                                |
+      |           \ P$ == I$  * R$ /                                   \ R$1$p == I$  * R$ /                                \ R$1$p == R$1$i  * R$ /                              \ R$1$p == R$1$i  * R$1 /                                                                                                                                                                                                                                                                |
+      |                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
+      | ( 1.55 )  /         2      \               ( --SUBSTITUTE--> ) /            2      \            ( --SUBSTITUTE--> ) /               2      \          ( --SUBSTITUTE--> ) /               2       \                                                                                                                                                                                                                                                                |
+      |           \ P$ == I$  * R$ /                                   \ R$2$p == I$  * R$ /                                \ R$2$p == R$2$i  * R$ /                              \ R$2$p == R$2$i  * R$2 /                                                                                                                                                                                                                                                                |
+      |                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
+      | ( 1.55 )  /         2      \               ( --SUBSTITUTE--> ) /            2      \            ( --SUBSTITUTE--> ) /               2      \          ( --SUBSTITUTE--> ) /               2       \                                                                                                                                                                                                                                                                |
+      |           \ P$ == I$  * R$ /                                   \ R$3$p == I$  * R$ /                                \ R$3$p == R$3$i  * R$ /                              \ R$3$p == R$3$i  * R$3 /                                                                                                                                                                                                                                                                |
+      |                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
+      | ( 1.55 )  /         2      \               ( --SUBSTITUTE--> ) /            2      \            ( --SUBSTITUTE--> ) /               2      \          ( --SUBSTITUTE--> ) /               2       \                                                                                                                                                                                                                                                                |
+      |           \ P$ == I$  * R$ /                                   \ R$4$p == I$  * R$ /                                \ R$4$p == R$4$i  * R$ /                              \ R$4$p == R$4$i  * R$4 /                                                                                                                                                                                                                                                                |
+      |                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
+      | ( 1.55 )  /         2      \               ( --SUBSTITUTE--> ) /            2      \            ( --SUBSTITUTE--> ) /               2      \          ( --SUBSTITUTE--> ) /               2       \                                                                                                                                                                                                                                                                |
+      |           \ P$ == I$  * R$ /                                   \ R$5$p == I$  * R$ /                                \ R$5$p == R$5$i  * R$ /                              \ R$5$p == R$5$i  * R$5 /                                                                                                                                                                                                                                                                |
+      |                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
+      | ( 1.55 )  /         2      \               ( --SUBSTITUTE--> ) /            2      \            ( --SUBSTITUTE--> ) /               2      \          ( --SUBSTITUTE--> ) /               2       \                                                                                                                                                                                                                                                                |
+      |           \ P$ == I$  * R$ /                                   \ R$6$p == I$  * R$ /                                \ R$6$p == R$6$i  * R$ /                              \ R$6$p == R$6$i  * R$6 /                                                                                                                                                                                                                                                                |
+      |                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
+      | ( 1.55 )  /         2      \               ( --SUBSTITUTE--> ) /            2      \            ( --SUBSTITUTE--> ) /               2      \          ( --SUBSTITUTE--> ) /               2       \                                                                                                                                                                                                                                                                |
+      |           \ P$ == I$  * R$ /                                   \ R$7$p == I$  * R$ /                                \ R$7$p == R$7$i  * R$ /                              \ R$7$p == R$7$i  * R$7 /                                                                                                                                                                                                                                                                |
+      \                                                                                                                                                                                                                                                                                                                                                                                                                                                                    /
+      
+      === STEPS (CODE VIEW) ===
+       1: VS$1 := 240`V --> 240`V
+       2: R$1 := 4`Ω --> 4`Ω
+       3: R$2 := 22.5`Ω --> 22.5`Ω
+       4: R$3 := 5`Ω --> 5`Ω
+       5: R$4 := 20`Ω --> 20`Ω
+       6: R$5 := 15`Ω --> 15`Ω
+       7: R$6 := 10`Ω --> 10`Ω
+       8: R$7 := 2`Ω --> 2`Ω
+       9: R$2$v := 54.65`mV --> 54.65`mV
+      10: R$6$v := 87.36`mV --> 87.36`mV
+      11: R$7$v := 239.64`V --> 239.64`V
+      12: (1.40) I$ == V$ / R$ --SUBSTITUTE--> R$2$i == V$ / R$ --SUBSTITUTE--> R$2$i == R$2$v / R$ --SUBSTITUTE--> R$2$i == R$2$v / R$2
+      13:   R$2$i := R$2$v / R$2 --EVALUATE--> R$2$i == 54.65`mV / 22.5`Ω --EVALUATE--> 0.002428888889`A
+      14: (1.95) V$S == V$1 + V$2 + ... + V$n --ELLIPSIS--> V$S == V$1 + V$2 + V$3 + V$4 --SUBSTITUTE--> VS$1 == V$1 + V$2 + V$3 + V$4 --SUBSTITUTE--> VS$1 == R$6$v + V$2 + V$3 + V$4 --SUBSTITUTE--> VS$1 == R$6$v + R$5$v + V$3 + V$4 --SUBSTITUTE--> VS$1 == R$6$v + R$5$v + R$7$v + V$4 --SUBSTITUTE--> VS$1 == R$6$v + R$5$v + R$7$v + R$2$v --SUBJECT--> R$5$v ==  -R$2$v - R$6$v - R$7$v + VS$1
+      15:   R$5$v :=  -R$2$v - R$6$v - R$7$v + VS$1 --EVALUATE--> R$5$v == -54.65`mV - 87.36`mV - 239.64`V + 240`V --EVALUATE--> 217.99`mV
+      16: (1.40) I$ == V$ / R$ --SUBSTITUTE--> R$5$i == V$ / R$ --SUBSTITUTE--> R$5$i == R$5$v / R$ --SUBSTITUTE--> R$5$i == R$5$v / R$5
+      17:   R$5$i := R$5$v / R$5 --EVALUATE--> R$5$i == 217.99`mV / 15`Ω --EVALUATE--> 0.01453266667`A
+      18: (1.40) I$ == V$ / R$ --SUBSTITUTE--> R$6$i == V$ / R$ --SUBSTITUTE--> R$6$i == R$6$v / R$ --SUBSTITUTE--> R$6$i == R$6$v / R$6
+      19:   R$6$i := R$6$v / R$6 --EVALUATE--> R$6$i == 87.36`mV / 10`Ω --EVALUATE--> 8.736`mA
+      20: (1.40) I$ == V$ / R$ --SUBSTITUTE--> R$7$i == V$ / R$ --SUBSTITUTE--> R$7$i == R$7$v / R$ --SUBSTITUTE--> R$7$i == R$7$v / R$7
+      21:   R$7$i := R$7$v / R$7 --EVALUATE--> R$7$i == 239.64`V / 2`Ω --EVALUATE--> 119.82`A
+      22: (1.110) I$T == I$1 + I$2 + ... + I$n --ELLIPSIS--> I$T == I$1 + I$2 --SUBSTITUTE--> R$5$i == I$1 + I$2 --SUBSTITUTE--> R$5$i == R$2$i + I$2 --SUBSTITUTE--> R$5$i == R$2$i + R$3$i --SUBJECT--> R$3$i ==  -R$2$i + R$5$i
+      23:   R$3$i :=  -R$2$i + R$5$i --EVALUATE--> R$3$i == -0.0024`A + 0.0145`A --EVALUATE--> 12.10377778`mA
+      24: (1.40) I$ == V$ / R$ --SUBSTITUTE--> R$3$i == V$ / R$ --SUBSTITUTE--> R$3$i == R$3$v / R$ --SUBSTITUTE--> R$3$i == R$3$v / R$3 --SUBJECT--> R$3$v == R$3 * R$3$i
+      25:   R$3$v := R$3 * R$3$i --EVALUATE--> R$3$v == 5`Ω * 12.1038`mA --EVALUATE--> 60.5188889`mV
+      26: (1.95) V$S == V$1 + V$2 + ... + V$n --ELLIPSIS--> V$S == V$1 + V$2 --SUBSTITUTE--> R$1$v == V$1 + V$2 --SUBSTITUTE--> R$1$v == R$2$v + V$2 --SUBSTITUTE--> R$1$v == R$2$v + R$3$v
+      27:   R$1$v := R$2$v + R$3$v --EVALUATE--> R$1$v == 54.65`mV + 60.5189`mV --EVALUATE--> 115.1688889`mV
+      28: (1.40) I$ == V$ / R$ --SUBSTITUTE--> R$1$i == V$ / R$ --SUBSTITUTE--> R$1$i == R$1$v / R$ --SUBSTITUTE--> R$1$i == R$1$v / R$1
+      29:   R$1$i := R$1$v / R$1 --EVALUATE--> R$1$i == 115.1689`mV / 4`Ω --EVALUATE--> 0.02879222223`A
+      30: (1.110) I$T == I$1 + I$2 + ... + I$n --ELLIPSIS--> I$T == I$1 + I$2 --SUBSTITUTE--> R$1$i == I$1 + I$2 --SUBSTITUTE--> R$1$i == R$3$i + I$2 --SUBSTITUTE--> R$1$i == R$3$i + R$4$i --SUBJECT--> R$4$i == R$1$i - R$3$i
+      31:   R$4$i := R$1$i - R$3$i --EVALUATE--> R$4$i == 0.0288`A - 12.1038`mA --EVALUATE--> 16.68844445`mA
+      32: (1.40) I$ == V$ / R$ --SUBSTITUTE--> R$4$i == V$ / R$ --SUBSTITUTE--> R$4$i == R$4$v / R$ --SUBSTITUTE--> R$4$i == R$4$v / R$4 --SUBJECT--> R$4$v == R$4 * R$4$i
+      33:   R$4$v := R$4 * R$4$i --EVALUATE--> R$4$v == 20`Ω * 16.6884`mA --EVALUATE--> 333.768889`mV
+      34: (1.55) P$ == I$^2 * R$ --SUBSTITUTE--> R$1$p == I$^2 * R$ --SUBSTITUTE--> R$1$p == R$1$i^2 * R$ --SUBSTITUTE--> R$1$p == R$1$i^2 * R$1
+      35:   R$1$p := R$1$i^2 * R$1 --EVALUATE--> R$1$p == 0.0288`A^2 * 4`Ω --EVALUATE--> 3.315968244`mW
+      36: (1.55) P$ == I$^2 * R$ --SUBSTITUTE--> R$2$p == I$^2 * R$ --SUBSTITUTE--> R$2$p == R$2$i^2 * R$ --SUBSTITUTE--> R$2$p == R$2$i^2 * R$2
+      37:   R$2$p := R$2$i^2 * R$2 --EVALUATE--> R$2$p == 0.0024`A^2 * 22.5`Ω --EVALUATE--> 132.7387778`μW
+      38: (1.55) P$ == I$^2 * R$ --SUBSTITUTE--> R$3$p == I$^2 * R$ --SUBSTITUTE--> R$3$p == R$3$i^2 * R$ --SUBSTITUTE--> R$3$p == R$3$i^2 * R$3
+      39:   R$3$p := R$3$i^2 * R$3 --EVALUATE--> R$3$p == 12.1038`mA^2 * 5`Ω --EVALUATE--> 0.7325071825`mW
+      40: (1.55) P$ == I$^2 * R$ --SUBSTITUTE--> R$4$p == I$^2 * R$ --SUBSTITUTE--> R$4$p == R$4$i^2 * R$ --SUBSTITUTE--> R$4$p == R$4$i^2 * R$4
+      41:   R$4$p := R$4$i^2 * R$4 --EVALUATE--> R$4$p == 16.6884`mA^2 * 20`Ω --EVALUATE--> 5.570083564`mW
+      42: (1.55) P$ == I$^2 * R$ --SUBSTITUTE--> R$5$p == I$^2 * R$ --SUBSTITUTE--> R$5$p == R$5$i^2 * R$ --SUBSTITUTE--> R$5$p == R$5$i^2 * R$5
+      43:   R$5$p := R$5$i^2 * R$5 --EVALUATE--> R$5$p == 0.0145`A^2 * 15`Ω --EVALUATE--> 3.167976008`mW
+      44: (1.55) P$ == I$^2 * R$ --SUBSTITUTE--> R$6$p == I$^2 * R$ --SUBSTITUTE--> R$6$p == R$6$i^2 * R$ --SUBSTITUTE--> R$6$p == R$6$i^2 * R$6
+      45:   R$6$p := R$6$i^2 * R$6 --EVALUATE--> R$6$p == 8.736`mA^2 * 10`Ω --EVALUATE--> 763.17696`μW
+      46: (1.55) P$ == I$^2 * R$ --SUBSTITUTE--> R$7$p == I$^2 * R$ --SUBSTITUTE--> R$7$p == R$7$i^2 * R$ --SUBSTITUTE--> R$7$p == R$7$i^2 * R$7
+      47:   R$7$p := R$7$i^2 * R$7 --EVALUATE--> R$7$p == 119.82`A^2 * 2`Ω --EVALUATE--> 28.7136648`kW
+      
+.   %/output
+
+%/group
+

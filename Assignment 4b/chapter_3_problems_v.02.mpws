@@ -1,0 +1,792 @@
+v.02
+
+%todo
+
+Release checklist:
+
+1) No duplicate problems.
+
+%/todo
+
+
+
+Complete all of the problems in this worksheet by
+placing the code you write for each exercise into
+the empty fold which is provided in each exercise
+section. Each empty fold has a subtype attribute
+named "problem". Immediately below each empty
+fold is a mathpiper_grade fold that contains code
+which will automatically grade the code you place
+into the fold above it.
+
+
+========================
+The following special symbol characters can be inserted
+into the document by doing the following:
+
+1) Type a word such as "ohm".
+2) Leave the cursor to the immediate right of the
+last letter in the name.
+3) Hold down the control key (represented by <ctrl>)
+then press the semicolon key ";".
+4) The word to the left of the cursor will be
+replaced by the special symbol.
+
+Note1: for Macintosh computers, use the
+<cmd> key instead of the <ctrl> key.
+
+Note2: The complete list of "abbreviation" words
+is in Utilities -> Global Options -> Abbreviations
+
+μ mu/micro
+Ω ohm
+ρ rho
+η eta
+∠ angle
+ϴ theta
+ϕ phi
+β beta
+′ prime
+
+- Compound units need to be in parentheses: 25`(mA / s) instead of 25`mA / s .
+
+ℓ
+
+
+
+%group,name="Problem 8b",description="p.93",example_page=""
+========================================================================================================
+
+%todo
+
+- The resistor values in this problem appear to be cherry picked to
+evaluate to "nice" numbers. How can this be done automatically?
+
+%/todo
+
+
+%mathpiper,name="Problem 8b",subtype="problem",unassign_all="true",globalStateShow="true",formula="true"
+
+Problem()
+{
+    Description()
+    {
+        "3.8 (explanation version .01)";
+    }
+    
+    Schematic()
+    {
+        "
+        Resistor_2 162 99 288 99 6
+        Resistor_3 288 99 414 99 5
+        Resistor_4 162 36 288 36 3
+        Resistor_5 162 225 288 225 11.25
+        Resistor_6 67 225 162 225 3.4
+        Resistor_7 288 225 414 225 10
+        Resistor_8 162 225 288 99 20
+        Resistor_9 288 99 414 225 60
+        Resistor_10 414 99 414 225 15
+        Resistor_12 288 99 288 225 75
+        Resistor_11 162 99 162 225 26
+        Wire_1 162 36 162 99
+        Wire_2 288 36 288 99
+        Resistor_1 67 99 162 99 2.5
+        ";
+    }
+    
+    Sought()
+    {
+        R$ab`Ω :: "Equivalent resistance between points 'a' and 'b'.";
+    }
+    
+    Given()
+    {
+        R$1 := 2.5`Ω;
+        R$2 := 6`Ω;
+        R$3 := 5`Ω;
+        R$4 := 3`Ω;
+        R$5 := 11.25`Ω;
+        R$6 := 3.4`Ω;
+        R$7 := 10`Ω;
+        R$8 := 20`Ω;
+        R$9 := 60`Ω;
+        R$10 := 15`Ω;
+        R$11 := 26`Ω;
+        R$12 := 75`Ω;
+    }
+    
+    Lookup()
+    {
+
+    }
+    
+    Formulas()
+    {
+        Formula(R$T`Ω == R$1`Ω + R$2`Ω + ... + R$n`Ω,
+                ID:"1.90",
+                Label:"4.1",
+                Page:"99",
+                Description:"Total series resistance.",
+                Ellipsis:2,
+                ID:"1.90",
+                Substitutions:[R$T -> R$13, R$1 -> R$3, R$2 -> R$10],
+                SchematicImage:"a_series.png",
+                Reason:"Series reduction.",
+                Search:"Keywords:series",
+                Subject:'Null,
+                Units:Ω,
+                Evaluate?:True);
+                
+        Formula(R$T`Ω == (R$1`Ω * R$2`Ω) / (R$1`Ω + R$2`Ω),
+                ID:"1.135",
+                Label:"5.6",
+                Page:"136",
+                Description:"Total resistance of two resistors in  parallel.",
+                ID:"1.135",
+                Substitutions:[R$T -> R$14, R$1 -> R$9, R$2 -> R$13],
+                SchematicImage:"b_parallel.png",
+                Reason:"Parallel reduction.",
+                Search:"Keywords:parallel",
+                Subject:'Null,
+                Units:Ω,
+                Evaluate?:True);
+                
+        Formula(R$T`Ω == R$1`Ω + R$2`Ω + ... + R$n`Ω,
+                ID:"1.90",
+                Label:"4.1",
+                Page:"99",
+                Description:"Total series resistance.",
+                Ellipsis:2,
+                ID:"1.90",
+                Substitutions:[R$T -> R$15, R$1 -> R$14, R$2 -> R$7],
+                SchematicImage:"c_series.png",
+                Reason:"Series reduction.",
+                Search:"Keywords:series",
+                Subject:'Null,
+                Units:Ω,
+                Evaluate?:True);
+                
+        Formula(R$T`Ω == (R$1`Ω * R$2`Ω) / (R$1`Ω + R$2`Ω),
+                ID:"1.135",
+                Label:"5.6",
+                Page:"136",
+                Description:"Total resistance of two resistors in  parallel.",
+                ID:"1.135",
+                Substitutions:[R$T -> R$16, R$1 -> R$12, R$2 -> R$15],
+                SchematicImage:"d_parallel.png",
+                Reason:"Parallel reduction.",
+                Search:"Keywords:parallel",
+                Subject:'Null,
+                Units:Ω,
+                Evaluate?:True);
+                
+        Formula(R$T`Ω == R$1`Ω + R$2`Ω + ... + R$n`Ω,
+                ID:"1.90",
+                Label:"4.1",
+                Page:"99",
+                Description:"Total series resistance.",
+                Ellipsis:2,
+                ID:"1.90",
+                Substitutions:[R$T -> R$17, R$1 -> R$16, R$2 -> R$5],
+                SchematicImage:"e_series.png",
+                Reason:"Series reduction.",
+                Search:"Keywords:series",
+                Subject:'Null,
+                Units:Ω,
+                Evaluate?:True);
+                
+        Formula(R$T`Ω == (R$1`Ω * R$2`Ω) / (R$1`Ω + R$2`Ω),
+                ID:"1.135",
+                Label:"5.6",
+                Page:"136",
+                Description:"Total resistance of two resistors in  parallel.",
+                ID:"1.135",
+                Substitutions:[R$T -> R$18, R$1 -> R$8, R$2 -> R$17],
+                SchematicImage:"f_parallel.png",
+                Reason:"Parallel reduction.",
+                Search:"Keywords:parallel",
+                Subject:'Null,
+                Units:Ω,
+                Evaluate?:True);
+                
+        Formula(R$T`Ω == (R$1`Ω * R$2`Ω) / (R$1`Ω + R$2`Ω),
+                ID:"1.135",
+                Label:"5.6",
+                Page:"136",
+                Description:"Total resistance of two resistors in  parallel.",
+                ID:"1.135",
+                Substitutions:[R$T -> R$19, R$1 -> R$4],
+                SchematicImage:"g_parallel.png",
+                Reason:"Parallel reduction.",
+                Search:"Keywords:parallel",
+                Subject:'Null,
+                Units:Ω,
+                Evaluate?:True);
+                
+        Formula(R$T`Ω == R$1`Ω + R$2`Ω + ... + R$n`Ω,
+                ID:"1.90",
+                Label:"4.1",
+                Page:"99",
+                Description:"Total series resistance.",
+                Ellipsis:2,
+                ID:"1.90",
+                Substitutions:[R$T -> R$20, R$1 -> R$19, R$2 -> R$18],
+                SchematicImage:"h_series.png",
+                Reason:"Series reduction.",
+                Search:"Keywords:series",
+                Subject:'Null,
+                Units:Ω,
+                Evaluate?:True);
+                
+        Formula(R$T`Ω == (R$1`Ω * R$2`Ω) / (R$1`Ω + R$2`Ω),
+                ID:"1.135",
+                Label:"5.6",
+                Page:"136",
+                Description:"Total resistance of two resistors in  parallel.",
+                ID:"1.135",
+                Substitutions:[R$T -> R$21, R$1 -> R$11, R$2 -> R$20],
+                SchematicImage:"i_parallel.png",
+                Reason:"Parallel reduction.",
+                Search:"Keywords:parallel",
+                Subject:'Null,
+                Units:Ω,
+                Evaluate?:True);
+                
+        Formula(R$T`Ω == R$1`Ω + R$2`Ω + ... + R$n`Ω,
+                ID:"1.90",
+                Label:"4.1",
+                Page:"99",
+                Description:"Total series resistance.",
+                Ellipsis:3,
+                ID:"1.90",
+                Substitutions:[R$T -> R$ab, R$2 -> R$21, R$3 -> R$6],
+                SchematicImage:"j_series.png",
+                Reason:"Series reduction.",
+                Search:"Keywords:series",
+                Subject:'Null,
+                Units:Ω,
+                Evaluate?:True);
+    }
+}
+
+%/mathpiper
+
+    %output,parent="Problem 8b",mpversion="327",preserve="false"
+      Result: 15`Ω
+      
+      Side Effects:
+      === RESULT VALUES ===
+      R$13: 20`Ω
+      R$14: 15`Ω
+      R$15: 25`Ω
+      R$16: 18.75`Ω
+      R$17: 30`Ω
+      R$18: 12`Ω
+      R$19: 2`Ω
+      R$20: 14`Ω
+      R$21: 9.1`Ω
+      R$ab: 15`Ω
+      
+      === FORMULAS (2D VIEW) ===
+      /                                                                                                                                                                                                                                              \
+      | ( 1.90 )  ( R$T == R$1 + R$2 + ... + R$n ) ( --ELLIPSIS--> )   ( R$T == R$1 + R$2 )       ( --SUBSTITUTE--> ) ( R$13 == R$1 + R$2 )       ( --SUBSTITUTE--> ) ( R$13 == R$3 + R$2 )        ( --SUBSTITUTE--> ) ( R$13 == R$3 + R$10 )        |
+      |                                                                                                                                                                                                                                              |
+      | ( 1.135 ) /        R$1 * R$2 \             ( --SUBSTITUTE--> ) /         R$1 * R$2 \      ( --SUBSTITUTE--> ) /         R$9 * R$2 \       ( --SUBSTITUTE--> ) /         R$9 * R$13 \                                                         |
+      |           | R$T == --------- |                                 | R$14 == --------- |                          | R$14 == --------- |                           | R$14 == ---------- |                                                         |
+      |           \        R$1 + R$2 /                                 \         R$1 + R$2 /                          \         R$9 + R$2 /                           \         R$9 + R$13 /                                                         |
+      |                                                                                                                                                                                                                                              |
+      | ( 1.90 )  ( R$T == R$1 + R$2 + ... + R$n ) ( --ELLIPSIS--> )   ( R$T == R$1 + R$2 )       ( --SUBSTITUTE--> ) ( R$15 == R$1 + R$2 )       ( --SUBSTITUTE--> ) ( R$15 == R$14 + R$2 )       ( --SUBSTITUTE--> ) ( R$15 == R$14 + R$7 )        |
+      |                                                                                                                                                                                                                                              |
+      | ( 1.135 ) /        R$1 * R$2 \             ( --SUBSTITUTE--> ) /         R$1 * R$2 \      ( --SUBSTITUTE--> ) /         R$12 * R$2 \      ( --SUBSTITUTE--> ) /         R$12 * R$15 \                                                        |
+      |           | R$T == --------- |                                 | R$16 == --------- |                          | R$16 == ---------- |                          | R$16 == ----------- |                                                        |
+      |           \        R$1 + R$2 /                                 \         R$1 + R$2 /                          \         R$12 + R$2 /                          \         R$12 + R$15 /                                                        |
+      |                                                                                                                                                                                                                                              |
+      | ( 1.90 )  ( R$T == R$1 + R$2 + ... + R$n ) ( --ELLIPSIS--> )   ( R$T == R$1 + R$2 )       ( --SUBSTITUTE--> ) ( R$17 == R$1 + R$2 )       ( --SUBSTITUTE--> ) ( R$17 == R$16 + R$2 )       ( --SUBSTITUTE--> ) ( R$17 == R$16 + R$5 )        |
+      |                                                                                                                                                                                                                                              |
+      | ( 1.135 ) /        R$1 * R$2 \             ( --SUBSTITUTE--> ) /         R$1 * R$2 \      ( --SUBSTITUTE--> ) /         R$8 * R$2 \       ( --SUBSTITUTE--> ) /         R$8 * R$17 \                                                         |
+      |           | R$T == --------- |                                 | R$18 == --------- |                          | R$18 == --------- |                           | R$18 == ---------- |                                                         |
+      |           \        R$1 + R$2 /                                 \         R$1 + R$2 /                          \         R$8 + R$2 /                           \         R$8 + R$17 /                                                         |
+      |                                                                                                                                                                                                                                              |
+      | ( 1.135 ) /        R$1 * R$2 \             ( --SUBSTITUTE--> ) /         R$1 * R$2 \      ( --SUBSTITUTE--> ) /         R$4 * R$2 \                                                                                                          |
+      |           | R$T == --------- |                                 | R$19 == --------- |                          | R$19 == --------- |                                                                                                          |
+      |           \        R$1 + R$2 /                                 \         R$1 + R$2 /                          \         R$4 + R$2 /                                                                                                          |
+      |                                                                                                                                                                                                                                              |
+      | ( 1.90 )  ( R$T == R$1 + R$2 + ... + R$n ) ( --ELLIPSIS--> )   ( R$T == R$1 + R$2 )       ( --SUBSTITUTE--> ) ( R$20 == R$1 + R$2 )       ( --SUBSTITUTE--> ) ( R$20 == R$19 + R$2 )       ( --SUBSTITUTE--> ) ( R$20 == R$19 + R$18 )       |
+      |                                                                                                                                                                                                                                              |
+      | ( 1.135 ) /        R$1 * R$2 \             ( --SUBSTITUTE--> ) /         R$1 * R$2 \      ( --SUBSTITUTE--> ) /         R$11 * R$2 \      ( --SUBSTITUTE--> ) /         R$11 * R$20 \                                                        |
+      |           | R$T == --------- |                                 | R$21 == --------- |                          | R$21 == ---------- |                          | R$21 == ----------- |                                                        |
+      |           \        R$1 + R$2 /                                 \         R$1 + R$2 /                          \         R$11 + R$2 /                          \         R$11 + R$20 /                                                        |
+      |                                                                                                                                                                                                                                              |
+      | ( 1.90 )  ( R$T == R$1 + R$2 + ... + R$n ) ( --ELLIPSIS--> )   ( R$T == R$1 + R$2 + R$3 ) ( --SUBSTITUTE--> ) ( R$ab == R$1 + R$2 + R$3 ) ( --SUBSTITUTE--> ) ( R$ab == R$1 + R$21 + R$3 ) ( --SUBSTITUTE--> ) ( R$ab == R$1 + R$21 + R$6 )  |
+      \                                                                                                                                                                                                                                              /
+      
+      === STEPS (CODE VIEW) ===
+       1: R$1 := 2.5`Ω --> 2.5`Ω
+       2: R$2 := 6`Ω --> 6`Ω
+       3: R$3 := 5`Ω --> 5`Ω
+       4: R$4 := 3`Ω --> 3`Ω
+       5: R$5 := 11.25`Ω --> 11.25`Ω
+       6: R$6 := 3.4`Ω --> 3.4`Ω
+       7: R$7 := 10`Ω --> 10`Ω
+       8: R$8 := 20`Ω --> 20`Ω
+       9: R$9 := 60`Ω --> 60`Ω
+      10: R$10 := 15`Ω --> 15`Ω
+      11: R$11 := 26`Ω --> 26`Ω
+      12: R$12 := 75`Ω --> 75`Ω
+      13: (1.90) R$T == R$1 + R$2 + ... + R$n --ELLIPSIS--> R$T == R$1 + R$2 --SUBSTITUTE--> R$13 == R$1 + R$2 --SUBSTITUTE--> R$13 == R$3 + R$2 --SUBSTITUTE--> R$13 == R$3 + R$10
+      14:   R$13 := R$3 + R$10 --EVALUATE--> R$13 == 5`Ω + 15`Ω --EVALUATE--> 20`Ω
+      15: (1.135) R$T == (R$1 * R$2) / (R$1 + R$2) --SUBSTITUTE--> R$14 == (R$1 * R$2) / (R$1 + R$2) --SUBSTITUTE--> R$14 == (R$9 * R$2) / (R$9 + R$2) --SUBSTITUTE--> R$14 == (R$9 * R$13) / (R$9 + R$13)
+      16:   R$14 := (R$9 * R$13) / (R$9 + R$13) --EVALUATE--> R$14 == (60`Ω * 20`Ω) / (60`Ω + 20`Ω) --EVALUATE--> 15`Ω
+      17: (1.90) R$T == R$1 + R$2 + ... + R$n --ELLIPSIS--> R$T == R$1 + R$2 --SUBSTITUTE--> R$15 == R$1 + R$2 --SUBSTITUTE--> R$15 == R$14 + R$2 --SUBSTITUTE--> R$15 == R$14 + R$7
+      18:   R$15 := R$14 + R$7 --EVALUATE--> R$15 == 15.0`Ω + 10`Ω --EVALUATE--> 25`Ω
+      19: (1.135) R$T == (R$1 * R$2) / (R$1 + R$2) --SUBSTITUTE--> R$16 == (R$1 * R$2) / (R$1 + R$2) --SUBSTITUTE--> R$16 == (R$12 * R$2) / (R$12 + R$2) --SUBSTITUTE--> R$16 == (R$12 * R$15) / (R$12 + R$15)
+      20:   R$16 := (R$12 * R$15) / (R$12 + R$15) --EVALUATE--> R$16 == (75`Ω * 25.0`Ω) / (75`Ω + 25.0`Ω) --EVALUATE--> 18.75`Ω
+      21: (1.90) R$T == R$1 + R$2 + ... + R$n --ELLIPSIS--> R$T == R$1 + R$2 --SUBSTITUTE--> R$17 == R$1 + R$2 --SUBSTITUTE--> R$17 == R$16 + R$2 --SUBSTITUTE--> R$17 == R$16 + R$5
+      22:   R$17 := R$16 + R$5 --EVALUATE--> R$17 == 18.75`Ω + 11.25`Ω --EVALUATE--> 30`Ω
+      23: (1.135) R$T == (R$1 * R$2) / (R$1 + R$2) --SUBSTITUTE--> R$18 == (R$1 * R$2) / (R$1 + R$2) --SUBSTITUTE--> R$18 == (R$8 * R$2) / (R$8 + R$2) --SUBSTITUTE--> R$18 == (R$8 * R$17) / (R$8 + R$17)
+      24:   R$18 := (R$8 * R$17) / (R$8 + R$17) --EVALUATE--> R$18 == (20`Ω * 30.0`Ω) / (20`Ω + 30.0`Ω) --EVALUATE--> 12`Ω
+      25: (1.135) R$T == (R$1 * R$2) / (R$1 + R$2) --SUBSTITUTE--> R$19 == (R$1 * R$2) / (R$1 + R$2) --SUBSTITUTE--> R$19 == (R$4 * R$2) / (R$4 + R$2)
+      26:   R$19 := (R$4 * R$2) / (R$4 + R$2) --EVALUATE--> R$19 == (3`Ω * 6`Ω) / (3`Ω + 6`Ω) --EVALUATE--> 2`Ω
+      27: (1.90) R$T == R$1 + R$2 + ... + R$n --ELLIPSIS--> R$T == R$1 + R$2 --SUBSTITUTE--> R$20 == R$1 + R$2 --SUBSTITUTE--> R$20 == R$19 + R$2 --SUBSTITUTE--> R$20 == R$19 + R$18
+      28:   R$20 := R$19 + R$18 --EVALUATE--> R$20 == 2.0`Ω + 12.0`Ω --EVALUATE--> 14`Ω
+      29: (1.135) R$T == (R$1 * R$2) / (R$1 + R$2) --SUBSTITUTE--> R$21 == (R$1 * R$2) / (R$1 + R$2) --SUBSTITUTE--> R$21 == (R$11 * R$2) / (R$11 + R$2) --SUBSTITUTE--> R$21 == (R$11 * R$20) / (R$11 + R$20)
+      30:   R$21 := (R$11 * R$20) / (R$11 + R$20) --EVALUATE--> R$21 == (26`Ω * 14.0`Ω) / (26`Ω + 14.0`Ω) --EVALUATE--> 9.1`Ω
+      31: (1.90) R$T == R$1 + R$2 + ... + R$n --ELLIPSIS--> R$T == R$1 + R$2 + R$3 --SUBSTITUTE--> R$ab == R$1 + R$2 + R$3 --SUBSTITUTE--> R$ab == R$1 + R$21 + R$3 --SUBSTITUTE--> R$ab == R$1 + R$21 + R$6
+      32:   R$ab := R$1 + R$21 + R$6 --EVALUATE--> R$ab == 2.5`Ω + 9.1`Ω + 3.4`Ω --EVALUATE--> 15`Ω
+      
+.   %/output
+
+
+
+
+
+%mathpiper_grade,name="Problem 8b"
+
+
+
+%/mathpiper_grade
+
+%/group
+
+
+
+
+
+
+
+%group,name="Problem 8a",description="p.93",example_page="p.???"
+========================================================================================================
+
+Create a schematic for the circuit in CircuitPiper, export it, then paste it into the body
+of the "Schematic" procedure below.
+
+
+%mathpiper,name="Problem 8a",subtype="problem",unassign_all="true",globalStateShow="true",formula="true",hint="false"
+
+Problem()
+{
+    Description()
+    {
+        "3.8.a solving for resistance";
+    }
+    
+    Schematic()
+    {
+        "
+        Wire_7 193 67 193 4 | w 193 67 193 4 0
+        Wire_8 225 4 193 4 | w 225 4 193 4 0
+        Wire_9 288 4 319 4 | w 288 4 319 4 0
+        Wire_20 225 193 193 193 | w 225 193 193 193 0
+        Wire_22 99 193 36 193 | w 99 193 36 193 0
+        Wire_21 193 193 162 193 | w 193 193 162 193 0
+        Wire_23 99 67 36 67 | w 99 67 36 67 0
+        Resistor_1 99 67 162 67 5.67 | r 99 67 162 67 0 5.0
+        Resistor_2 225 4 288 4 5.67 | r 225 4 288 4 0 18.0
+        Resistor_3 225 67 288 67 5.67 | r 225 67 288 67 0 9.0
+        Resistor_4 225 193 288 193 5.67 | r 225 193 288 193 0 10.0
+        Resistor_5 99 193 162 193 5.67 | r 99 193 162 193 0 3.0
+        Resistor_6 193 162 193 99 5.67 | r 193 162 193 99 0 30.0
+        Resistor_7 319 99 319 162 5.67 | r 319 99 319 162 0 20.0
+        Resistor_8 382 99 382 162 5.67 | r 382 99 382 162 0 5.0
+        Wire_11 288 67 319 67 | w 288 67 319 67 0
+        Wire_10 319 4 319 67 | w 319 4 319 67 0
+        Wire_13 319 67 382 67 | w 319 67 382 67 0
+        Wire_12 319 67 319 99 | w 319 67 319 99 0
+        Wire_1 162 67 193 67 | w 162 67 193 67 0
+        Wire_15 319 162 319 193 | w 319 162 319 193 0
+        Wire_2 193 67 225 67 | w 193 67 225 67 0
+        Wire_14 382 67 382 99 | w 382 67 382 99 0
+        Wire_3 193 99 193 67 | w 193 99 193 67 0
+        Wire_17 382 193 319 193 | w 382 193 319 193 0
+        Wire_16 382 162 382 193 | w 382 162 382 193 0
+        Wire_19 193 162 193 193 | w 193 162 193 193 0
+        Wire_18 319 193 288 193 | w 319 193 288 193 0
+        ";
+    }
+    
+    Sought()
+    {
+        R$ab`Ω :: "Equivalent resistance between points 'a' and 'b'.";
+    }
+    
+    Given()
+    {
+        R$1 := 5`Ω;
+        R$2 := 18`Ω;
+        R$3 := 9`Ω;
+        R$4 := 10`Ω;
+        R$5 := 3`Ω;
+        R$6 := 30`Ω;
+        R$7 := 20`Ω;
+        R$8 := 5`Ω;
+    }
+    
+    Formulas()
+    {
+        Formula(R$T`Ω == (R$1`Ω * R$2`Ω) / (R$1`Ω + R$2`Ω),
+            ID:"1.135",
+            Label:"5.6",
+            Page:"136",
+            Description:"Total resistance of two resistors in  parallel.",
+            ID:"1.135",
+            Substitutions:[R$T -> R$7and8, R$1 -> R$7, R$2 -> R$8],
+            Subject:'Null,
+            Units:Ω,
+            Evaluate?:True);
+        Formula(R$T`Ω == (R$1`Ω * R$2`Ω) / (R$1`Ω + R$2`Ω),
+            ID:"1.135",
+            Label:"5.6",
+            Page:"136",
+            Description:"Total resistance of two resistors in  parallel.",
+            ID:"1.135",
+            Substitutions:[R$T -> R$2and3, R$1 -> R$2, R$2 -> R$3],
+            Subject:'Null,
+            Units:Ω,
+            Evaluate?:True);
+        Formula(R$T`Ω == R$1`Ω + R$2`Ω + ... + R$n`Ω,
+            ID:"1.90",
+            Label:"4.1",
+            Page:"99",
+            Description:"Total series resistance.",
+            Ellipsis:3,
+            ID:"1.90",
+            Substitutions:[R$T -> R$2and3and4and7and8, R$1 -> R$2and3, R$2 -> R$7and8, R$3 -> R$4],
+            Subject:'Null,
+            Units:Ω,
+            Evaluate?:True);
+        Formula(R$T`Ω == (R$1`Ω * R$2`Ω) / (R$1`Ω + R$2`Ω),
+            ID:"1.135",
+            Label:"5.6",
+            Page:"136",
+            Description:"Total resistance of two resistors in  parallel.",
+            ID:"1.135",
+            Substitutions:[R$T -> R$2and3and4and6and7and8, R$1 -> R$6, R$2 -> R$2and3and4and7and8],
+            Subject:'Null,
+            Units:Ω,
+            Evaluate?:True);
+        Formula(R$T`Ω == R$1`Ω + R$2`Ω + ... + R$n`Ω,
+            ID:"1.90",
+            Label:"4.1",
+            Page:"99",
+            Description:"Total series resistance.",
+            Ellipsis:2,
+            ID:"1.90",
+            Substitutions:[R$T -> R$ab, R$1 -> R$5, R$2 -> R$1],
+            Subject:'Null,
+            Units:Ω,
+            Evaluate?:True);
+    }
+}
+
+%/mathpiper
+
+    %output,parent="Problem 8a",mpversion="327",preserve="false"
+      Result: 8`Ω
+      
+      Side Effects:
+      === RESULT VALUES ===
+      R$7and8: 4`Ω
+      R$2and3: 4.5`Ω
+      R$2and3and4and7and8: 18.5`Ω
+      R$2and3and4and6and7and8: 11.44329897`Ω
+      R$ab: 8`Ω
+      
+      === FORMULAS (2D VIEW) ===
+      /                                                                                                                                                                                                                                                                                                                                                                                                    \
+      | ( 1.135 ) /        R$1 * R$2 \             ( --SUBSTITUTE--> ) /            R$1 * R$2 \                 ( --SUBSTITUTE--> ) /            R$7 * R$2 \                   ( --SUBSTITUTE--> ) /            R$7 * R$8 \                                                                                                                                                                                |
+      |           | R$T == --------- |                                 | R$7and8 == --------- |                                     | R$7and8 == --------- |                                       | R$7and8 == --------- |                                                                                                                                                                                |
+      |           \        R$1 + R$2 /                                 \            R$1 + R$2 /                                     \            R$7 + R$2 /                                       \            R$7 + R$8 /                                                                                                                                                                                |
+      |                                                                                                                                                                                                                                                                                                                                                                                                    |
+      | ( 1.135 ) /        R$1 * R$2 \             ( --SUBSTITUTE--> ) /            R$1 * R$2 \                 ( --SUBSTITUTE--> ) /            R$2 * R$2 \                   ( --SUBSTITUTE--> ) /            R$3 * R$3 \                                                                                                                                                                                |
+      |           | R$T == --------- |                                 | R$2and3 == --------- |                                     | R$2and3 == --------- |                                       | R$2and3 == --------- |                                                                                                                                                                                |
+      |           \        R$1 + R$2 /                                 \            R$1 + R$2 /                                     \            R$2 + R$2 /                                       \            R$3 + R$3 /                                                                                                                                                                                |
+      |                                                                                                                                                                                                                                                                                                                                                                                                    |
+      | ( 1.90 )  ( R$T == R$1 + R$2 + ... + R$n ) ( --ELLIPSIS--> )   ( R$T == R$1 + R$2 + R$3 )               ( --SUBSTITUTE--> ) ( R$2and3and4and7and8 == R$1 + R$2 + R$3 ) ( --SUBSTITUTE--> ) ( R$2and3and4and7and8 == R$2and3 + R$2 + R$3 )           ( --SUBSTITUTE--> ) ( R$2and3and4and7and8 == R$2and3 + R$7and8 + R$3 ) ( --SUBSTITUTE--> ) ( R$2and3and4and7and8 == R$2and3 + R$7and8 + R$4 )  |
+      |                                                                                                                                                                                                                                                                                                                                                                                                    |
+      | ( 1.135 ) /        R$1 * R$2 \             ( --SUBSTITUTE--> ) /                            R$1 * R$2 \ ( --SUBSTITUTE--> ) /                            R$6 * R$2 \   ( --SUBSTITUTE--> ) /                            R$6 * R$2and3and4and7and8 \                                                                                                                                                |
+      |           | R$T == --------- |                                 | R$2and3and4and6and7and8 == --------- |                     | R$2and3and4and6and7and8 == --------- |                       | R$2and3and4and6and7and8 == ------------------------- |                                                                                                                                                |
+      |           \        R$1 + R$2 /                                 \                            R$1 + R$2 /                     \                            R$6 + R$2 /                       \                            R$6 + R$2and3and4and7and8 /                                                                                                                                                |
+      |                                                                                                                                                                                                                                                                                                                                                                                                    |
+      | ( 1.90 )  ( R$T == R$1 + R$2 + ... + R$n ) ( --ELLIPSIS--> )   ( R$T == R$1 + R$2 )                     ( --SUBSTITUTE--> ) ( R$ab == R$1 + R$2 )                      ( --SUBSTITUTE--> ) ( R$ab == R$5 + R$2 )                                    ( --SUBSTITUTE--> ) ( R$ab == R$5 + R$1 )                                                                                                      |
+      \                                                                                                                                                                                                                                                                                                                                                                                                    /
+      
+      === STEPS (CODE VIEW) ===
+       1: R$1 := 5`Ω --> 5`Ω
+       2: R$2 := 18`Ω --> 18`Ω
+       3: R$3 := 9`Ω --> 9`Ω
+       4: R$4 := 10`Ω --> 10`Ω
+       5: R$5 := 3`Ω --> 3`Ω
+       6: R$6 := 30`Ω --> 30`Ω
+       7: R$7 := 20`Ω --> 20`Ω
+       8: R$8 := 5`Ω --> 5`Ω
+       9: (1.135) R$T == (R$1 * R$2) / (R$1 + R$2) --SUBSTITUTE--> R$7and8 == (R$1 * R$2) / (R$1 + R$2) --SUBSTITUTE--> R$7and8 == (R$7 * R$2) / (R$7 + R$2) --SUBSTITUTE--> R$7and8 == (R$7 * R$8) / (R$7 + R$8)
+      10:   R$7and8 := (R$7 * R$8) / (R$7 + R$8) --EVALUATE--> R$7and8 == (20`Ω * 5`Ω) / (20`Ω + 5`Ω) --EVALUATE--> 4`Ω
+      11: (1.135) R$T == (R$1 * R$2) / (R$1 + R$2) --SUBSTITUTE--> R$2and3 == (R$1 * R$2) / (R$1 + R$2) --SUBSTITUTE--> R$2and3 == (R$2 * R$2) / (R$2 + R$2) --SUBSTITUTE--> R$2and3 == (R$3 * R$3) / (R$3 + R$3)
+      12:   R$2and3 := (R$3 * R$3) / (R$3 + R$3) --EVALUATE--> R$2and3 == (9`Ω * 9`Ω) / (9`Ω + 9`Ω) --EVALUATE--> 4.5`Ω
+      13: (1.90) R$T == R$1 + R$2 + ... + R$n --ELLIPSIS--> R$T == R$1 + R$2 + R$3 --SUBSTITUTE--> R$2and3and4and7and8 == R$1 + R$2 + R$3 --SUBSTITUTE--> R$2and3and4and7and8 == R$2and3 + R$2 + R$3 --SUBSTITUTE--> R$2and3and4and7and8 == R$2and3 + R$7and8 + R$3 --SUBSTITUTE--> R$2and3and4and7and8 == R$2and3 + R$7and8 + R$4
+      14:   R$2and3and4and7and8 := R$2and3 + R$7and8 + R$4 --EVALUATE--> R$2and3and4and7and8 == 4.5`Ω + 4.0`Ω + 10`Ω --EVALUATE--> 18.5`Ω
+      15: (1.135) R$T == (R$1 * R$2) / (R$1 + R$2) --SUBSTITUTE--> R$2and3and4and6and7and8 == (R$1 * R$2) / (R$1 + R$2) --SUBSTITUTE--> R$2and3and4and6and7and8 == (R$6 * R$2) / (R$6 + R$2) --SUBSTITUTE--> R$2and3and4and6and7and8 == (R$6 * R$2and3and4and7and8) / (R$6 + R$2and3and4and7and8)
+      16:   R$2and3and4and6and7and8 := (R$6 * R$2and3and4and7and8) / (R$6 + R$2and3and4and7and8) --EVALUATE--> R$2and3and4and6and7and8 == (30`Ω * 18.5`Ω) / (30`Ω + 18.5`Ω) --EVALUATE--> 11.44329897`Ω
+      17: (1.90) R$T == R$1 + R$2 + ... + R$n --ELLIPSIS--> R$T == R$1 + R$2 --SUBSTITUTE--> R$ab == R$1 + R$2 --SUBSTITUTE--> R$ab == R$5 + R$2 --SUBSTITUTE--> R$ab == R$5 + R$1
+      18:   R$ab := R$5 + R$1 --EVALUATE--> R$ab == 3`Ω + 5`Ω --EVALUATE--> 8`Ω
+      
+.   %/output
+
+%/group
+
+
+
+
+
+
+
+%group,name="Problem 8c",description="p.93",example_page="p.???"
+========================================================================================================
+
+Create a schematic for the circuit in CircuitPiper, export it, then paste it into the body
+of the "Schematic" procedure below.
+
+%mathpiper,name="Problem 8c",subtype="problem",unassign_all="true",globalStateShow="true",formula="true",hint="false"
+
+Problem()
+{
+    Description()
+    {
+        "3.8.c solving for resistance";
+    }
+    
+    Schematic()
+    {
+        "
+        Wire_7 162 288 256 288 | w 162 288 256 288 0
+        Wire_8 256 130 256 162 | w 256 130 256 162 0
+        Wire_9 256 193 256 225 | w 256 193 256 225 0
+        Resistor_1 67 162 67 256 5.67 | r 67 162 67 256 0 45.0
+        Resistor_2 99 288 162 288 5.67 | r 99 288 162 288 0 15.0
+        Resistor_3 99 99 225 256 5.67 | r 99 99 225 256 0 40.0
+        Resistor_4 256 288 256 225 5.67 | r 256 288 256 225 0 1.0
+        Resistor_5 130 67 193 67 5.67 | r 130 67 193 67 0 6.0
+        Resistor_6 256 67 256 130 5.67 | r 256 67 256 130 0 1.5
+        Resistor_7 288 99 382 256 5.67 | r 288 99 382 256 0 12.0
+        Resistor_8 319 67 382 67 5.67 | r 319 67 382 67 0 3.0
+        Resistor_9 414 162 414 256 5.67 | r 414 162 414 256 0 5.0
+        Resistor_10 319 288 382 288 5.67 | r 319 288 382 288 0 5.2
+        Wire_11 256 288 319 288 | w 256 288 319 288 0
+        Wire_10 225 256 256 288 | w 225 256 256 288 0
+        Wire_13 382 67 414 67 | w 382 67 414 67 0
+        Wire_12 256 67 319 67 | w 256 67 319 67 0
+        Wire_1 193 67 256 67 | w 193 67 256 67 0
+        Wire_15 414 256 414 288 | w 414 256 414 288 0
+        Wire_2 67 67 130 67 | w 67 67 130 67 0
+        Wire_14 414 67 414 162 | w 414 67 414 162 0
+        Wire_3 67 67 67 162 | w 67 67 67 162 0
+        Wire_17 256 67 288 99 | w 256 67 288 99 0
+        Wire_4 67 288 99 288 | w 67 288 99 288 0
+        Wire_5 67 288 67 256 | w 67 288 67 256 0
+        Wire_19 382 288 414 288 | w 382 288 414 288 0
+        Wire_6 99 99 67 67 | w 99 99 67 67 0
+        Wire_18 382 256 414 288 | w 382 256 414 288 0
+        ";
+    }
+    
+    Sought()
+    {
+        R$ab`Ω :: "Equivalent resistance between points 'a' and 'b'.";
+    }
+    
+    Given()
+    {
+        R$1 := 45`Ω;
+        R$2 := 15`Ω;
+        R$3 := 40`Ω;
+        R$4 := 1`Ω;
+        R$5 := 6`Ω;
+        R$6 := 1.5`Ω;
+        R$7 := 12`Ω;
+        R$8 := 3`Ω;
+        R$9 := 5`Ω;
+        R$10 := 5.2`Ω;
+    }
+    
+    Formulas()
+    {
+        Formula(R$T`Ω == R$1`Ω + R$2`Ω + ... + R$n`Ω,
+            ID:"1.90",
+            Label:"4.1",
+            Page:"99",
+            Description:"Total series resistance.",
+            Ellipsis:2,
+            ID:"1.90",
+            Substitutions:[R$T -> R$1and2],
+            Subject:'Null,
+            Units:Ω,
+            Evaluate?:True);
+        Formula(R$T`Ω == R$1`Ω + R$2`Ω + ... + R$n`Ω,
+            ID:"1.90",
+            Label:"4.1",
+            Page:"99",
+            Description:"Total series resistance.",
+            Ellipsis:2,
+            ID:"1.90",
+            Substitutions:[R$T -> R$8and9, R$1 -> R$8, R$2 -> R$9],
+            Subject:'Null,
+            Units:Ω,
+            Evaluate?:True);
+        Formula(R$T`Ω == (R$1`Ω * R$2`Ω) / (R$1`Ω + R$2`Ω),
+            ID:"1.135",
+            Label:"5.6",
+            Page:"136",
+            Description:"Total resistance of two resistors in  parallel.",
+            ID:"1.135",
+            Substitutions:[R$T -> R$1and2and3, R$1 -> R$1and2, R$2 -> R$3],
+            Subject:'Null,
+            Units:Ω,
+            Evaluate?:True);
+        Formula(R$T`Ω == (R$1`Ω * R$2`Ω) / (R$1`Ω + R$2`Ω),
+            ID:"1.135",
+            Label:"5.6",
+            Page:"136",
+            Description:"Total resistance of two resistors in  parallel.",
+            ID:"1.135",
+            Substitutions:[R$T -> R$7and8and9, R$1 -> R$8and9, R$2 -> R$7],
+            Subject:'Null,
+            Units:Ω,
+            Evaluate?:True);
+        Formula(R$T`Ω == R$1`Ω + R$2`Ω + ... + R$n`Ω,
+            ID:"1.90",
+            Label:"4.1",
+            Page:"99",
+            Description:"Total series resistance.",
+            Ellipsis:2,
+            ID:"1.90",
+            Substitutions:[R$T -> R$1and2and3and5, R$1 -> R$1and2and3, R$2 -> R$5],
+            Subject:'Null,
+            Units:Ω,
+            Evaluate?:True);
+        Formula(R$T`Ω == R$1`Ω + R$2`Ω + ... + R$n`Ω,
+            ID:"1.90",
+            Label:"4.1",
+            Page:"99",
+            Description:"Total series resistance.",
+            Ellipsis:2,
+            ID:"1.90",
+            Substitutions:[R$T -> R$7and8and9and10, R$1 -> R$7and8and9, R$2 -> R$10],
+            Subject:'Null,
+            Units:Ω,
+            Evaluate?:True);
+       Formula(R$T`Ω == (R$1`Ω * R$2`Ω) / (R$1`Ω + R$2`Ω),
+            ID:"1.135",
+            Label:"5.6",
+            Page:"136",
+            Description:"Total resistance of two resistors in  parallel.",
+            ID:"1.135",
+            Substitutions:[R$T -> R$1and2and3and5and7and8and9and10, R$1 -> R$1and2and3and5, R$2 -> R$7and8and9and10],
+            Subject:'Null,
+            Units:Ω,
+            Evaluate?:True);
+        Formula(R$T`Ω == R$1`Ω + R$2`Ω + ... + R$n`Ω,
+            ID:"1.90",
+            Label:"4.1",
+            Page:"99",
+            Description:"Total series resistance.",
+            Ellipsis:3,
+            ID:"1.90",
+            Substitutions:[R$T -> R$ab, R$1 -> R$4, R$2 -> R$6, R$3 -> R$1and2and3and5and7and8and9and10],
+            Subject:'Null,
+            Units:Ω,
+            Evaluate?:True);
+    }
+}
+
+%/mathpiper
+
+    %output,parent="Problem 8c",mpversion="327",preserve="false"
+      Result: 10`Ω
+      
+      Side Effects:
+      === RESULT VALUES ===
+      R$1and2: 60`Ω
+      R$8and9: 8`Ω
+      R$1and2and3: 24`Ω
+      R$7and8and9: 4.8`Ω
+      R$1and2and3and5: 30`Ω
+      R$7and8and9and10: 10`Ω
+      R$1and2and3and5and7and8and9and10: 7.5`Ω
+      R$ab: 10`Ω
+      
+      === FORMULAS (2D VIEW) ===
+      /                                                                                                                                                                                                                                                                                                                                                                                                                                                \
+      | ( 1.90 )  ( R$T == R$1 + R$2 + ... + R$n ) ( --ELLIPSIS--> )   ( R$T == R$1 + R$2 )                              ( --SUBSTITUTE--> ) ( R$1and2 == R$1 + R$2 )                                                                                                                                                                                                                                                                                  |
+      |                                                                                                                                                                                                                                                                                                                                                                                                                                                |
+      | ( 1.90 )  ( R$T == R$1 + R$2 + ... + R$n ) ( --ELLIPSIS--> )   ( R$T == R$1 + R$2 )                              ( --SUBSTITUTE--> ) ( R$8and9 == R$1 + R$2 )                                      ( --SUBSTITUTE--> ) ( R$8and9 == R$8 + R$2 )                                                   ( --SUBSTITUTE--> ) ( R$8and9 == R$8 + R$9 )                                                                                                 |
+      |                                                                                                                                                                                                                                                                                                                                                                                                                                                |
+      | ( 1.135 ) /        R$1 * R$2 \             ( --SUBSTITUTE--> ) /                R$1 * R$2 \                      ( --SUBSTITUTE--> ) /                R$1and2 * R$2 \                              ( --SUBSTITUTE--> ) /                R$1and2 * R$3 \                                                                                                                                                                                        |
+      |           | R$T == --------- |                                 | R$1and2and3 == --------- |                                          | R$1and2and3 == ------------- |                                                  | R$1and2and3 == ------------- |                                                                                                                                                                                        |
+      |           \        R$1 + R$2 /                                 \                R$1 + R$2 /                                          \                R$1and2 + R$2 /                                                  \                R$1and2 + R$3 /                                                                                                                                                                                        |
+      |                                                                                                                                                                                                                                                                                                                                                                                                                                                |
+      | ( 1.135 ) /        R$1 * R$2 \             ( --SUBSTITUTE--> ) /                R$1 * R$2 \                      ( --SUBSTITUTE--> ) /                R$8and9 * R$2 \                              ( --SUBSTITUTE--> ) /                R$8and9 * R$7 \                                                                                                                                                                                        |
+      |           | R$T == --------- |                                 | R$7and8and9 == --------- |                                          | R$7and8and9 == ------------- |                                                  | R$7and8and9 == ------------- |                                                                                                                                                                                        |
+      |           \        R$1 + R$2 /                                 \                R$1 + R$2 /                                          \                R$8and9 + R$2 /                                                  \                R$8and9 + R$7 /                                                                                                                                                                                        |
+      |                                                                                                                                                                                                                                                                                                                                                                                                                                                |
+      | ( 1.90 )  ( R$T == R$1 + R$2 + ... + R$n ) ( --ELLIPSIS--> )   ( R$T == R$1 + R$2 )                              ( --SUBSTITUTE--> ) ( R$1and2and3and5 == R$1 + R$2 )                              ( --SUBSTITUTE--> ) ( R$1and2and3and5 == R$1and2and3 + R$2 )                                   ( --SUBSTITUTE--> ) ( R$1and2and3and5 == R$1and2and3 + R$5 )                                                                                 |
+      |                                                                                                                                                                                                                                                                                                                                                                                                                                                |
+      | ( 1.90 )  ( R$T == R$1 + R$2 + ... + R$n ) ( --ELLIPSIS--> )   ( R$T == R$1 + R$2 )                              ( --SUBSTITUTE--> ) ( R$7and8and9and10 == R$1 + R$2 )                             ( --SUBSTITUTE--> ) ( R$7and8and9and10 == R$7and8and9 + R$2 )                                  ( --SUBSTITUTE--> ) ( R$7and8and9and10 == R$7and8and9 + R$10 )                                                                               |
+      |                                                                                                                                                                                                                                                                                                                                                                                                                                                |
+      | ( 1.135 ) /        R$1 * R$2 \             ( --SUBSTITUTE--> ) /                                     R$1 * R$2 \ ( --SUBSTITUTE--> ) /                                     R$1and2and3and5 * R$2 \ ( --SUBSTITUTE--> ) /                                     R$1and2and3and5 * R$7and8and9and10 \                                                                                                                                              |
+      |           | R$T == --------- |                                 | R$1and2and3and5and7and8and9and10 == --------- |                     | R$1and2and3and5and7and8and9and10 == --------------------- |                     | R$1and2and3and5and7and8and9and10 == ---------------------------------- |                                                                                                                                              |
+      |           \        R$1 + R$2 /                                 \                                     R$1 + R$2 /                     \                                     R$1and2and3and5 + R$2 /                     \                                     R$1and2and3and5 + R$7and8and9and10 /                                                                                                                                              |
+      |                                                                                                                                                                                                                                                                                                                                                                                                                                                |
+      | ( 1.90 )  ( R$T == R$1 + R$2 + ... + R$n ) ( --ELLIPSIS--> )   ( R$T == R$1 + R$2 + R$3 )                        ( --SUBSTITUTE--> ) ( R$ab == R$1 + R$2 + R$3 )                                   ( --SUBSTITUTE--> ) ( R$ab == R$4 + R$2 + R$3 )                                                ( --SUBSTITUTE--> ) ( R$ab == R$4 + R$6 + R$3 )                ( --SUBSTITUTE--> ) ( R$ab == R$4 + R$6 + R$1and2and3and5and7and8and9and10 )  |
+      \                                                                                                                                                                                                                                                                                                                                                                                                                                                /
+      
+      === STEPS (CODE VIEW) ===
+       1: R$1 := 45`Ω --> 45`Ω
+       2: R$2 := 15`Ω --> 15`Ω
+       3: R$3 := 40`Ω --> 40`Ω
+       4: R$4 := 1`Ω --> 1`Ω
+       5: R$5 := 6`Ω --> 6`Ω
+       6: R$6 := 1.5`Ω --> 1.5`Ω
+       7: R$7 := 12`Ω --> 12`Ω
+       8: R$8 := 3`Ω --> 3`Ω
+       9: R$9 := 5`Ω --> 5`Ω
+      10: R$10 := 5.2`Ω --> 5.2`Ω
+      11: (1.90) R$T == R$1 + R$2 + ... + R$n --ELLIPSIS--> R$T == R$1 + R$2 --SUBSTITUTE--> R$1and2 == R$1 + R$2
+      12:   R$1and2 := R$1 + R$2 --EVALUATE--> R$1and2 == 45`Ω + 15`Ω --EVALUATE--> 60`Ω
+      13: (1.90) R$T == R$1 + R$2 + ... + R$n --ELLIPSIS--> R$T == R$1 + R$2 --SUBSTITUTE--> R$8and9 == R$1 + R$2 --SUBSTITUTE--> R$8and9 == R$8 + R$2 --SUBSTITUTE--> R$8and9 == R$8 + R$9
+      14:   R$8and9 := R$8 + R$9 --EVALUATE--> R$8and9 == 3`Ω + 5`Ω --EVALUATE--> 8`Ω
+      15: (1.135) R$T == (R$1 * R$2) / (R$1 + R$2) --SUBSTITUTE--> R$1and2and3 == (R$1 * R$2) / (R$1 + R$2) --SUBSTITUTE--> R$1and2and3 == (R$1and2 * R$2) / (R$1and2 + R$2) --SUBSTITUTE--> R$1and2and3 == (R$1and2 * R$3) / (R$1and2 + R$3)
+      16:   R$1and2and3 := (R$1and2 * R$3) / (R$1and2 + R$3) --EVALUATE--> R$1and2and3 == (60`Ω * 40`Ω) / (60`Ω + 40`Ω) --EVALUATE--> 24`Ω
+      17: (1.135) R$T == (R$1 * R$2) / (R$1 + R$2) --SUBSTITUTE--> R$7and8and9 == (R$1 * R$2) / (R$1 + R$2) --SUBSTITUTE--> R$7and8and9 == (R$8and9 * R$2) / (R$8and9 + R$2) --SUBSTITUTE--> R$7and8and9 == (R$8and9 * R$7) / (R$8and9 + R$7)
+      18:   R$7and8and9 := (R$8and9 * R$7) / (R$8and9 + R$7) --EVALUATE--> R$7and8and9 == (8`Ω * 12`Ω) / (8`Ω + 12`Ω) --EVALUATE--> 4.8`Ω
+      19: (1.90) R$T == R$1 + R$2 + ... + R$n --ELLIPSIS--> R$T == R$1 + R$2 --SUBSTITUTE--> R$1and2and3and5 == R$1 + R$2 --SUBSTITUTE--> R$1and2and3and5 == R$1and2and3 + R$2 --SUBSTITUTE--> R$1and2and3and5 == R$1and2and3 + R$5
+      20:   R$1and2and3and5 := R$1and2and3 + R$5 --EVALUATE--> R$1and2and3and5 == 24.0`Ω + 6`Ω --EVALUATE--> 30`Ω
+      21: (1.90) R$T == R$1 + R$2 + ... + R$n --ELLIPSIS--> R$T == R$1 + R$2 --SUBSTITUTE--> R$7and8and9and10 == R$1 + R$2 --SUBSTITUTE--> R$7and8and9and10 == R$7and8and9 + R$2 --SUBSTITUTE--> R$7and8and9and10 == R$7and8and9 + R$10
+      22:   R$7and8and9and10 := R$7and8and9 + R$10 --EVALUATE--> R$7and8and9and10 == 4.8`Ω + 5.2`Ω --EVALUATE--> 10`Ω
+      23: (1.135) R$T == (R$1 * R$2) / (R$1 + R$2) --SUBSTITUTE--> R$1and2and3and5and7and8and9and10 == (R$1 * R$2) / (R$1 + R$2) --SUBSTITUTE--> R$1and2and3and5and7and8and9and10 == (R$1and2and3and5 * R$2) / (R$1and2and3and5 + R$2) --SUBSTITUTE--> R$1and2and3and5and7and8and9and10 == (R$1and2and3and5 * R$7and8and9and10) / (R$1and2and3and5 + R$7and8and9and10)
+      24:   R$1and2and3and5and7and8and9and10 := (R$1and2and3and5 * R$7and8and9and10) / (R$1and2and3and5 + R$7and8and9and10) --EVALUATE--> R$1and2and3and5and7and8and9and10 == (30.0`Ω * 10.0`Ω) / (30.0`Ω + 10.0`Ω) --EVALUATE--> 7.5`Ω
+      25: (1.90) R$T == R$1 + R$2 + ... + R$n --ELLIPSIS--> R$T == R$1 + R$2 + R$3 --SUBSTITUTE--> R$ab == R$1 + R$2 + R$3 --SUBSTITUTE--> R$ab == R$4 + R$2 + R$3 --SUBSTITUTE--> R$ab == R$4 + R$6 + R$3 --SUBSTITUTE--> R$ab == R$4 + R$6 + R$1and2and3and5and7and8and9and10
+      26:   R$ab := R$4 + R$6 + R$1and2and3and5and7and8and9and10 --EVALUATE--> R$ab == 1`Ω + 1.5`Ω + 7.5`Ω --EVALUATE--> 10`Ω
+      
+.   %/output
+
+%/group

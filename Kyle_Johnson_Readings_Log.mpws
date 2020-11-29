@@ -1,0 +1,403 @@
+====================
+
+v.01
+
+%mathpiper,title="Electronics book study session times.",indent="false"
+
+%mathpiper,title="Electronics book study session times.",indent="false"
+
+
+normalizeTimes(time) :=
+{
+    Local(hourValue, minutes);
+    
+    [hourValue, minutes] := MapSingle("StringToNumber", StringSplit(time, ":"));
+
+    [hourValue, minutes];
+}
+
+
+StudyTimesReport(timesData) :=
+{
+
+Local(averageSessionTime,
+      chapterDuration,
+      chapterDurationHour,
+      currentPartNumber,
+      duration,
+      endHour,
+      endMinutes,
+      endTime,
+      fields,
+      hourValue,
+      lineIndex,
+      minutes,
+      partDurations,
+      sessionDuration,
+      sessionsCount,
+      startHour,
+      startMinutes,
+      startTime,
+      totalDuration,
+      totalDurationHour,
+      line,
+      lines,
+      linesLength,
+      dateString,
+      bookInfo);
+    
+    Echo("v7");
+      
+    chapterDuration := 0`minute;
+    totalDuration := 0`minute;
+    sessionsCount := 0;
+    currentPartNumber := 1;
+    partDurations := [0`minute, 0`minute, 0`minute, 0`minute];
+    
+    lineIndex := 1;
+    
+    timesData := StringTrim(timesData);
+    bookInfo := StringTrim(StringSubstring(timesData, 1, StringIndexOf(timesData, Nl())));
+    Echo(bookInfo);
+    
+    timesData := StringTrim(StringSubstring(timesData, StringIndexOf(timesData, Nl()) + 1, Length(timesData)));
+   
+    lines := StringSplit(timesData, Nl());
+    linesLength := Length(lines);
+    
+    While(lineIndex <=? linesLength )
+    {
+        //WriteString(lineIndex + " "); // Uncomment for debugging.
+        
+        line := lines[lineIndex];
+                
+        
+        If(line !=? "")
+        {
+            fields := StringSplit(line, ",");
+            
+            // Echo(fields[1]); // Uncomment for debugging.
+            
+            If(StringStartsWith?(fields[1], "Part"))
+            {   
+                If(StringStartsWith?(fields[1], "Part1:"))
+                {
+                    currentPartNumber := 2;
+                }
+                
+                If(StringStartsWith?(fields[1], "Part2:"))
+                {   
+                    currentPartNumber := 3;
+                }
+                
+                If(StringStartsWith?(fields[1], "Part3"))
+                {
+                    currentPartNumber := 4;
+                }
+            }
+            Else If(Length(fields) =? 1 |? StringStartsWith?(fields[1], "Ch")) // Chapter or part marker.
+            {
+                If(lineIndex !=? 1)
+                {
+                    chapterDurationHour := chapterDuration # hour;
+         
+                    Echo(" ---------");
+                    Echo(" " + NotationDecimal(RoundToPlace(ValueOf(chapterDurationHour), 2))`hour);
+                }
+                
+                chapterDuration := 0`minute;
+                
+                Echo(Nl() + line);
+                
+                If(fields[1] =? "Total")
+                {
+                    totalDurationHour := totalDuration # hour;
+                    Echo(" ---------");
+                    Echo(" " + NotationDecimal(RoundToPlace(ValueOf(totalDurationHour), 2))`hour);
+                }
+            }
+            Else If(Length(fields) =? 8) // Session data.
+            {
+                [startHour, startMinutes] := normalizeTimes(fields[5]);
+                
+                [endHour, endMinutes] := normalizeTimes(fields[8]);
+                
+                startTime := startHour`hour + startMinutes`minute;
+                
+                endTime := endHour`hour + endMinutes`minute;
+                
+                duration := endTime - startTime;
+                
+                sessionDuration := NM(duration # minute);
+                
+                If(fields[2] =? "0/0/0000")
+                {
+                    dateString := "";
+                }
+                Else
+                {
+                    dateString :=  fields[2] + " ";
+                }
+                
+                Echo(" " + fields[1] + " " + sessionDuration);
+                
+                If(NegativeNumber?(ValueOf(sessionDuration)))
+                {
+                    Echo("*** The duration \"" + sessionDuration + "\" is negative. ***");
+                    
+                    Break();
+                }
+                
+                
+                chapterDuration := chapterDuration + sessionDuration;
+                
+                partDurations[currentPartNumber] := partDurations[currentPartNumber] + sessionDuration;
+                
+                totalDuration := totalDuration + sessionDuration;
+                
+                sessionsCount++;
+            }
+            Else
+            {
+                ExceptionThrow("", "Parse error on line " + lineIndex);
+            }
+        }
+        
+        lineIndex++;
+    }
+    
+    averageSessionTime := (totalDuration / sessionsCount) # minute;
+    
+    Echo();
+    Echo("Reading Sessions Count: " + sessionsCount);
+    Echo("Average Session Time: " + NotationDecimal(RoundToPlace(ValueOf(averageSessionTime), 2)`minute));
+
+    If(ValueOf(partDurations[2]) >? 0)
+    {
+        Echo("Part 1 (ETEM1110 DC): " + NotationDecimal(RoundToPlace(ValueOf((partDurations[2] # hour))), 2)`hour);
+        Echo("Part 2 (ETEM1111 AC): " + NotationDecimal(RoundToPlace(ValueOf((partDurations[3] # hour))), 2)`hour);
+        Echo("Part 3 (ETEM1216 Electronics): " + NotationDecimal(RoundToPlace(ValueOf((partDurations[4] # hour))), 2)`hour);
+    }
+}
+
+
+%/mathpiper
+
+    %output,mpversion="327",preserve="false"
+Result: 
+True
+.   %/output
+
+
+
+
+
+%mathpiper
+
+timesData :=
+"
+Electric Circuits, Nilsson and Riedel, 7th edition
+
+Preface
+1,8/29/2020,xvii,B,15:06,xxvi,E,16:28
+
+Ch1 Circuit Variables
+2,8/30/2020,2,B,16:15,28,E,17:11
+
+Ch2 Circuit Elements
+3,8/31/2020,28,B,20:36,54,E,22:29
+
+Ch3 Simple Resistive Circuits
+4,9/11/2020,66,B,10:00,75,E,11:45
+5,9/11/2020,75,B,13:30,83,E,15:30
+
+Ch4 Techniques of Circuit Analysis
+6,9/16/2020,108,B,13:00,120,E,13:48
+7,9/16/2020,120,B,14:30,132,E,16:00
+8,9/16/2020,132,B,17:00,140,E,18:45
+9,9/17/2020,140,B,10:00,151,E,11:30
+
+Ch6 Inductance, Capacitance, and Mutual Inductance
+10,9/18/2020,216,B,17:00,221,E,18:33
+11,9/18/2020,221,B,18:30,227,E,19:23
+12,9/18/2020,227,B,20:00,233,E,20:36
+13,9/19/2020,236,B,13:00,240,E,13:46
+14,9/19/2020,240,B,14:30,244,E,15:14
+15,9/19/2020,244,B,16:00,250,E,17:37
+ 
+Ch7 Response of First-Order RL and RC Circuits
+16,9/22/2020,262,B,17:00,265,E,17:37
+17,9/22/2020,265,B,18:00,270,E,19:30
+18,9/23/2020,270,B,12:00,272,E,12:25
+19,9/23/2020,272,B,13:00,275,E,14:14
+20,9/23/2020,275,B,17:00,280,E,18:00
+21,9/24/2020,280,B,10:00,283,E,10:52
+22,9/24/2020,283,B,11:00,287,E,11:30
+23,9/24/2020,287,B,12:00,290,E,12:30
+24,9/24/2020,290,B,13:00,295,E,14:30
+25,9/24/2020,295,B,16:00,305,E,18:22
+
+Ch8 Natural and Step Responses of RLC Circuits
+26,10/1/2020,328,B,17:00,331,E,17:25
+27,10/1/2020,331,B,17:40,334,E,18:05
+28,10/2/2020,334,B,10:00,338,E,10:35
+29,10/2/2020,338,B,11:00,341,E,11:25
+30,10/2/2020,341,B,12:00,345,E,12:42
+31,10/2/2020,345,B,13:00,350,E,14:00
+32,10/2/2020,350,B,17:00,353,E,17:34
+33,10/2/2020,353,B,17:45,356,E,18:25
+34,10/2/2020,356,B,19:15,360,E,20:00
+35,10/3/2020,360,B,10:00,363,E,10:34
+36,10/3/2020,363,B,11:00,370,E,12:14
+
+Ch9 Sinusoidal Steady-State Analysis
+37,10/8/2020,380,B,17:00,384,E,17:52
+38,10/8/2020,384,B,18:00,389,E,19:07
+39,10/8/2020,389,B,19:30,393,E,20:07
+40,10/8/2020,393,B,20:30,396,E,20:54
+41,10/9/2020,396,B,10:00,400,E,10:54
+42,10/9/2020,400,B,10:00,402,E,10:22
+43,10/9/2020,402,B,10:49,404,E,11:14
+44,10/9/2020,404,B,11:30,408,E,12:21
+45,10/9/2020,408,B,13:00,410,E,13:49
+46,10/9/2020,410,B,14:30,414,E,15:13
+47,10/9/2020,414,B,16:00,420,E,17:19
+48,10/10/2020,420,B,10:00,422,E,10:33
+49,10/10/2020,422,B,11:00,426,E,11:43
+50,10/10/2020,426,B,13:00,432,E,14:14
+
+Ch10 Sinusoidal Steady-State Power Calculations
+50,10/15/2020,448,B,17:00,452,E,17:46
+51,10/15/2020,452,B,18:30,454,E,19:06
+52,10/15/2020,454,B,19:30,460,E,20:59
+53,10/16/2020,460,B,10:00,465,E,11:10
+54,10/16/2020,465,B,11:30,470,E,12:20
+55,10/17/2020,470,B,19:30,475,E,20:13
+56,10/17/2020,475,B,21:00,483,E,22:21
+
+Total
+";
+
+
+StudyTimesReport(timesData);
+
+
+%/mathpiper
+
+    %output,mpversion="327",preserve="false"
+      Result: False
+      
+      Side Effects:
+      v7
+      Electric Circuits, Nilsson and Riedel, 7th edition
+      
+      Preface
+       1 82`minute
+       ---------
+       1.37`hour
+      
+      Ch1 Circuit Variables
+       2 56`minute
+       ---------
+       0.93`hour
+      
+      Ch2 Circuit Elements
+       3 113`minute
+       ---------
+       1.88`hour
+      
+      Ch3 Simple Resistive Circuits
+       4 105`minute
+       5 120`minute
+       ---------
+       3.75`hour
+      
+      Ch4 Techniques of Circuit Analysis
+       6 48`minute
+       7 90`minute
+       8 105`minute
+       9 90`minute
+       ---------
+       5.55`hour
+      
+      Ch6 Inductance, Capacitance, and Mutual Inductance
+       10 93`minute
+       11 53`minute
+       12 36`minute
+       13 46`minute
+       14 44`minute
+       15 97`minute
+       ---------
+       6.15`hour
+      
+       
+       ---------
+       0.0`hour
+      
+      Ch7 Response of First-Order RL and RC Circuits
+       16 37`minute
+       17 90`minute
+       18 25`minute
+       19 74`minute
+       20 60`minute
+       21 52`minute
+       22 30`minute
+       23 30`minute
+       24 90`minute
+       25 142`minute
+       ---------
+       10.5`hour
+      
+      Ch8 Natural and Step Responses of RLC Circuits
+       26 25`minute
+       27 25`minute
+       28 35`minute
+       29 25`minute
+       30 42`minute
+       31 60`minute
+       32 34`minute
+       33 40`minute
+       34 45`minute
+       35 34`minute
+       36 74`minute
+       ---------
+       7.32`hour
+      
+      Ch9 Sinusoidal Steady-State Analysis
+       37 52`minute
+       38 67`minute
+       39 37`minute
+       40 24`minute
+       41 54`minute
+       42 22`minute
+       43 25`minute
+       44 51`minute
+       45 49`minute
+       46 43`minute
+       47 79`minute
+       48 33`minute
+       49 43`minute
+       50 74`minute
+       ---------
+       10.88`hour
+      
+      Ch10 Sinusoidal Steady-State Power Calculations
+       50 46`minute
+       51 36`minute
+       52 89`minute
+       53 70`minute
+       54 50`minute
+       55 43`minute
+       56 81`minute
+       ---------
+       6.92`hour
+      
+      Total
+       ---------
+       55.25`hour
+      
+      Reading Sessions Count: 57
+      Average Session Time: 58.16
+      
+.   %/output
+

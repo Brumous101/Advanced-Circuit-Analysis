@@ -1,0 +1,161 @@
+v.02
+
+For the problems in this worksheet use free-form MathPiper code
+to solve each problem instead of the computer-assisted
+problem solving system.
+
+Problem AP_4.2 has already been solved in two ways to give you
+an idea of what free-form MathPiper code looks like.
+
+
+%group,name="Problem AP_4.2",description="p.115",example_page="p."
+========================================================================================================
+
+Technique #1:
+
+%mathpiper,name="Problem AP_4.2",subtype="problem",unassign_all="true",globalStateShow="true"
+
+aa := '(-4.5 + _v$1/1 + (_v$1 - _v$2) / (6+2) == 0);
+
+bb := '(_v$2/12 + (_v$2 - _v$1)/(6+2) + (_v$2-30)/4 == 0);
+
+cc := '(((6-18)/(6+2))-_t$1==0);
+
+dd :='(2*(-3/2)+18-_V$G==0);
+
+solution := NM(Solve([aa, bb, cc, dd], [_v$1, _v$2, _t$1, _V$G]));
+
+%/mathpiper
+
+
+
+Technique #2:
+
+%mathpiper,title="Problem AP_4.2",subtype="problem",unassign_all="true",globalStateShow="true"
+
+aa := '(-4.5 + _v$1/1 + (_v$1 - _v$2) / (6+2) == 0);
+
+bb := '(_v$2/12 + (_v$2 - _v$1)/(6+2) + (_v$2-30)/4 == 0);
+
+cc := Solve([aa, bb], [_v$1, _v$2]);
+
+v$1 := NM(cc[1][2]);
+
+v$2 := NM(cc[2][2]);
+
+i := NM(((v$1 - v$2)/(6+2)));
+
+v := NM(((2*i) + v$2)`V);
+
+%/mathpiper
+
+%/group
+
+
+
+
+
+
+
+%group,name="Problem AP_4.5",description="p.121",example_page="p."
+========================================================================================================
+
+
+%mathpiper,name="Problem AP_4.5",subtype="problem",unassign_all="true",globalStateShow="true"
+
+
+
+%/mathpiper
+
+%/group
+
+
+
+
+
+
+
+%group,name="Problem AP_4.7",description="p.125",example_page="p."
+========================================================================================================
+
+
+%mathpiper,name="Problem AP_4.7",subtype="problem",unassign_all="true",globalStateShow="true"
+
+
+
+%/mathpiper
+
+%/group
+
+
+
+
+
+
+
+%group,name="Problem AP_4.9",description="p.127",example_page="p."
+========================================================================================================
+
+
+%mathpiper,name="Problem AP_4.9",subtype="problem",unassign_all="true",globalStateShow="true"
+
+
+
+%/mathpiper
+
+%/group
+
+
+
+
+
+
+
+
+%group,name="Problem AP_4.15",description="p.139",example_page="p."
+========================================================================================================
+
+
+%mathpiper,name="Problem AP_4.15",subtype="problem",unassign_all="true",globalStateShow="true"
+
+
+
+%/mathpiper
+
+%/group
+
+
+
+
+
+
+
+%group,name="Problem AP_4.16",description="p.144",example_page="p."
+========================================================================================================
+
+
+%mathpiper,name="Problem AP_4.16",subtype="problem",unassign_all="true",globalStateShow="true"
+
+
+
+%/mathpiper
+
+%/group
+
+
+
+
+
+
+
+%group,name="Problem AP_4.17",description="p.144",example_page="p."
+========================================================================================================
+
+
+%mathpiper,name="Problem AP_4.17",subtype="problem",unassign_all="true",globalStateShow="true"
+
+
+
+%/mathpiper
+
+%/group
