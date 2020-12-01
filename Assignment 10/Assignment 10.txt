@@ -1,0 +1,64 @@
+Kyle Johnson
+Advanced Circuit Analysis
+Assignment 10
+1.)
+	The "Matrix" section of the dump does match the stamp for resistor that is on slide
+22 of the "Element Stamping" presentation.
+
+2.)
+	The code in "stampResistor" method is filling in the matrix with an x y location of
+and value for the resistor.
+
+3.)
+	The values of the matrix were derived by making a new row in the matrix and making the diagnols for the matrix the summation of 
+either:
+	a.) The starting resistor being added to the matrix
+	b.) The starting resistor plus the next resistor being added together
+	c.) The final resistor being added to the matrix
+
+	This can be seen with the following examples where example 1 demonstrates the 5Ω and 2Ω matrix and example 2 demonstrates a
+matrix with 5Ω, 2Ω, 10Ω
+
+	Example 1
+Matrix:
+ _			  _
+/                          \
+/0.5, -0.5, 0.0, 0.0	   |	//3.a Matrix Location(1,1)
+|-0.5, 0.5 + 0.2, -0.2, 0.0|	//3.b Matrix Location(2,2)
+|0.0, -0.2, 0.2, 0.0       |	//3.c Matrix Location(3,3)
+\_			  _/
+ 
+
+	Example 2
+Matrix:
+ _			  _
+/                          \	//R0 = (1/2 Ω) = 0.5
+|0.5, -0.5, 0.0, 0.0, 0.0  |	//3.a Matrix Location(1,1) = R0
+|                          |	//R1 = (1/5 Ω) = 0.2
+|-0.5, 0.7, -0.2, 0.0, 0.0 |	//3.b Matrix Location(2,2) = summation(0.5 + 0.2) = R0 + R1 = 0.5 + 0.2 = 0.7
+|                          |	//R2 = (1/10 Ω) = 0.1
+|0.0, -0.2, 0.3, -0.1, 0.0 |	//3.b Matrix Location(3,3) = summation(0.2 + 0.1) = R1 + R2 = 0.2 + 0.1 = 0.3
+|0.0, 0.0, -0.1, 0.1, 0.0  |	//3.c Matrix Location(4,4) = R2
+|			   |
+\_			  _/
+
+4.)
+	The results from the matrix were obtained by using a formula where the value for the
+capacitor is divided by the secant slope. Secant slope is defined as being the time between
+any unit time and any unit time -1 as a function of n. The value farads is then taken and divided
+by the secant slope and the operations from 3.a, 3.b, and 3.c is then applied but instead of resistors
+they can be substituted capacitors.
+
+Matrix:
+ _			  _
+/                          \
+|4.0, -4.0, 0.0            |
+|-4.0, 4.0, 0.0            |
+|			   |
+\_			  _/
+
+
+
+
+
+

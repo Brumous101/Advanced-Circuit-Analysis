@@ -3,8 +3,29 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/home/tkosan/NetBeansProjects/CircuitPiper/src/org/mathpiper/ui/gui/applications/circuitpiper/view/CircuitPiperMain.java</file>
-            <file>file:/home/tkosan/NetBeansProjects/CircuitPiper/src/org/mathpiper/ui/gui/applications/circuitpiper/view/ButtonPanel.java</file>
+            <file>file:/C:/Users/Brumo/Documents/repos/Advanced-Circuit-Analysis/Assignment%207b/CircuitPiper/src/org/mathpiper/ui/gui/applications/circuitpiper/circuitjs1/ScopePropertiesDialog.java</file>
+            <file>file:/C:/Users/Brumo/Documents/repos/Advanced-Circuit-Analysis/Assignment%207b/CircuitPiper/src/org/mathpiper/ui/gui/applications/circuitpiper/circuitjs1/LoadFile.java</file>
+            <file>file:/C:/Users/Brumo/Documents/repos/Advanced-Circuit-Analysis/Assignment%207b/CircuitPiper/src/org/mathpiper/ui/gui/applications/circuitpiper/circuitjs1/CustomLogicModel.java</file>
+            <file>file:/C:/Users/Brumo/Documents/repos/Advanced-Circuit-Analysis/Assignment%207b/CircuitPiper/src/org/mathpiper/ui/gui/applications/circuitpiper/circuitjs1/Scope.java</file>
+            <file>file:/C:/Users/Brumo/Documents/repos/Advanced-Circuit-Analysis/Assignment%207b/CircuitPiper/src/org/mathpiper/ui/gui/applications/circuitpiper/circuitjs1/DiodeModel.java</file>
+            <file>file:/C:/Users/Brumo/Documents/repos/Advanced-Circuit-Analysis/Assignment%207b/CircuitPiper/src/org/mathpiper/ui/gui/applications/circuitpiper/circuitjs1/ExprParser.java</file>
+            <file>file:/C:/Users/Brumo/Documents/repos/Advanced-Circuit-Analysis/Assignment%207b/CircuitPiper/src/org/mathpiper/ui/gui/applications/circuitpiper/circuitjs1/CirSim.java</file>
+            <file>file:/C:/Users/Brumo/Documents/repos/Advanced-Circuit-Analysis/Assignment%207b/CircuitPiper/src/org/mathpiper/ui/gui/applications/circuitpiper/circuitjs1/SliderDialog.java</file>
+            <file>file:/C:/Users/Brumo/Documents/repos/Advanced-Circuit-Analysis/Assignment%207b/CircuitPiper/src/org/mathpiper/ui/gui/applications/circuitpiper/circuitjs1/Diode.java</file>
+            <file>file:/C:/Users/Brumo/Documents/repos/Advanced-Circuit-Analysis/Assignment%207b/CircuitPiper/src/org/mathpiper/ui/gui/applications/circuitpiper/circuitjs1/elements/CircuitElm.java</file>
+            <file>file:/C:/Users/Brumo/Documents/repos/Advanced-Circuit-Analysis/Assignment%207b/CircuitPiper/src/org/mathpiper/ui/gui/applications/circuitpiper/circuitjs1/ShortcutsDialog.java</file>
+            <file>file:/C:/Users/Brumo/Documents/repos/Advanced-Circuit-Analysis/Assignment%207b/CircuitPiper/src/org/mathpiper/ui/gui/applications/circuitpiper/circuitjs1/EditCompositeModelDialog.java</file>
+            <file>file:/C:/Users/Brumo/Documents/repos/Advanced-Circuit-Analysis/Assignment%207b/CircuitPiper/src/org/mathpiper/ui/gui/applications/circuitpiper/circuitjs1/Adjustable.java</file>
+            <file>file:/C:/Users/Brumo/Documents/repos/Advanced-Circuit-Analysis/Assignment%207b/CircuitPiper/src/org/mathpiper/ui/gui/applications/circuitpiper/circuitjs1/ImportFromDropboxDialog.java</file>
+            <file>file:/C:/Users/Brumo/Documents/repos/Advanced-Circuit-Analysis/Assignment%207b/CircuitPiper/src/org/mathpiper/ui/gui/applications/circuitpiper/circuitjs1/Scrollbar.java</file>
+            <file>file:/C:/Users/Brumo/Documents/repos/Advanced-Circuit-Analysis/Assignment%207b/CircuitPiper/src/org/mathpiper/ui/gui/applications/circuitpiper/circuitjs1/Expr.java</file>
+            <file>file:/C:/Users/Brumo/Documents/repos/Advanced-Circuit-Analysis/Assignment%207b/CircuitPiper/src/org/mathpiper/ui/gui/applications/circuitpiper/circuitjs1/ImportFromTextDialog.java</file>
+            <file>file:/C:/Users/Brumo/Documents/repos/Advanced-Circuit-Analysis/Assignment%207b/CircuitPiper/src/org/mathpiper/ui/gui/applications/circuitpiper/circuitjs1/Inductor.java</file>
+            <file>file:/C:/Users/Brumo/Documents/repos/Advanced-Circuit-Analysis/Assignment%207b/CircuitPiper/src/org/mathpiper/ui/gui/applications/circuitpiper/circuitjs1/ExportAsTextDialog.java</file>
+            <file>file:/C:/Users/Brumo/Documents/repos/Advanced-Circuit-Analysis/Assignment%207b/CircuitPiper/src/org/mathpiper/ui/gui/applications/circuitpiper/circuitjs1/ScrollValuePopup.java</file>
+            <file>file:/C:/Users/Brumo/Documents/repos/Advanced-Circuit-Analysis/Assignment%207b/CircuitPiper/src/org/mathpiper/ui/gui/applications/circuitpiper/circuitjs1/EditOptions.java</file>
+            <file>file:/C:/Users/Brumo/Documents/repos/Advanced-Circuit-Analysis/Assignment%207b/CircuitPiper/src/org/mathpiper/ui/gui/applications/circuitpiper/circuitjs1/EditDialog.java</file>
+            <file>file:/C:/Users/Brumo/Documents/repos/Advanced-Circuit-Analysis/Assignment%207b/CircuitPiper/src/org/mathpiper/ui/gui/applications/circuitpiper/circuitjs1/ImportFromDropbox.java</file>
         </group>
     </open-files>
 </project-private>

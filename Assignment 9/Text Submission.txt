@@ -1,0 +1,4 @@
+5.a)
+A "Node" is a series of connections to a component. During the simulation this is necessary in order to determine if components are in parallel or in series as well as other things that just having the coordinates for a component can't necessarily differentiate without context.That context could be anything from time spent running the simulation to how the circuitry is hooked up.
+5,b)
+I think that the matrix part of each dump is being used to calculate each value through nodal analysis. This is done by taking into context the different component's connections to any other given components and iterating through each of the possible flows that can reach the components and applying the formulas that are applicable to any part of the matrix. This iteration process is what also allows for the functionality of capacitors and other components, who's value will change over time, to be operated on so it can be used to show the real time feedback from the simulation.
