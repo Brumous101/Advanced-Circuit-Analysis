@@ -46,7 +46,7 @@ Matrix:
 	The results from the matrix were obtained by using a formula where the value for the
 capacitor is divided by the secant slope. Secant slope is defined as being the time between
 any unit time and any unit time -1 as a function of n. The value farads is then taken and divided
-by the secant slope and the operations from 3.a, 3.b, and 3.c is then applied but instead of resistors
+by the secant slope. The operations from 3.a, 3.b, and 3.c are then applied but instead of resistors
 they can be substituted capacitors.
 
 Matrix:
