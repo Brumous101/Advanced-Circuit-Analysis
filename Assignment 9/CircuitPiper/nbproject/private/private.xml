@@ -2,6 +2,10 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group/>
+        <group>
+            <file>file:/C:/Users/Brumo/Documents/repos/Advanced-Circuit-Analysis/Assignment%209/CircuitPiper/src/org/mathpiper/ui/gui/applications/circuitpiper/circuitjs1/elements/ResistorElm.java</file>
+            <file>file:/C:/Users/Brumo/Documents/repos/Advanced-Circuit-Analysis/Assignment%209/CircuitPiper/src/org/mathpiper/ui/gui/applications/circuitpiper/circuitjs1/elements/CapacitorElm.java</file>
+            <file>file:/C:/Users/Brumo/Documents/repos/Advanced-Circuit-Analysis/Assignment%209/CircuitPiper/src/org/mathpiper/ui/gui/applications/circuitpiper/circuitjs1/CirSim.java</file>
+        </group>
     </open-files>
 </project-private>
